@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3yllstdmow4o"]
+
+[ext_resource type="PackedScene" uid="uid://dqplwuanj0qb7" path="res://scenes/tile_map.tscn" id="1_04r47"]
+[ext_resource type="PackedScene" uid="uid://g4ytruh0jt1b" path="res://scenes/Player.tscn" id="1_tvfoe"]
+[ext_resource type="Script" path="res://scenes/test_scene.gd" id="1_udhml"]
+[ext_resource type="PackedScene" uid="uid://bpn04pgdpl1ai" path="res://ui/joy_stick.tscn" id="3_fsps6"]
+
+[node name="TestScene" type="Node2D"]
+script = ExtResource("1_udhml")
+metadata/_edit_horizontal_guides_ = [-91.0]
+metadata/_edit_vertical_guides_ = [561.0]
+
+[node name="TileMap" parent="." instance=ExtResource("1_04r47")]
+
+[node name="Player" parent="." instance=ExtResource("1_tvfoe")]
+position = Vector2(104, 189)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+limit_smoothed = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="JoyStick" parent="CanvasLayer" instance=ExtResource("3_fsps6")]
