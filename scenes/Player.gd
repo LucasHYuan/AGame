@@ -3,9 +3,11 @@ extends CharacterBody2D
 const RUN_SPEED := 100.0
 const KNOCKBACK_AMOUNT := 1200.0
 var pending_damage: Array = []
-@onready var sprite_2d = $Sprite2D
+@onready var sprite_2d: Sprite2D = $Graphics/Sprite2D
 @onready var animation_player = $AnimationPlayer
 @onready var stats: Stats = $Stats
+@onready var invincible_timer: Timer = $InvincibleTimer
+@onready var graphics: Node2D = $Graphics
 
 enum Direction {
 	LEFT = -1,
@@ -28,9 +30,15 @@ func _physics_process(delta: float) -> void:
 	tick_physics(current_state, delta)
 
 func tick_physics(state: State, delta: float) -> void:
+	if invincible_timer.time_left > 0:
+		graphics.modulate.a = sin(Time.get_ticks_msec()/20) * 0.5 + 0.5
+	else:
+		graphics.modulate.a = 1
 	match state:
-		State.IDLE, State.DEATH ,State.HIT:
+		State.IDLE, State.HIT:
 			move(0)
+		State.DEATH:
+			pass
 		State.ATTACK:
 			# 在 HIT 状态下不移动
 			pass
@@ -88,17 +96,21 @@ func transition_state(from: State, to: State) -> void:
 				var dir = dmg.source.global_position.direction_to(global_position)
 				velocity = dir * KNOCKBACK_AMOUNT
 				move_and_slide()
+			invincible_timer.start()
 		State.ATTACK:
 			animation_player.play("attack")
 		State.DEATH:
 			animation_player.play("death")
+			invincible_timer.stop()
 
 func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
+	if invincible_timer.time_left > 0:
+		return
 	var attacker: Node2D = hitbox.owner as Node2D
 	var new_dmg = Damage.new(attacker.stats.atk,attacker)
 	pending_damage.append(new_dmg)
 	#transition_state(current_state, State.HIT)
+	
 
 func die() -> void:
-	print("die")
-	queue_free()
+	get_tree().reload_current_scene()
