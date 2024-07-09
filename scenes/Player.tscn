@@ -324,6 +324,7 @@ height = 16.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player_Group"]]
 collision_layer = 2
+motion_mode = 1
 script = ExtResource("1_cwdlh")
 
 [node name="Graphics" type="Node2D" parent="."]
