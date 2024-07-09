@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://g4ytruh0jt1b"]
+[gd_scene load_steps=13 format=3 uid="uid://g4ytruh0jt1b"]
 
 [ext_resource type="Texture2D" uid="uid://gdjxdkdd54m7" path="res://assets/brackeys_platformer_assets/sprites/knight.png" id="1_2eeth"]
 [ext_resource type="Script" path="res://scenes/Player.gd" id="1_cwdlh"]
 [ext_resource type="Script" path="res://classes/StateMachine.gd" id="3_ovmfn"]
 [ext_resource type="Script" path="res://classes/Hurtbox.gd" id="4_5wdb1"]
-[ext_resource type="Script" path="res://classes/Stats.gd" id="5_o5khm"]
 
 [sub_resource type="Animation" id="Animation_fv7hq"]
 length = 0.4
@@ -57,21 +56,6 @@ tracks/3/keys = {
 "update": 1,
 "values": [3]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Hurtbox:monitoring")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_j56qo"]
-resource_name = "attack"
 
 [sub_resource type="Animation" id="Animation_6tovx"]
 resource_name = "death"
@@ -124,20 +108,6 @@ tracks/3/keys = {
 "update": 1,
 "values": [0, 1, 2, 3]
 }
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.4),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"die"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_cadkn"]
 resource_name = "hit"
@@ -177,30 +147,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:vframes")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Hurtbox:monitoring")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_1xbpy"]
@@ -309,6 +255,9 @@ tracks/3/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 15]
 }
 
+[sub_resource type="Animation" id="Animation_j56qo"]
+resource_name = "attack"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w4cmk"]
 _data = {
 "RESET": SubResource("Animation_fv7hq"),
@@ -356,13 +305,8 @@ script = ExtResource("4_5wdb1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -8)
-scale = Vector2(1.02, 1.02)
 shape = SubResource("CapsuleShape2D_sxgmk")
 debug_color = Color(0.844691, 0.279891, 0.648589, 0.42)
-
-[node name="Stats" type="Node" parent="."]
-script = ExtResource("5_o5khm")
-max_health = 2
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
