@@ -13,7 +13,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	while true:
 		var next := owner.get_next_state(current_state) as int
-		if next == -1:
+		if current_state == next:
 			break
 		current_state = next
 		
