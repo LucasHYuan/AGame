@@ -13,8 +13,9 @@ metadata/_edit_vertical_guides_ = [561.0]
 
 [node name="TileMap" parent="." instance=ExtResource("1_04r47")]
 
-[node name="farmerHouse" parent="." instance=ExtResource("6_t6nbb")]
+[node name="farmerHouse" parent="." node_paths=PackedStringArray("interact_target") instance=ExtResource("6_t6nbb")]
 position = Vector2(76, 142)
+interact_target = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("1_tvfoe")]
 position = Vector2(104, 189)

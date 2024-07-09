@@ -1,8 +1,14 @@
+class_name Player
 extends CharacterBody2D
 
-const RUN_SPEED := 100.0
+const RUN_SPEED :=80.0
 const KNOCKBACK_AMOUNT := 1200.0
 var pending_damage: Array = []
+var interacting_with: Node2D
+
+
+
+
 @onready var sprite_2d: Sprite2D = $Graphics/Sprite2D
 @onready var animation_player = $AnimationPlayer
 @onready var stats: Stats = $Stats

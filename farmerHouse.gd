@@ -1,24 +1,25 @@
 extends Buildings
 
-@onready var sprite_2d: Sprite2D = $Graphics/Sprite2D
-@onready var stats: Stats = $Stats
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var state_machine: StateMachine = $StateMachine
-@onready var detector: Area2D = $Area2D
-
 var is_player_here = false
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var coin: AnimatedSprite2D = $coin
+@onready var coin_text: Label = $coin/coin_text
+
+
+#Override _ready from Buildings
 func _ready() -> void:
-	# 调试信息，确保变量初始化
-	detector.connect("body_entered",_on_area_entered)
+	interactable_area.interacted.connect(interacting)
+	interactable_area.uninteracted.connect(interacting_end)
+	coin.visible = false
 
-func _on_area_entered(body: Node) -> void:
-	if body.is_in_group("Player_Group"):
-		is_player_here = true
+#Override interacting from Buildings
+func interacting() -> void:
+	is_player_here = true
 
-func _on_area_exited(body: Node2D) -> void:
-	if body.is_in_group("Player_Group"):
-		is_player_here = false
+#Override interacting_end from Buildings
+func interacting_end() -> void:
+	is_player_here = false
 
 func get_next_state(state: State) -> State:
 	match state:
@@ -28,7 +29,10 @@ func get_next_state(state: State) -> State:
 		State.FRAME:
 			if not is_player_here:
 				return State.UNBUILT
-			if Input.is_action_just_pressed("ui_select"):
+			coin.visible = true
+			if (interact_target.stats.coin >= int(coin_text.text)) and Input.is_action_just_pressed("ui_select"):
+				interact_target.stats.coin -= int(coin_text.text)
+				coin.visible = false
 				return State.BUILDING
 		State.BUILDING:
 			if not animation_player.is_playing():

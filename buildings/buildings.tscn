@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdjpnog1k76dq"]
+[gd_scene load_steps=5 format=3 uid="uid://bdjpnog1k76dq"]
 
 [ext_resource type="Script" path="res://buildings/buildings.gd" id="1_jafur"]
+[ext_resource type="Script" path="res://classes/Interactable.gd" id="2_4ovd7"]
 [ext_resource type="Script" path="res://classes/Stats.gd" id="2_exin5"]
 [ext_resource type="Script" path="res://classes/StateMachine.gd" id="3_0320s"]
 
@@ -11,8 +12,6 @@ script = ExtResource("1_jafur")
 
 [node name="Sprite2D" type="Sprite2D" parent="Graphics"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [node name="Stats" type="Node" parent="."]
@@ -20,3 +19,8 @@ script = ExtResource("2_exin5")
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_0320s")
+
+[node name="Interactable_area" type="Area2D" parent="."]
+script = ExtResource("2_4ovd7")
+
+[node name="Detector" type="CollisionShape2D" parent="Interactable_area"]
