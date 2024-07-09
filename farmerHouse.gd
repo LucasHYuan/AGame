@@ -28,6 +28,7 @@ func get_next_state(state: State) -> State:
 				return State.FRAME
 		State.FRAME:
 			if not is_player_here:
+				coin.visible = false
 				return State.UNBUILT
 			coin.visible = true
 			if (interact_target.stats.coin >= int(coin_text.text)) and Input.is_action_just_pressed("ui_select"):

@@ -495,6 +495,7 @@ shape = SubResource("CircleShape2D_jv05s")
 [node name="coin" type="AnimatedSprite2D" parent="." index="6"]
 position = Vector2(-5, -53)
 sprite_frames = SubResource("SpriteFrames_qccyp")
+autoplay = "default"
 frame_progress = 0.569235
 
 [node name="coin_text" type="Label" parent="coin" index="0"]
