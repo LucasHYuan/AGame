@@ -1,4 +1,4 @@
-extends CollisionShape2D
+extends Area2D
 
 @onready var attack_range = $"."
 @onready var shoot_timer = $ShootTimer
