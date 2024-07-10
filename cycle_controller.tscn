@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4gp4m7flwfx0"]
+[gd_scene load_steps=6 format=3 uid="uid://diit1i7sexrw6"]
 
 [ext_resource type="Script" path="res://CycleController.gd" id="1_uyxye"]
 [ext_resource type="FontFile" uid="uid://cfy3sf2ma8mr2" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="2_myk6j"]
@@ -52,12 +52,10 @@ libraries = {
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -19.0
+offset_left = -9.0
 offset_top = 45.0
-offset_right = 21.0
+offset_right = 31.0
 offset_bottom = 68.0
 grow_horizontal = 2
 text = "80"
 label_settings = SubResource("LabelSettings_m6c6d")
-horizontal_alignment = 1
-vertical_alignment = 1
