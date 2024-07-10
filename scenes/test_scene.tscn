@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3yllstdmow4o"]
+[gd_scene load_steps=7 format=3 uid="uid://d3yllstdmow4o"]
 
 [ext_resource type="PackedScene" uid="uid://dqplwuanj0qb7" path="res://scenes/tile_map.tscn" id="1_04r47"]
 [ext_resource type="PackedScene" uid="uid://g4ytruh0jt1b" path="res://scenes/Player.tscn" id="1_tvfoe"]
 [ext_resource type="Script" path="res://scenes/test_scene.gd" id="1_udhml"]
 [ext_resource type="PackedScene" uid="uid://bpn04pgdpl1ai" path="res://ui/joy_stick.tscn" id="3_fsps6"]
 [ext_resource type="PackedScene" uid="uid://yu11u0cbdylo" path="res://buildings/farmerHouse.tscn" id="6_t6nbb"]
+[ext_resource type="PackedScene" uid="uid://diit1i7sexrw6" path="res://cycle_controller.tscn" id="6_ufvnw"]
 
 [node name="TestScene" type="Node2D"]
 script = ExtResource("1_udhml")
@@ -27,3 +28,5 @@ position_smoothing_enabled = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="JoyStick" parent="CanvasLayer" instance=ExtResource("3_fsps6")]
+
+[node name="CycleController" parent="." instance=ExtResource("6_ufvnw")]
