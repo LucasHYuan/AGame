@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://yu11u0cbdylo" path="res://buildings/farmerHouse.tscn" id="6_t6nbb"]
 
 [node name="TestScene" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_udhml")
 metadata/_edit_horizontal_guides_ = [-91.0]
 metadata/_edit_vertical_guides_ = [561.0]
