@@ -74,6 +74,7 @@ func start_day() -> void:
 func start_night() -> void:
 	current_state = State.NIGHT
 	state_timer.start(night_time)
+	night.emit()
 	
 
 func transition_to_color(target_color: Color) -> void:
