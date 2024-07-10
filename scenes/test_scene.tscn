@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://diit1i7sexrw6" path="res://cycle_controller.tscn" id="6_ufvnw"]
 
 [node name="TestScene" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_udhml")
 metadata/_edit_horizontal_guides_ = [-91.0]
 metadata/_edit_vertical_guides_ = [561.0]
