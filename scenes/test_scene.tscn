@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3yllstdmow4o"]
+[gd_scene load_steps=8 format=3 uid="uid://d3yllstdmow4o"]
 
 [ext_resource type="PackedScene" uid="uid://dqplwuanj0qb7" path="res://scenes/tile_map.tscn" id="1_04r47"]
 [ext_resource type="PackedScene" uid="uid://g4ytruh0jt1b" path="res://scenes/Player.tscn" id="1_tvfoe"]
 [ext_resource type="Script" path="res://scenes/test_scene.gd" id="1_udhml"]
 [ext_resource type="PackedScene" uid="uid://bpn04pgdpl1ai" path="res://ui/joy_stick.tscn" id="3_fsps6"]
+[ext_resource type="PackedScene" uid="uid://b0myny5kap7m6" path="res://bullets/Bullet.tscn" id="5_fc671"]
 [ext_resource type="PackedScene" uid="uid://yu11u0cbdylo" path="res://buildings/farmerHouse.tscn" id="6_t6nbb"]
-[ext_resource type="PackedScene" uid="uid://diit1i7sexrw6" path="res://cycle_controller.tscn" id="6_ufvnw"]
+[ext_resource type="PackedScene" uid="uid://b4gp4m7flwfx0" path="res://cycle_controller.tscn" id="6_ufvnw"]
 
 [node name="TestScene" type="Node2D"]
 y_sort_enabled = true
@@ -25,6 +26,9 @@ position = Vector2(104, 189)
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_smoothed = true
 position_smoothing_enabled = true
+
+[node name="Bullet" parent="." instance=ExtResource("5_fc671")]
+position = Vector2(121, 180)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -8,8 +8,7 @@ var interacting_with: Node2D
 
 
 
-
-@onready var sprite_2d: Sprite2D = $Graphics/Sprite2D
+@onready var sprite_2d = $Graphics/PlayerSprite
 @onready var animation_player = $AnimationPlayer
 @onready var stats: Stats = $Stats
 @onready var invincible_timer: Timer = $InvincibleTimer

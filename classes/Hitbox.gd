@@ -2,8 +2,6 @@ class_name Hitbox
 extends Area2D
 signal hit(hurtbox)
 
-
-
 func _init() -> void:
 	area_entered.connect(_on_area_entered)
 	

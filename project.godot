@@ -64,6 +64,8 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_4="PlayerHurtbox"
 2d_physics/layer_5="EnemyHurtbox"
 2d_physics/layer_6="Buildings"
+2d_physics/layer_7="PlayerBullets"
+2d_physics/layer_8="EnemyBullets"
 
 [rendering]
 
