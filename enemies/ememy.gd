@@ -51,3 +51,5 @@ func move_towards_target(target: Node2D, delta: float) -> void:
 	velocity = direction * max_speed
 	move_and_slide()
 	
+func die() -> void:
+	queue_free()

@@ -1,4 +1,8 @@
+class_name CycleController
+
 extends Node2D
+signal day
+signal night
 
 @onready var day_night_modulate: CanvasModulate = $DayNightModulate
 @onready var state_timer: Timer = $StateTimer
@@ -65,6 +69,7 @@ func next_state() -> void:
 func start_day() -> void:
 	current_state = State.DAY
 	state_timer.start(day_time)
+	day.emit()
 
 func start_night() -> void:
 	current_state = State.NIGHT
