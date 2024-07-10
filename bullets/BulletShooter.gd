@@ -28,7 +28,7 @@ func _on_shoot_timer_timeout():
 		
 		var new_bullet = bullet.instantiate()
 		new_bullet.speed = bullet_speed
-		new_bullet.damage = bullet_damage
+		new_bullet.atk = bullet_damage
 		new_bullet.position = shoot_point.global_position
 		
 		

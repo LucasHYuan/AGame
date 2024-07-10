@@ -29,6 +29,9 @@ enum State {
 
 var current_state: State = State.IDLE
 
+func _ready() -> void:
+	stats.enemy_death.connect(_on_enemy_death)
+
 func _physics_process(delta: float) -> void:
 	tick_physics(current_state, delta)
 
@@ -112,8 +115,11 @@ func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
 	var attacker: Node2D = hitbox.owner as Node2D
 	var new_dmg = Damage.new(attacker.stats.atk,attacker)
 	pending_damage.append(new_dmg)
-	#transition_state(current_state, State.HIT)
 	
 
 func die() -> void:
 	get_tree().reload_current_scene()
+
+func _on_enemy_death(enemy_stats: Stats) -> void:
+	stats.coin+=enemy_stats.coin
+	stats.exp+=enemy_stats.max_exp

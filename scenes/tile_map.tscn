@@ -2614,6 +2614,7 @@ sources/1 = SubResource("TileSetAtlasSource_lh384")
 sources/2 = SubResource("TileSetAtlasSource_yejmp")
 
 [node name="TileMap" type="TileMap"]
+y_sort_enabled = true
 tile_set = SubResource("TileSet_21m8e")
 format = 2
 layer_0/name = "Ground"

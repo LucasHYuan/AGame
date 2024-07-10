@@ -24,7 +24,8 @@ func _on_enemy_timer_timeout():
 	
 func clear_all_enemies() -> void:
 	for enemy in enemy_list:
-		enemy.die()
+		if enemy!=null:
+			enemy.die()
 	enemy_timer.stop()
 
 func start_generate() -> void:

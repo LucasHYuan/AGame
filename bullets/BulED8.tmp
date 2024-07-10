@@ -23,7 +23,7 @@ script = ExtResource("1_dhc6m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_m0nx6")
-frame_progress = 0.0652143
+frame_progress = 0.014427
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0

@@ -1,8 +1,16 @@
 extends Enemy
 
-var pending_damage: Damage
-
 func get_next_state(state: State) -> State:
+	match state:
+		State.TARGET:
+			if stats.health <= 0:
+				return State.DEATH
+			if pending_damage.size()>0:
+				transition_state(state, State.HIT)
+				return State.HIT
+		State.HIT:
+			if not animation_player.is_playing():
+				return State.TARGET
 	return state
 				
 func tick_physics(state: State, delta:float) -> void:
@@ -12,10 +20,20 @@ func tick_physics(state: State, delta:float) -> void:
 			move_towards_target(target, delta)
 	
 func transition_state(from: State, to: State) -> void:
-	pass
-	
-func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
-	stats.health -= hitbox.owner.stats.dmg
-	if stats.health == 0:
-		queue_free()
+	current_state = to
+	match to:
+		State.HIT:
+			animation_player.play("hit")
+			if pending_damage.size() > 0: 
+				var dmg = pending_damage.pop_front()
+				stats.health -= dmg.amount
+				var dir = dmg.source.global_position.direction_to(global_position)
+				velocity = dir * KNOCKBACK_AMOUNT
+				move_and_slide()
+		State.DEATH:
+			animation_player.play("death")
+		State.TARGET, State.IDLE:
+			animation_player.play("RESET")
+		
+
 	

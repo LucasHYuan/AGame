@@ -21,6 +21,7 @@ metadata/_edit_horizontal_guides_ = [-91.0]
 metadata/_edit_vertical_guides_ = [561.0]
 
 [node name="TileMap" parent="." instance=ExtResource("1_04r47")]
+y_sort_enabled = true
 
 [node name="farmerHouse" parent="." node_paths=PackedStringArray("interact_target") instance=ExtResource("6_t6nbb")]
 position = Vector2(76, 142)
@@ -38,6 +39,8 @@ position_smoothing_enabled = true
 [node name="JoyStick" parent="CanvasLayer" instance=ExtResource("3_fsps6")]
 
 [node name="CycleController" parent="." instance=ExtResource("6_ufvnw")]
+night_time = 30.0
+day_time = 30.0
 
 [node name="EnemyGenerator" parent="." node_paths=PackedStringArray("enemy_path", "enemy_spawn_location", "cycle_controller") instance=ExtResource("7_afqbx")]
 enemy_path = NodePath("Path2D")
