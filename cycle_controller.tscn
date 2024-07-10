@@ -34,7 +34,6 @@ shadow_color = Color(0, 0, 0, 1)
 script = ExtResource("1_uyxye")
 
 [node name="DayNightModulate" type="CanvasModulate" parent="."]
-color = Color(0.113725, 0.133333, 0.160784, 1)
 
 [node name="StateTimer" type="Timer" parent="."]
 
