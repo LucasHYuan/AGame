@@ -6,7 +6,7 @@ var dir=Vector2.ZERO
 var speed=1
 var atk=1
 
-
+@onready var timer_destroy = $TimerDestroy
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,4 +18,8 @@ func _process(delta):
 	position += (dir * speed) * delta
 
 func _on_hitbox_hit(hurtbox:Hurtbox) -> void:
+	queue_free()
+
+
+func _on_timer_destroy_timeout():
 	queue_free()

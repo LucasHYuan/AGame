@@ -36,3 +36,8 @@ shape = SubResource("CircleShape2D_pnmqf")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 scale = Vector2(0.2, 0.2)
+
+[node name="TimerDestroy" type="Timer" parent="."]
+wait_time = 20.0
+
+[connection signal="timeout" from="TimerDestroy" to="." method="_on_timer_destroy_timeout"]
