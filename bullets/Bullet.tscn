@@ -18,7 +18,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_pnmqf"]
 radius = 5.0
 
-[node name="Bullet" type="CharacterBody2D"]
+[node name="Bullet" type="Node2D"]
 script = ExtResource("1_dhc6m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -28,7 +28,11 @@ frame_progress = 0.0652143
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 16
+monitorable = false
 script = ExtResource("3_um4lj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_pnmqf")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+scale = Vector2(0.2, 0.2)

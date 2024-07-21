@@ -1,8 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://g4ytruh0jt1b"]
+[gd_scene load_steps=16 format=3 uid="uid://g4ytruh0jt1b"]
 
 [ext_resource type="Texture2D" uid="uid://gdjxdkdd54m7" path="res://assets/brackeys_platformer_assets/sprites/knight.png" id="1_2eeth"]
 [ext_resource type="Script" path="res://scenes/Player.gd" id="1_cwdlh"]
-[ext_resource type="Script" path="res://bullets/BulletShooter.gd" id="3_2eoos"]
+[ext_resource type="PackedScene" uid="uid://40nqsobwv8oq" path="res://scenes/AttackRange.tscn" id="3_e201i"]
 [ext_resource type="Script" path="res://classes/StateMachine.gd" id="3_ovmfn"]
 [ext_resource type="Script" path="res://classes/Hurtbox.gd" id="4_5wdb1"]
 [ext_resource type="Script" path="res://classes/Stats.gd" id="5_o5khm"]
@@ -324,9 +324,6 @@ _data = {
 radius = 3.0
 height = 9.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_vu8cn"]
-radius = 80.0
-
 [node name="Player" type="CharacterBody2D" groups=["Player_Group"]]
 collision_layer = 2
 motion_mode = 1
@@ -354,23 +351,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_sxgmk")
 debug_color = Color(4.23551e-06, 0.58264, 0.790378, 0.42)
 
-[node name="AttackRange" type="Area2D" parent="."]
-rotation = 1.5708
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("3_2eoos")
-
-[node name="ShootTimer" type="Timer" parent="AttackRange"]
-autostart = true
-
-[node name="ShootPoint" type="Marker2D" parent="AttackRange"]
-position = Vector2(-6, 1.086e-05)
-rotation = -1.5708
-scale = Vector2(1, 2)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
-scale = Vector2(1, 2)
-shape = SubResource("CircleShape2D_vu8cn")
+[node name="AttackRange" parent="." instance=ExtResource("3_e201i")]
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_ovmfn")
@@ -405,7 +386,4 @@ offset_bottom = 32.0
 stats = NodePath("../../Stats")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="AttackRange" to="AttackRange" method="_on_body_entered"]
-[connection signal="body_exited" from="AttackRange" to="AttackRange" method="_on_body_exited"]
-[connection signal="timeout" from="AttackRange/ShootTimer" to="AttackRange" method="_on_shoot_timer_timeout"]
 [connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]

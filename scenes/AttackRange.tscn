@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://40nqsobwv8oq"]
+
+[ext_resource type="Script" path="res://bullets/BulletShooter.gd" id="1_47tcd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vu8cn"]
+radius = 80.0
+
+[node name="AttackRange" type="Area2D"]
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_47tcd")
+
+[node name="ShootTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="ShootPoint" type="Marker2D" parent="."]
+position = Vector2(-6, 1.086e-05)
+rotation = -1.5708
+scale = Vector2(1, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 2)
+shape = SubResource("CircleShape2D_vu8cn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
