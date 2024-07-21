@@ -11,6 +11,9 @@ collision_layer = 4
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_6grxu")
+direction = null
+max_speed = null
+target_groups = null
 
 [node name="Graphics" type="Node2D" parent="."]
 

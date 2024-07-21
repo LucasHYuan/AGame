@@ -28,6 +28,10 @@ func get_nearest_enemy():
 	var res = null
 	var bodies = get_overlapping_bodies()
 	for body:Enemy in bodies:
+		# 排除已经没血的敌人
+		if body.current_state == Enemy.State.DEATH:
+			continue
+		
 		if res == null: # 第一个遍历到的敌人
 			res = body
 		else: # 逐个比较，留在最小的

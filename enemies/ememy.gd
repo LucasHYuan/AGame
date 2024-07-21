@@ -69,3 +69,5 @@ func die() -> void:
 	if player!=null:
 		player._on_enemy_death(stats)
 	queue_free()
+
+

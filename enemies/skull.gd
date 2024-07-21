@@ -25,8 +25,10 @@ func transition_state(from: State, to: State) -> void:
 		State.HIT:
 			animation_player.play("hit")
 			if pending_damage.size() > 0: 
+				# 扣血
 				var dmg = pending_damage.pop_front()
 				stats.health -= dmg.amount
+				# 击退效果
 				var dir = dmg.source.global_position.direction_to(global_position)
 				velocity = dir * KNOCKBACK_AMOUNT
 				move_and_slide()
