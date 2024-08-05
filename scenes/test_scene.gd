@@ -11,4 +11,3 @@ func _ready() -> void:
 	camera_2d.limit_bottom = used.end.y * tile_size.y
 	camera_2d.limit_left = used.position.x * tile_size.x
 	camera_2d.limit_right = used.end.x * tile_size.x
-

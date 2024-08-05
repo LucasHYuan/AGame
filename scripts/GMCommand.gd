@@ -1,17 +1,24 @@
 extends Node2D
 
+signal playerLevelUp
+signal changeTime
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+@onready var button_lv_up: Button = $CanvasLayer/ButtonLvUp
+@onready var button_change_time: Button = $CanvasLayer/ButtonChangeTime
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _ready() -> void:
+	button_lv_up.pressed.connect(_on_button_lv_up_pressed)
+	button_change_time.pressed.connect(_on_button_change_time_pressed)
 	
-func playerLevelUp():
-	print("GM指令：升级！")
-	
-func nextTime():
-	print("GM指令：昼夜交替！")
+func _on_button_lv_up_pressed():
+	GMPrint("升级！")
+	playerLevelUp.emit()
+
+
+func _on_button_change_time_pressed():
+	GMPrint("昼夜交替！")
+	changeTime.emit()
+
+
+func GMPrint(text):
+	print("GM指令：" + text)

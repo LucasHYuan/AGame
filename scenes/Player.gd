@@ -1,7 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
-const RUN_SPEED :=50.0
+const RUN_SPEED := 50.0
 const KNOCKBACK_AMOUNT := 1200.0
 var pending_damage: Array = []
 var interacting_with: Node2D
@@ -11,6 +11,8 @@ var interacting_with: Node2D
 @onready var stats: Stats = $Stats
 @onready var invincible_timer: Timer = $InvincibleTimer
 @onready var graphics: Node2D = $Graphics
+
+@onready var hurtbox: Hurtbox = $Hurtbox
 
 enum Direction {
 	LEFT = -1,
@@ -31,13 +33,14 @@ var current_state: State = State.IDLE
 
 func _ready() -> void:
 	stats.enemy_death.connect(_on_enemy_death)
+	hurtbox.hurt.connect(_on_hurtbox_hurt)
 
 func _physics_process(delta: float) -> void:
 	tick_physics(current_state, delta)
 
 func tick_physics(state: State, delta: float) -> void:
 	if invincible_timer.time_left > 0:
-		graphics.modulate.a = sin(Time.get_ticks_msec()/20) * 0.5 + 0.5
+		graphics.modulate.a = sin(Time.get_ticks_msec() / 20) * 0.5 + 0.5
 	else:
 		graphics.modulate.a = 1
 	match state:
@@ -69,7 +72,7 @@ func get_next_state(state: State) -> State:
 	var is_still := is_zero_approx(movement_H) && is_zero_approx(movement_V)
 	if stats.health == 0:
 		return State.DEATH
-	if pending_damage.size()>0:
+	if pending_damage.size() > 0:
 		transition_state(state, State.HIT)
 		return State.HIT
 	match state:
@@ -96,7 +99,7 @@ func transition_state(from: State, to: State) -> void:
 			animation_player.play("running")
 		State.HIT:
 			animation_player.play("hit")
-			if pending_damage.size() > 0: 
+			if pending_damage.size() > 0:
 				var dmg = pending_damage.pop_front()
 				stats.health -= dmg.amount
 				var dir = dmg.source.global_position.direction_to(global_position)
@@ -113,7 +116,7 @@ func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
 	if invincible_timer.time_left > 0:
 		return
 	var attacker: Node2D = hitbox.owner as Node2D
-	var new_dmg = Damage.new(attacker.stats.atk,attacker)
+	var new_dmg = Damage.new(attacker.stats.atk, attacker)
 	pending_damage.append(new_dmg)
 	
 
@@ -121,5 +124,5 @@ func die() -> void:
 	get_tree().reload_current_scene()
 
 func _on_enemy_death(enemy_stats: Stats) -> void:
-	stats.coin+=enemy_stats.coin
-	stats.exp+=enemy_stats.max_exp
+	stats.coin += enemy_stats.coin
+	stats.exp += enemy_stats.max_exp

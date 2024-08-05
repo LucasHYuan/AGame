@@ -7,7 +7,7 @@ script = ExtResource("1_4oyv8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="ButtonNextTime" type="Button" parent="CanvasLayer"]
+[node name="ButtonChangeTime" type="Button" parent="CanvasLayer"]
 offset_left = 140.0
 offset_top = 4.0
 offset_right = 212.0
@@ -20,6 +20,3 @@ offset_top = 40.0
 offset_right = 212.0
 offset_bottom = 71.0
 text = "升级"
-
-[connection signal="pressed" from="CanvasLayer/ButtonNextTime" to="." method="nextTime"]
-[connection signal="pressed" from="CanvasLayer/ButtonLvUp" to="." method="playerLevelUp"]
