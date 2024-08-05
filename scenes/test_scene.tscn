@@ -22,6 +22,7 @@ metadata/_edit_horizontal_guides_ = [-91.0]
 metadata/_edit_vertical_guides_ = [561.0]
 
 [node name="TileMap" parent="." instance=ExtResource("1_04r47")]
+y_sort_enabled = false
 
 [node name="farmerHouse" parent="." node_paths=PackedStringArray("interact_target") instance=ExtResource("6_t6nbb")]
 position = Vector2(76, 142)
