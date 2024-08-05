@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3yllstdmow4o"]
+[gd_scene load_steps=10 format=3 uid="uid://d3yllstdmow4o"]
 
 [ext_resource type="PackedScene" uid="uid://dqplwuanj0qb7" path="res://scenes/tile_map.tscn" id="1_04r47"]
 [ext_resource type="PackedScene" uid="uid://g4ytruh0jt1b" path="res://scenes/Player.tscn" id="1_tvfoe"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://yu11u0cbdylo" path="res://buildings/farmerHouse.tscn" id="6_t6nbb"]
 [ext_resource type="PackedScene" uid="uid://diit1i7sexrw6" path="res://cycle_controller.tscn" id="6_ufvnw"]
 [ext_resource type="PackedScene" uid="uid://dqpc7u7apn2h" path="res://enemies/enemy_generator.tscn" id="7_afqbx"]
+[ext_resource type="PackedScene" uid="uid://mr2hi4fimewl" path="res://scenes/GMCommand.tscn" id="8_ccghd"]
 
 [sub_resource type="Curve2D" id="Curve2D_oe8ji"]
 _data = {
@@ -51,3 +52,5 @@ curve = SubResource("Curve2D_oe8ji")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="EnemyGenerator/Path2D"]
 position = Vector2(-272, -80)
+
+[node name="GmCommand" parent="." instance=ExtResource("8_ccghd")]

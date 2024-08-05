@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://mr2hi4fimewl"]
+
+[ext_resource type="Script" path="res://scripts/GMCommand.gd" id="1_4oyv8"]
+
+[node name="GmCommand" type="Node2D"]
+script = ExtResource("1_4oyv8")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ButtonNextTime" type="Button" parent="CanvasLayer"]
+offset_left = 140.0
+offset_top = 4.0
+offset_right = 212.0
+offset_bottom = 35.0
+text = "日夜交替"
+
+[node name="ButtonLvUp" type="Button" parent="CanvasLayer"]
+offset_left = 140.0
+offset_top = 40.0
+offset_right = 212.0
+offset_bottom = 71.0
+text = "升级"
+
+[connection signal="pressed" from="CanvasLayer/ButtonNextTime" to="." method="nextTime"]
+[connection signal="pressed" from="CanvasLayer/ButtonLvUp" to="." method="playerLevelUp"]
