@@ -370,8 +370,6 @@ debug_color = Color(0.844691, 0.279891, 0.648589, 0.42)
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("5_o5khm")
-max_health = 10
-max_exp = 10
 
 [node name="InvincibleTimer" type="Timer" parent="."]
 wait_time = 2.0

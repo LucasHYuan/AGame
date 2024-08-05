@@ -1,26 +1,24 @@
 class_name Enemy
 extends CharacterBody2D
-enum Direction{
+enum Direction {
 	LEFT = -1,
 	RIGHT = +1,
 	UP = -1,
-	DOWN = 1,	
+	DOWN = 1,
 }
 
-enum State{
+enum State {
 	TARGET,
 	IDLE,
 	DEATH,
 	HIT,
 }
 
-@export var direction:= Direction.LEFT:
-	set(v):
-		direction = v
+signal enemy_death(stats: Stats)
 
 @export var max_speed: float = 30
-var target: Node2D  # 追踪目标
-@export var target_groups := ["Player_Group", "Building_Group"]  # 要追踪的组列表
+var target: Node2D # 追踪目标
+@export var target_groups := ["Player_Group", "Building_Group"] # 要追踪的组列表
 @onready var graphics: Node2D = $Graphics
 @onready var state_machine: StateMachine = $StateMachine
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -33,7 +31,11 @@ const KNOCKBACK_AMOUNT := 1200.0
 
 func _ready() -> void:
 	hurtbox.hurt.connect(_on_hurtbox_hurt)
+	GlobalSignal.add_emitter("enemy_death", self)
 
+#region 移动&目标控制
+func get_target() -> Node2D:
+	return get_closest_target()
 
 func get_closest_target() -> Node2D:
 	var closest_target: Node2D = null
@@ -48,26 +50,65 @@ func get_closest_target() -> Node2D:
 				closest_target = obj
 	return closest_target
 	
-func move_towards_target(target: Node2D, delta: float) -> void:
-	var direction = (target.global_position - global_position).normalized()
-	if direction.x<0:
+func move_towards_target(cur_target: Node2D, _delta: float) -> void:
+	var direction = (cur_target.global_position - global_position).normalized()
+	if direction.x < 0:
 		animation_player.play("left")
 	else: animation_player.play("right")
-	if direction.y<0:
+	if direction.y < 0:
 		animation_player.play("up")
 	else: animation_player.play("down")
 	velocity = direction * max_speed
 	move_and_slide()
+#endregion
+
+#region 状态机控制
+func get_next_state(state: State) -> State:
+	match state:
+		State.TARGET:
+			if stats.health <= 0:
+				return State.DEATH
+			if pending_damage.size() > 0:
+				transition_state(state, State.HIT)
+				return State.HIT
+		State.HIT:
+			if not animation_player.is_playing():
+				return State.TARGET
+	return state
+				
+func tick_physics(state: State, delta: float) -> void:
+	target = get_target()
+	match state:
+		State.TARGET:
+			move_towards_target(target, delta)
+	
+func transition_state(_from: State, to: State) -> void:
+	current_state = to
+	match to:
+		State.HIT:
+			animation_player.play("hit")
+			if pending_damage.size() > 0:
+				# 扣血
+				var dmg = pending_damage.pop_front()
+				stats.health -= dmg.amount
+				hurt_effect(dmg)
+				move_and_slide()
+		State.DEATH:
+			animation_player.play("death")
+			die()
+		State.TARGET, State.IDLE:
+			animation_player.play("RESET")
+
+func hurt_effect(_dmg: Damage) -> void:
+	print("存在未实现的怪物受击")
+	pass
+#endregion
 
 func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
 	var attacker: Node2D = hitbox.owner as Node2D
-	var new_dmg = Damage.new(attacker.atk,attacker)
+	var new_dmg = Damage.new(attacker.atk, attacker)
 	pending_damage.append(new_dmg)
 
 func die() -> void:
-	var player = get_node("../../Player") #it's not good, but to test func just put it here
-	if player!=null:
-		player._on_enemy_death(stats)
+	GlobalSignal.emit_signal("enemy_death", stats)
 	queue_free()
-
-

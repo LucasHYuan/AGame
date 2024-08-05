@@ -35,6 +35,38 @@ func _ready() -> void:
 	stats.enemy_death.connect(_on_enemy_death)
 	hurtbox.hurt.connect(_on_hurtbox_hurt)
 
+	gm_connect()
+	game_connect()
+	init_stats()
+
+#region 属性管理
+func init_stats() -> void:
+	stats.max_health = 38
+	stats.atk = 1
+	stats.max_exp = 3
+	stats.init_coin = 50
+	stats.max_coin = 999
+	stats.default_init()
+#endregion
+
+#region 游戏逻辑
+func game_connect() -> void:
+	GlobalSignal.add_listener("enemy_death", self, "_on_enemy_death")
+
+func _on_enemy_death(enemy_stats: Stats) -> void:
+	stats.coin += enemy_stats.coin
+	stats.exp += enemy_stats.max_exp
+#endregion
+
+#region GM指令注册
+func gm_connect() -> void:
+	GlobalSignal.add_listener("playerLevelUp", self, "_on_player_level_up")
+#endregion
+
+func _on_player_level_up() -> void:
+	print("玩家执行升级！")
+
+#region 状态机控制
 func _physics_process(delta: float) -> void:
 	tick_physics(current_state, delta)
 
@@ -111,7 +143,9 @@ func transition_state(from: State, to: State) -> void:
 		State.DEATH:
 			animation_player.play("death")
 			invincible_timer.stop()
+#endregion
 
+#region 伤害
 func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
 	if invincible_timer.time_left > 0:
 		return
@@ -122,7 +156,4 @@ func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
 
 func die() -> void:
 	get_tree().reload_current_scene()
-
-func _on_enemy_death(enemy_stats: Stats) -> void:
-	stats.coin += enemy_stats.coin
-	stats.exp += enemy_stats.max_exp
+#endregion

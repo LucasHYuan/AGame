@@ -4,13 +4,19 @@ signal health_changed
 signal exp_changed
 signal level_changed
 signal coin_changed
-signal enemy_death(enemy_stats:Stats)
+signal enemy_death(enemy_stats: Stats)
 
-@export var max_health: int = 3
-@export var atk: int = 1
-@export var max_exp: int = 3
-@export var init_coin: int = 50
+var max_health: int = 3
+var atk: int = 1
+var max_exp: int = 3
+var init_coin: int = 50
 var max_coin: int = 999
+
+func default_init() -> void:
+	health = max_health
+	exp = 0
+	coin = init_coin
+	level = 0
 
 @onready var health: int = max_health:
 	set(v):
@@ -25,9 +31,9 @@ var max_coin: int = 999
 		if v <= 0:
 			return
 		exp = v
-		if exp>=max_exp:
-			exp-=max_exp
-			level+=1
+		if exp >= max_exp:
+			exp -= max_exp
+			level += 1
 		exp_changed.emit()
 
 @onready var coin: int = init_coin:
