@@ -352,6 +352,7 @@ shape = SubResource("CapsuleShape2D_sxgmk")
 debug_color = Color(4.23551e-06, 0.58264, 0.790378, 0.42)
 
 [node name="AttackRange" parent="." instance=ExtResource("3_e201i")]
+scale = Vector2(0.5, 0.5)
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_ovmfn")

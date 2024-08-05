@@ -1,7 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
-const RUN_SPEED :=80.0
+const RUN_SPEED :=50.0
 const KNOCKBACK_AMOUNT := 1200.0
 var pending_damage: Array = []
 var interacting_with: Node2D
