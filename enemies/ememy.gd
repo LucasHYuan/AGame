@@ -32,6 +32,10 @@ const KNOCKBACK_AMOUNT := 1200.0
 func _ready() -> void:
 	hurtbox.hurt.connect(_on_hurtbox_hurt)
 	GlobalSignal.add_emitter("enemy_death", self)
+	init_stats()
+
+func init_stats() -> void:
+	pass
 
 #region 移动&目标控制
 func get_target() -> Node2D:
@@ -94,8 +98,8 @@ func transition_state(_from: State, to: State) -> void:
 				hurt_effect(dmg)
 				move_and_slide()
 		State.DEATH:
-			animation_player.play("death")
 			die()
+			animation_player.play("death")
 		State.TARGET, State.IDLE:
 			animation_player.play("RESET")
 
@@ -110,5 +114,5 @@ func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
 	pending_damage.append(new_dmg)
 
 func die() -> void:
-	GlobalSignal.emit_signal("enemy_death", stats)
+	enemy_death.emit(stats)
 	queue_free()

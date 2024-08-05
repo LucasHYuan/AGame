@@ -54,6 +54,7 @@ func game_connect() -> void:
 	GlobalSignal.add_listener("enemy_death", self, "_on_enemy_death")
 
 func _on_enemy_death(enemy_stats: Stats) -> void:
+	print("敌人死亡！")
 	stats.coin += enemy_stats.coin
 	stats.exp += enemy_stats.max_exp
 #endregion

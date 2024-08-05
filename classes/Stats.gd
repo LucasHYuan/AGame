@@ -6,7 +6,7 @@ signal level_changed
 signal coin_changed
 signal enemy_death(enemy_stats: Stats)
 
-var max_health: int = 3
+var max_health: int = 2
 var atk: int = 1
 var max_exp: int = 3
 var init_coin: int = 50
