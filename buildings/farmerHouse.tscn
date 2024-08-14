@@ -478,10 +478,6 @@ libraries = {
 "": SubResource("AnimationLibrary_uk8jm")
 }
 
-[node name="Stats" parent="." index="3"]
-max_health = 10
-atk = 0
-
 [node name="Detector" parent="Interactable_area" index="0"]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_jv05s")
@@ -500,3 +496,4 @@ offset_bottom = 4.0
 size_flags_horizontal = 4
 text = "30"
 label_settings = SubResource("LabelSettings_0ui8h")
+metadata/_edit_use_anchors_ = true
