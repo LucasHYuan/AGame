@@ -24,8 +24,8 @@ func _ready() -> void:
 	interactable_area.uninteracted.connect(interacting_end)
 	button.pressed.connect(_on_Button_pressed)
 
-	price = owner.price
-	nameLabel = owner.buildingName
+	price = get_parent().price
+	nameLabel = get_parent().buildingName
 	button.text = str(price)
 	label.text = nameLabel
 	pass # Replace with function body.

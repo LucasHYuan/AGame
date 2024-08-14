@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://m3mx4wyq1waq"]
+[gd_scene load_steps=11 format=3 uid="uid://m3mx4wyq1waq"]
 
 [ext_resource type="Script" path="res://buildings/Building.gd" id="1_n6iat"]
 [ext_resource type="Script" path="res://classes/Stats.gd" id="2_3lp6e"]
 [ext_resource type="Texture2D" uid="uid://ccutmsu8l4nqm" path="res://assets/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetHouse.png" id="4_0wocw"]
-[ext_resource type="PackedScene" uid="uid://cb1noa13yna06" path="res://buildings/BuildComponent.tscn" id="5_m8e6a"]
 
 [sub_resource type="Animation" id="Animation_uhd5w"]
 length = 0.001
@@ -43,9 +42,6 @@ libraries = {
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("2_3lp6e")
-
-[node name="BuildComponent" parent="." instance=ExtResource("5_m8e6a")]
-position = Vector2(0, 40)
 
 [node name="BuildShow" type="Sprite2D" parent="."]
 visible = false

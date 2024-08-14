@@ -22,7 +22,7 @@ func _ready() -> void:
 	if buildC:
 		_init_build()
 	else:
-		current_state = State.IDLE
+		_on_build()
 	pass # Replace with function body.
 
 func _init_build() -> void:
