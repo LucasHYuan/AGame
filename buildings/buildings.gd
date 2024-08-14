@@ -10,6 +10,7 @@ enum State{
 	BUILDING,
 	IDLE,
 }
+
 var current_state: State = State.UNBUILT
 
 func _ready() -> void:

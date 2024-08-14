@@ -32,6 +32,8 @@ enum State {
 var current_state: State = State.IDLE
 
 func _ready() -> void:
+	GlobalObjects.SetObject("player", self)
+
 	stats.enemy_death.connect(_on_enemy_death)
 	hurtbox.hurt.connect(_on_hurtbox_hurt)
 
@@ -51,6 +53,7 @@ func init_stats() -> void:
 
 #region 游戏逻辑
 func game_connect() -> void:
+	
 	GlobalSignal.add_listener("enemy_death", self, "_on_enemy_death")
 
 func _on_enemy_death(enemy_stats: Stats) -> void:
