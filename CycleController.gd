@@ -33,6 +33,13 @@ enum State{
 var color_index: int = 0
 
 func _ready() -> void:
+	# 监听GM指令
+	GlobalSignal.add_listener("gmChangeTime", self, "_on_timer_timeout")
+
+	# 注册全局指令
+	GlobalSignal.add_emitter("day", self)
+	GlobalSignal.add_emitter("night", self)
+
 	day_night_modulate.color = colors[color_index]
 	state_timer.start(night_time)
 	state_timer.timeout.connect(_on_timer_timeout)
@@ -54,6 +61,7 @@ func _transition_time_out() -> void:
 	transition_to_color(colors[color_index])
 	transition_timer.start(transition_time)
 	
+# 日夜交替
 func _on_timer_timeout() -> void:
 	next_state()
 	color_index = (color_index + 1) % colors.size()

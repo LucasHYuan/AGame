@@ -22,12 +22,13 @@ func _ready() -> void:
 	if buildC:
 		_init_build()
 	else:
+		# 自动建造
 		_on_build()
 	pass # Replace with function body.
 
 func _init_build() -> void:
-	current_state = State.UNBUILT
 	# 作为需要建造的建筑初始化
+	current_state = State.UNBUILT
 	buildC.build.connect(_on_build)
 	buildC.show_ui.connect(_on_build_show_ui)
 	buildC.hide_ui.connect(_on_build_hide_ui)
