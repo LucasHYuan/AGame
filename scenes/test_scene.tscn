@@ -98,24 +98,28 @@ position = Vector2(0, 27)
 
 [node name="Farm" parent="Buildings" instance=ExtResource("9_app1a")]
 position = Vector2(114, 210)
+coin_earn_day = 1
 
 [node name="BuildComponent" parent="Buildings/Farm" instance=ExtResource("9_g848o")]
 position = Vector2(0, 24)
 
 [node name="Farm2" parent="Buildings" instance=ExtResource("9_app1a")]
 position = Vector2(148, 210)
+coin_earn_day = 1
 
 [node name="BuildComponent" parent="Buildings/Farm2" instance=ExtResource("9_g848o")]
 position = Vector2(0, 24)
 
 [node name="Farm3" parent="Buildings" instance=ExtResource("9_app1a")]
 position = Vector2(148, 173)
+coin_earn_day = 1
 
 [node name="BuildComponent" parent="Buildings/Farm3" instance=ExtResource("9_g848o")]
 position = Vector2(0, 24)
 
 [node name="Farm4" parent="Buildings" instance=ExtResource("9_app1a")]
 position = Vector2(114, 173)
+coin_earn_day = 1
 
 [node name="BuildComponent" parent="Buildings/Farm4" instance=ExtResource("9_g848o")]
 position = Vector2(0, 24)
