@@ -55,7 +55,7 @@ position = Vector2(-272, -80)
 position = Vector2(49, 108)
 
 [node name="Building" parent="." instance=ExtResource("9_xwlvg")]
-position = Vector2(148, 121)
+position = Vector2(130, 79)
 buildingName = "原始小屋"
 
 [node name="BuildComponent" parent="Building" instance=ExtResource("9_g848o")]

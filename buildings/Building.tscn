@@ -21,7 +21,6 @@ region_enabled = true
 region_rect = Rect2(46.9823, 126.767, 48.6636, 35.3391)
 
 [node name="Building" type="StaticBody2D" parent="."]
-visible = false
 
 [node name="Img" type="Sprite2D" parent="Building"]
 texture = ExtResource("4_0wocw")

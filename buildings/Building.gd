@@ -24,26 +24,37 @@ func _ready() -> void:
 	else:
 		# 自动建造
 		_on_build()
-	pass # Replace with function body.
 
 func _init_build() -> void:
 	# 作为需要建造的建筑初始化
 	current_state = State.UNBUILT
+
 	buildC.build.connect(_on_build)
 	buildC.show_ui.connect(_on_build_show_ui)
 	buildC.hide_ui.connect(_on_build_hide_ui)
 
+	# 隐藏建筑
+	_set_building_active(false)
+	building.visible = false
+	for child in building.get_children():
+		if child is CollisionShape2D:
+			child.disabled = true
+
 func _on_build_show_ui() -> void:
 	# 展示预览图
 	buildShow.visible = true
-	pass
 
 func _on_build_hide_ui() -> void:
-	# 隐藏预览图
+	# 隐藏建筑
 	buildShow.visible = false
-	pass
 
 func _on_build() -> void:
 	# 开始建造
-	building.visible = true
-	pass
+	_set_building_active(true)
+
+func _set_building_active(active: bool) -> void:
+	# 激活建筑
+	building.visible = active
+	for child in building.get_children():
+		if child is CollisionShape2D:
+			child.disabled = not active
