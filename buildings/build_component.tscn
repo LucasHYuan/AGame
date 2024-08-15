@@ -24,7 +24,7 @@ shape = SubResource("CircleShape2D_3yoiq")
 
 [node name="Graphics" type="Node2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="Graphics"]
+[node name="Icon" type="Sprite2D" parent="Graphics"]
 position = Vector2(0, -8)
 texture = ExtResource("2_x8r8u")
 region_enabled = true

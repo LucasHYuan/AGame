@@ -1,6 +1,7 @@
 class_name BuildComponent
 extends Node2D
 
+@onready var icon: Sprite2D = $Graphics/Icon
 @onready var ui: Container = $CanvasLayer/VBoxContainer
 @onready var interactable_area: Interactable = $Interactable_area
 @onready var button: Button = $CanvasLayer/VBoxContainer/Button
@@ -33,6 +34,10 @@ func _ready() -> void:
 	# 初始化
 	ui.visible = false
 
+	# 监听全局信号
+	GlobalSignal.add_listener("day", self, "_on_day")
+	GlobalSignal.add_listener("night", self, "_on_night")
+
 func interacting() -> void:
 	show_ui.emit()
 	ui.visible = true
@@ -55,4 +60,16 @@ func _on_build() -> void:
 	# 钱够,建造
 	build.emit()
 	self.queue_free()
+	pass
+
+func _on_day() -> void:
+	# 白天显示地基，可建造
+	interactable_area.process_mode=Node.PROCESS_MODE_INHERIT
+	icon.visible = true
+	pass
+
+func _on_night() -> void:
+	# 夜晚隐藏地基，不可建造
+	interactable_area.process_mode=Node.PROCESS_MODE_DISABLED
+	icon.visible = false
 	pass
