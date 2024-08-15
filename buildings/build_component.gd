@@ -16,9 +16,6 @@ var nameLabel: String = "未命名"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# 跨物体信号
-	# GlobalSignal.add_emitter("build_ask", self)
-	# GlobalSignal.add_listener("build", self, "_on_build")
 	# 绑定interactable
 	interactable_area.interacted.connect(interacting)
 	interactable_area.uninteracted.connect(interacting_end)

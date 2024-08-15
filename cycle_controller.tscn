@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://diit1i7sexrw6"]
 
-[ext_resource type="Script" path="res://CycleController.gd" id="1_uyxye"]
+[ext_resource type="Script" path="res://cycle_controller.gd" id="1_uyxye"]
 [ext_resource type="FontFile" uid="uid://cfy3sf2ma8mr2" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="2_myk6j"]
 
 [sub_resource type="Animation" id="Animation_pbevs"]

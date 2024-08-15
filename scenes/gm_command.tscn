@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://mr2hi4fimewl"]
 
-[ext_resource type="Script" path="res://scripts/GMCommand.gd" id="1_4oyv8"]
+[ext_resource type="Script" path="res://scripts/gm_command.gd" id="1_4oyv8"]
 
 [node name="GmCommand" type="Node2D"]
 script = ExtResource("1_4oyv8")

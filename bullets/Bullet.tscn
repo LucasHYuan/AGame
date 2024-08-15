@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://b0myny5kap7m6"]
 
-[ext_resource type="Script" path="res://bullets/Bullet.gd" id="1_dhc6m"]
+[ext_resource type="Script" path="res://bullets/bullet.gd" id="1_dhc6m"]
 [ext_resource type="Texture2D" uid="uid://c1fly64g4vjxt" path="res://assets/Ninja Adventure - Asset Pack/Items/Food/Calamari.png" id="2_ow6o7"]
-[ext_resource type="Script" path="res://classes/Hitbox.gd" id="3_um4lj"]
+[ext_resource type="Script" path="res://classes/hitbox.gd" id="3_um4lj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_m0nx6"]
 animations = [{

@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://bbtrppnn3mx5t"]
 
 [ext_resource type="Script" path="res://enemies/ememy.gd" id="1_6grxu"]
-[ext_resource type="Script" path="res://classes/StateMachine.gd" id="1_q4x34"]
-[ext_resource type="Script" path="res://classes/Hitbox.gd" id="2_hb6xy"]
-[ext_resource type="Script" path="res://classes/Hurtbox.gd" id="3_x1qvi"]
-[ext_resource type="Script" path="res://classes/Stats.gd" id="5_xwiba"]
+[ext_resource type="Script" path="res://classes/state_machine.gd" id="1_q4x34"]
+[ext_resource type="Script" path="res://classes/hitbox.gd" id="2_hb6xy"]
+[ext_resource type="Script" path="res://classes/hurtbox.gd" id="3_x1qvi"]
+[ext_resource type="Script" path="res://classes/stats.gd" id="5_xwiba"]
 
 [node name="Ememy" type="CharacterBody2D"]
 collision_layer = 4

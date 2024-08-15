@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cb1noa13yna06"]
 
-[ext_resource type="Script" path="res://classes/Interactable.gd" id="1_db6re"]
-[ext_resource type="Script" path="res://buildings/BuildComponent.gd" id="1_dxdpw"]
+[ext_resource type="Script" path="res://classes/interactable.gd" id="1_db6re"]
+[ext_resource type="Script" path="res://buildings/build_component.gd" id="1_dxdpw"]
 [ext_resource type="Texture2D" uid="uid://ccutmsu8l4nqm" path="res://assets/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetHouse.png" id="2_x8r8u"]
 [ext_resource type="Texture2D" uid="uid://de63yru3yg8yu" path="res://assets/brackeys_platformer_assets/sprites/coin.png" id="4_27ske"]
 

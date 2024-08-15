@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://d3yllstdmow4o"]
 
 [ext_resource type="PackedScene" uid="uid://dqplwuanj0qb7" path="res://scenes/tile_map.tscn" id="1_04r47"]
-[ext_resource type="PackedScene" uid="uid://g4ytruh0jt1b" path="res://scenes/Player.tscn" id="1_tvfoe"]
+[ext_resource type="PackedScene" uid="uid://g4ytruh0jt1b" path="res://scenes/player.tscn" id="1_tvfoe"]
 [ext_resource type="PackedScene" uid="uid://bpn04pgdpl1ai" path="res://ui/joy_stick.tscn" id="3_fsps6"]
 [ext_resource type="PackedScene" uid="uid://diit1i7sexrw6" path="res://cycle_controller.tscn" id="6_ufvnw"]
 [ext_resource type="PackedScene" uid="uid://dqpc7u7apn2h" path="res://enemies/enemy_generator.tscn" id="7_afqbx"]
-[ext_resource type="PackedScene" uid="uid://mr2hi4fimewl" path="res://scenes/GMCommand.tscn" id="8_ccghd"]
-[ext_resource type="PackedScene" uid="uid://cb1noa13yna06" path="res://buildings/BuildComponent.tscn" id="9_g848o"]
-[ext_resource type="PackedScene" uid="uid://m3mx4wyq1waq" path="res://buildings/Building.tscn" id="9_xwlvg"]
+[ext_resource type="PackedScene" uid="uid://mr2hi4fimewl" path="res://scenes/gm_command.tscn" id="8_ccghd"]
+[ext_resource type="PackedScene" uid="uid://cb1noa13yna06" path="res://buildings/build_component.tscn" id="9_g848o"]
+[ext_resource type="PackedScene" uid="uid://m3mx4wyq1waq" path="res://buildings/building.tscn" id="9_xwlvg"]
 
 [sub_resource type="Curve2D" id="Curve2D_oe8ji"]
 _data = {
@@ -55,7 +55,7 @@ position = Vector2(-272, -80)
 position = Vector2(49, 108)
 
 [node name="Building" parent="." instance=ExtResource("9_xwlvg")]
-position = Vector2(130, 79)
+position = Vector2(103, 140)
 buildingName = "原始小屋"
 
 [node name="BuildComponent" parent="Building" instance=ExtResource("9_g848o")]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://m3mx4wyq1waq"]
 
-[ext_resource type="Script" path="res://buildings/Building.gd" id="1_n6iat"]
-[ext_resource type="Script" path="res://classes/Stats.gd" id="2_3lp6e"]
+[ext_resource type="Script" path="res://buildings/building.gd" id="1_n6iat"]
+[ext_resource type="Script" path="res://classes/stats.gd" id="2_3lp6e"]
 [ext_resource type="Texture2D" uid="uid://ccutmsu8l4nqm" path="res://assets/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetHouse.png" id="4_0wocw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d350p"]

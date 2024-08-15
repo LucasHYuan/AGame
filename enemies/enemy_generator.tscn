@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dqpc7u7apn2h"]
 
-[ext_resource type="Script" path="res://MonsterGenerator.gd" id="1_58bms"]
+[ext_resource type="Script" path="res://monster_generator.gd" id="1_58bms"]
 
 [node name="EnemyGenerator" type="Node2D"]
 script = ExtResource("1_58bms")
