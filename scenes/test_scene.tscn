@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d3yllstdmow4o"]
+[gd_scene load_steps=11 format=3 uid="uid://d3yllstdmow4o"]
 
 [ext_resource type="PackedScene" uid="uid://dqplwuanj0qb7" path="res://scenes/tile_map.tscn" id="1_04r47"]
 [ext_resource type="PackedScene" uid="uid://g4ytruh0jt1b" path="res://scenes/player.tscn" id="1_tvfoe"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dqpc7u7apn2h" path="res://enemies/enemy_generator.tscn" id="7_afqbx"]
 [ext_resource type="PackedScene" uid="uid://mr2hi4fimewl" path="res://scenes/gm_command.tscn" id="8_ccghd"]
 [ext_resource type="PackedScene" uid="uid://cb1noa13yna06" path="res://buildings/build_component.tscn" id="9_g848o"]
+[ext_resource type="PackedScene" uid="uid://031u5b0jmcbl" path="res://buildings/tower_basic.tscn" id="9_hyy0c"]
 [ext_resource type="PackedScene" uid="uid://m3mx4wyq1waq" path="res://buildings/building.tscn" id="9_xwlvg"]
 
 [sub_resource type="Curve2D" id="Curve2D_oe8ji"]
@@ -51,12 +52,24 @@ position = Vector2(-272, -80)
 
 [node name="GmCommand" parent="." instance=ExtResource("8_ccghd")]
 
-[node name="AutoBuiltBuilding" parent="." instance=ExtResource("9_xwlvg")]
-position = Vector2(49, 108)
+[node name="Buildings" type="Node2D" parent="."]
+z_as_relative = false
+y_sort_enabled = true
 
-[node name="Building" parent="." instance=ExtResource("9_xwlvg")]
+[node name="Tower" parent="Buildings" instance=ExtResource("9_hyy0c")]
+z_as_relative = true
+y_sort_enabled = false
+position = Vector2(61, 244)
+shoot_time = 2.0
+bullet_speed = 200.0
+bullet_damage = 1
+
+[node name="BuildComponent" parent="Buildings/Tower" instance=ExtResource("9_g848o")]
+position = Vector2(0, 27)
+
+[node name="Building" parent="Buildings" instance=ExtResource("9_xwlvg")]
 position = Vector2(103, 140)
 buildingName = "原始小屋"
 
-[node name="BuildComponent" parent="Building" instance=ExtResource("9_g848o")]
+[node name="BuildComponent" parent="Buildings/Building" instance=ExtResource("9_g848o")]
 position = Vector2(0, 29)

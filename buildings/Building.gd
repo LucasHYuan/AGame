@@ -38,8 +38,9 @@ func _init_build() -> void:
 	buildC.show_ui.connect(_on_build_show_ui)
 	buildC.hide_ui.connect(_on_build_hide_ui)
 
-	# 不建造建筑
+	# 隐藏建筑和预览
 	_set_building_active(false)
+	_on_build_hide_ui()
 
 func _on_build_show_ui() -> void:
 	# 展示预览图

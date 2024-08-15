@@ -1,4 +1,4 @@
-class_name Player
+# class_name Player
 extends CharacterBody2D
 
 const RUN_SPEED := 50.0

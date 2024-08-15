@@ -8,6 +8,8 @@
 radius = 23.0868
 
 [node name="Building" type="Node2D"]
+z_as_relative = false
+y_sort_enabled = true
 script = ExtResource("1_n6iat")
 
 [node name="Stats" type="Node" parent="."]

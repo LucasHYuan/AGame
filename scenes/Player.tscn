@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://gdjxdkdd54m7" path="res://assets/brackeys_platformer_assets/sprites/knight.png" id="1_2eeth"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_cwdlh"]
-[ext_resource type="PackedScene" uid="uid://40nqsobwv8oq" path="res://scenes/attack_range.tscn" id="3_e201i"]
+[ext_resource type="PackedScene" uid="uid://40nqsobwv8oq" path="res://scenes/bullet_shooter.tscn" id="3_e201i"]
 [ext_resource type="Script" path="res://classes/state_machine.gd" id="3_ovmfn"]
 [ext_resource type="Script" path="res://classes/hurtbox.gd" id="4_5wdb1"]
 [ext_resource type="Script" path="res://classes/stats.gd" id="5_o5khm"]
@@ -351,7 +351,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_sxgmk")
 debug_color = Color(4.23551e-06, 0.58264, 0.790378, 0.42)
 
-[node name="AttackRange" parent="." instance=ExtResource("3_e201i")]
+[node name="BulletShooter" parent="." instance=ExtResource("3_e201i")]
 scale = Vector2(0.5, 0.5)
 
 [node name="StateMachine" type="Node" parent="."]

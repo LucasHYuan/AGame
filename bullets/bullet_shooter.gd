@@ -1,4 +1,5 @@
 extends Area2D
+class_name BulletShooter
 
 @onready var attack_range = $"."
 @onready var shoot_timer = $ShootTimer
@@ -6,15 +7,20 @@ extends Area2D
 
 @onready var bullet = preload("res://bullets/Bullet.tscn")
 
-var shoot_time=2
-var bullet_speed=200
-var bullet_damage=1
+var shoot_time = 2
+var bullet_speed = 200
+var bullet_damage = 1
 
-var target_enemy:Enemy=null
+var target_enemy: Enemy = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
+
+func _init_data_from_parent() -> void:
+	shoot_time = get_parent().shoot_time
+	bullet_speed = get_parent().bullet_speed
+	bullet_damage = get_parent().bullet_damage
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,7 +33,7 @@ func get_distance(o):
 func get_nearest_enemy():
 	var res = null
 	var bodies = get_overlapping_bodies()
-	for body:Enemy in bodies:
+	for body: Enemy in bodies:
 		# 排除已经没血的敌人
 		if body.current_state == Enemy.State.DEATH:
 			continue
@@ -40,14 +46,21 @@ func get_nearest_enemy():
 	return res
 
 func _on_shoot_timer_timeout():
+	# 隐藏则不射击
+	if get_parent().visible == false:
+		return
+	else:
+		_shoot()
+
+func _shoot() -> void:
 	target_enemy = get_nearest_enemy()
 	
-	if target_enemy!=null:
+	if target_enemy != null:
 		var new_bullet = bullet.instantiate()
 		new_bullet.speed = bullet_speed
 		new_bullet.atk = bullet_damage
 		new_bullet.position = shoot_point.global_position
 		
-		new_bullet.dir = (target_enemy.global_position- shoot_point.global_position).normalized()
+		new_bullet.dir = (target_enemy.global_position - shoot_point.global_position).normalized()
 		#print("发射方向:%s"%new_bullet.dir)
 		get_tree().root.add_child(new_bullet)
