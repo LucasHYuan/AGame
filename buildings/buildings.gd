@@ -1,7 +1,8 @@
-class_name Building
+class_name Buildings
 extends Node2D
 
 @export var buildingName: String = "建筑名称"
+@export var descriptionLabel: String = "建筑描述"
 @export var price: int = 2
 
 @onready var buildShow: Sprite2D = $BuildShow

@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://diit1i7sexrw6" path="res://cycle_controller.tscn" id="6_ufvnw"]
 [ext_resource type="PackedScene" uid="uid://dqpc7u7apn2h" path="res://enemies/enemy_generator.tscn" id="7_afqbx"]
 [ext_resource type="PackedScene" uid="uid://mr2hi4fimewl" path="res://scenes/gm_command.tscn" id="8_ccghd"]
-[ext_resource type="PackedScene" uid="uid://doe3ou8ymiafx" path="res://buildings/farm_basic.tscn" id="9_app1a"]
 [ext_resource type="PackedScene" uid="uid://cb1noa13yna06" path="res://buildings/build_component.tscn" id="9_g848o"]
 [ext_resource type="PackedScene" uid="uid://031u5b0jmcbl" path="res://buildings/tower_basic.tscn" id="9_hyy0c"]
+[ext_resource type="PackedScene" uid="uid://m3mx4wyq1waq" path="res://buildings/buildings.tscn" id="9_xwlvg"]
 
 [sub_resource type="Curve2D" id="Curve2D_oe8ji"]
 _data = {
@@ -59,63 +59,18 @@ y_sort_enabled = true
 [node name="Tower" parent="Buildings" instance=ExtResource("9_hyy0c")]
 z_as_relative = true
 y_sort_enabled = false
-position = Vector2(61, 237)
+position = Vector2(61, 244)
 shoot_time = 2.0
 bullet_speed = 200.0
+bullet_damage = 1
 
 [node name="BuildComponent" parent="Buildings/Tower" instance=ExtResource("9_g848o")]
 position = Vector2(0, 27)
 
-[node name="Tower2" parent="Buildings" instance=ExtResource("9_hyy0c")]
-z_as_relative = true
-y_sort_enabled = false
-position = Vector2(196, 237)
-shoot_time = 2.0
-bullet_speed = 200.0
+[node name="Building" parent="Buildings" instance=ExtResource("9_xwlvg")]
+position = Vector2(103, 140)
+buildingName = "原始小屋"
+price = null
 
-[node name="BuildComponent" parent="Buildings/Tower2" instance=ExtResource("9_g848o")]
-position = Vector2(0, 27)
-
-[node name="Tower3" parent="Buildings" instance=ExtResource("9_hyy0c")]
-z_as_relative = true
-y_sort_enabled = false
-position = Vector2(196, 159)
-shoot_time = 2.0
-bullet_speed = 200.0
-
-[node name="BuildComponent" parent="Buildings/Tower3" instance=ExtResource("9_g848o")]
-position = Vector2(0, 27)
-
-[node name="Tower4" parent="Buildings" instance=ExtResource("9_hyy0c")]
-z_as_relative = true
-y_sort_enabled = false
-position = Vector2(62, 159)
-shoot_time = 2.0
-bullet_speed = 200.0
-
-[node name="BuildComponent" parent="Buildings/Tower4" instance=ExtResource("9_g848o")]
-position = Vector2(0, 27)
-
-[node name="Farm" parent="Buildings" instance=ExtResource("9_app1a")]
-position = Vector2(114, 210)
-
-[node name="BuildComponent" parent="Buildings/Farm" instance=ExtResource("9_g848o")]
-position = Vector2(0, 24)
-
-[node name="Farm2" parent="Buildings" instance=ExtResource("9_app1a")]
-position = Vector2(148, 210)
-
-[node name="BuildComponent" parent="Buildings/Farm2" instance=ExtResource("9_g848o")]
-position = Vector2(0, 24)
-
-[node name="Farm3" parent="Buildings" instance=ExtResource("9_app1a")]
-position = Vector2(148, 173)
-
-[node name="BuildComponent" parent="Buildings/Farm3" instance=ExtResource("9_g848o")]
-position = Vector2(0, 24)
-
-[node name="Farm4" parent="Buildings" instance=ExtResource("9_app1a")]
-position = Vector2(114, 173)
-
-[node name="BuildComponent" parent="Buildings/Farm4" instance=ExtResource("9_g848o")]
-position = Vector2(0, 24)
+[node name="BuildComponent" parent="Buildings/Building" instance=ExtResource("9_g848o")]
+position = Vector2(0, 29)

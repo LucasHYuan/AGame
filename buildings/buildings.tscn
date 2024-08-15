@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://m3mx4wyq1waq"]
 
-[ext_resource type="Script" path="res://buildings/building.gd" id="1_n6iat"]
+[ext_resource type="Script" path="res://buildings/buildings.gd" id="1_jafur"]
 [ext_resource type="Script" path="res://classes/stats.gd" id="2_3lp6e"]
 [ext_resource type="Texture2D" uid="uid://ccutmsu8l4nqm" path="res://assets/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetHouse.png" id="4_0wocw"]
 
@@ -10,13 +10,12 @@ radius = 23.0868
 [node name="Building" type="Node2D"]
 z_as_relative = false
 y_sort_enabled = true
-script = ExtResource("1_n6iat")
+script = ExtResource("1_jafur")
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("2_3lp6e")
 
 [node name="BuildShow" type="Sprite2D" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0.329412)
 texture = ExtResource("4_0wocw")
 region_enabled = true

@@ -1,4 +1,4 @@
-extends Building
+extends Buildings
 class_name TowerBasic
 
 @export var shoot_time:float=2 # 射击间隔

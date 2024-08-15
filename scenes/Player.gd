@@ -1,10 +1,16 @@
-# class_name Player
 extends CharacterBody2D
+class_name Player
 
 const RUN_SPEED := 50.0
 const KNOCKBACK_AMOUNT := 1200.0
 var pending_damage: Array = []
 var interacting_with: Node2D
+
+@export var max_health: int = 5
+@export var atk: int = 1
+@export var max_exp: int = 3
+@export var max_coin: int = 999
+@export var init_coin: int = 3
 
 @onready var sprite_2d = $Graphics/PlayerSprite
 @onready var animation_player = $AnimationPlayer
@@ -43,11 +49,11 @@ func _ready() -> void:
 
 #region 属性管理
 func init_stats() -> void:
-	stats.max_health = 38
-	stats.atk = 1
-	stats.max_exp = 3
-	stats.init_coin = 50
-	stats.max_coin = 999
+	stats.max_health = max_health
+	stats.atk = atk
+	stats.max_exp = max_exp
+	stats.init_coin = init_coin
+	stats.max_coin = max_coin
 	stats.default_init()
 #endregion
 

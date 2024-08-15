@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://031u5b0jmcbl"]
 
-[ext_resource type="PackedScene" uid="uid://m3mx4wyq1waq" path="res://buildings/buildings.tscn" id="1_3pqih"]
+[ext_resource type="PackedScene" uid="uid://m3mx4wyq1waq" path="res://buildings/building.tscn" id="1_3pqih"]
 [ext_resource type="Script" path="res://buildings/tower_basic.gd" id="2_ngooe"]
 [ext_resource type="PackedScene" uid="uid://40nqsobwv8oq" path="res://scenes/bullet_shooter.tscn" id="3_xwn3r"]
 
@@ -12,11 +12,9 @@ script = ExtResource("2_ngooe")
 shoot_time = 1.0
 bullet_speed = 100.0
 bullet_damage = 1
-buildingName = "箭塔"
-descriptionLabel = "不断攻击范围内的敌人"
-price = 3
 
 [node name="BuildShow" parent="." index="1"]
+visible = true
 position = Vector2(0, -24)
 region_rect = Rect2(256, 96, 48, 80)
 

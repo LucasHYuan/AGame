@@ -5,6 +5,7 @@ extends Node2D
 @onready var interactable_area: Interactable = $Interactable_area
 @onready var button: Button = $CanvasLayer/VBoxContainer/Button
 @onready var label: Label = $CanvasLayer/VBoxContainer/Label
+@onready var labelDescription: Label = $CanvasLayer/VBoxContainer/Description
 
 # signal build_ask(price: int) # 向玩家请求建造
 signal build # 建造
@@ -13,6 +14,7 @@ signal hide_ui
 
 var price: int = 0
 var nameLabel: String = "未命名"
+var descriptionLabel: String = "未命名"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,9 +25,13 @@ func _ready() -> void:
 
 	price = get_parent().price
 	nameLabel = get_parent().buildingName
+	descriptionLabel = get_parent().descriptionLabel
 	button.text = str(price)
 	label.text = nameLabel
-	pass # Replace with function body.
+	labelDescription.text = descriptionLabel
+
+	# 初始化
+	ui.visible = false
 
 func interacting() -> void:
 	show_ui.emit()

@@ -6,9 +6,11 @@ func hurt_effect(dmg: Damage) -> void:
 	velocity = dir * KNOCKBACK_AMOUNT
 
 
-func init_stats()->void:
+func init_stats() -> void:
 	# 初始化怪物属性
-	stats.health = 2
-	stats.atk = 1
-	stats.max_exp = 1
-	stats.init_coin = 1
+	stats.health = health
+	stats.atk = atk
+	stats.max_exp = max_exp
+	stats.exp = max_exp
+	stats.init_coin = init_coin
+	stats.coin = init_coin

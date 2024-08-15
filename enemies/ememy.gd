@@ -1,5 +1,6 @@
 class_name Enemy
 extends CharacterBody2D
+
 enum Direction {
 	LEFT = -1,
 	RIGHT = +1,
@@ -15,6 +16,11 @@ enum State {
 }
 
 signal enemy_death(stats: Stats)
+
+@export var health: int = 1
+@export var atk: int = 1
+@export var max_exp: int = 1
+@export var init_coin: int = 0
 
 @export var max_speed: float = 30
 var target: Node2D # 追踪目标
