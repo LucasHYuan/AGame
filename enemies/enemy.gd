@@ -18,15 +18,12 @@ enum State {
 signal enemy_death(enemy: Enemy)
 
 # 固定属性：生命、攻击、经验、金币
-@export var atk: int = 1
 @export var EXP: int = 1
 @export var coin: int = 1
 
 @export var max_speed: float = 30
 var target: Node2D # 追踪目标
 @export var target_groups := ["Player_Group", "Building_Group"] # 要追踪的组列表
-
-@onready var hitbox: Hitbox = $Hitbox
 
 @onready var graphics: Node2D = $Graphics
 @onready var state_machine: StateMachine = $StateMachine
@@ -43,6 +40,7 @@ func init_stats() -> void:
 
 func _ready() -> void:
 	battle_unit.unit_hurt.connect(_on_unit_hurt)
+	battle_unit.unit_kickback.connect(_on_unit_kickback)
 	GlobalSignal.add_emitter("enemy_death", self)
 	init_stats()
 
@@ -119,6 +117,10 @@ func hurt_effect(_attack_item: AttackItem) -> void:
 # 受击逻辑
 func _on_unit_hurt(attack: AttackItem) -> void:
 	pending_damage.append(attack)
+
+func _on_unit_kickback(kickback: Vector2) -> void:
+	# 由于Hit状态下不会每帧设置速度，可以使用速度位移
+	velocity = kickback * KNOCKBACK_AMOUNT
 
 func die() -> void:
 	enemy_death.emit(self)

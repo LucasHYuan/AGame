@@ -5,7 +5,7 @@ class_name BulletShooter
 @onready var shoot_timer = $ShootTimer
 @onready var shoot_point = $ShootPoint
 
-@onready var bullet = preload("res://bullets/Bullet.tscn")
+@onready var bullet = preload("res://bullets/bullet.tscn")
 
 var shoot_time = 2
 var bullet_speed = 200

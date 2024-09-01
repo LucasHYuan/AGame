@@ -37,7 +37,6 @@ var current_state: State = State.IDLE
 
 func _ready() -> void:
 	GlobalObjects.SetObject("player", self)
-
 	gm_connect()
 	game_connect()
 	init_stats()
@@ -52,6 +51,7 @@ func game_connect() -> void:
 	# 自己的战斗单位
 	battle_unit.unit_dead.connect(die)
 	battle_unit.unit_hurt.connect(_on_unit_hurt)
+	battle_unit.unit_kickback.connect(_on_unit_kickback)
 
 	# 所有的敌人死亡
 	GlobalSignal.add_listener("enemy_death", self, "_on_enemy_death")
@@ -139,6 +139,11 @@ func transition_state(_from: State, to: State) -> void:
 #region 受击逻辑
 func _on_unit_hurt(_attack: AttackItem) -> void:
 	flag_hit = true
+
+func _on_unit_kickback(kickback: Vector2) -> void:
+	print("玩家受击击退", kickback)
+	# 因为速度被操控系统占用，只能直接位移
+	translate(kickback*30)
 
 func die() -> void:
 	get_tree().reload_current_scene()

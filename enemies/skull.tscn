@@ -452,20 +452,15 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_6n67b"]
 radius = 8.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4npwa"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_bj0gr"]
 radius = 8.0
 
 [node name="Skull" instance=ExtResource("1_5enrj")]
 position = Vector2(0, -8)
 collision_mask = 4
 script = ExtResource("2_eq5do")
-atk = 1
-EXP = 1
-coin = 1
-max_speed = 30.0
-target_groups = ["Player_Group", "Building_Group"]
 
-[node name="Graphics_Hurtbox#CollisionShape2D2" type="CollisionShape2D" parent="." index="0"]
+[node name="Graphics_Hurtbox" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_4gbpa")
 debug_color = Color(0.950089, 2.31028e-06, 0.570311, 0.42)
 
@@ -486,14 +481,18 @@ autoplay = "down"
 
 [node name="BattleUnit" parent="." index="5"]
 scale = Vector2(0.795, 0.795)
+max_health = 2
+
+[node name="Hurtbox" parent="." index="6"]
+collision_layer = 0
 
 [node name="HurtCollision" parent="Hurtbox" index="0"]
 shape = SubResource("CircleShape2D_6n67b")
 
-[node name="HitAttacker" type="Node2D" parent="." index="7" node_paths=PackedStringArray("hitbox", "battle_unit")]
+[node name="HitAttacker" type="Area2D" parent="." index="7"]
+collision_layer = 0
+collision_mask = 3
 script = ExtResource("4_gulxi")
-hitbox = NodePath("../Hitbox")
-battle_unit = NodePath("../BattleUnit")
 
-[node name="HitCollision" parent="Hitbox" index="0"]
-shape = SubResource("CircleShape2D_4npwa")
+[node name="HitCollision" type="CollisionShape2D" parent="HitAttacker" index="0"]
+shape = SubResource("CircleShape2D_bj0gr")

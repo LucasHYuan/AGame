@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bbtrppnn3mx5t"]
+[gd_scene load_steps=6 format=3 uid="uid://bbtrppnn3mx5t"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_6grxu"]
 [ext_resource type="Script" path="res://classes/state_machine.gd" id="1_q4x34"]
-[ext_resource type="Script" path="res://classes/hitbox.gd" id="2_hb6xy"]
 [ext_resource type="PackedScene" uid="uid://ynah0rik0eio" path="res://battle/battle_unit.tscn" id="4_gtygu"]
 [ext_resource type="Script" path="res://classes/hurtbox.gd" id="5_p1u8q"]
 
@@ -14,11 +13,6 @@ collision_layer = 2
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_6grxu")
-atk = null
-EXP = null
-coin = null
-max_speed = null
-target_groups = null
 
 [node name="Graphics" type="Node2D" parent="."]
 
@@ -44,10 +38,3 @@ script = ExtResource("5_p1u8q")
 rotation = 1.5708
 shape = SubResource("CircleShape2D_65eks")
 debug_color = Color(0.844691, 0.279891, 0.648589, 0.42)
-
-[node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 3
-script = ExtResource("2_hb6xy")
-
-[node name="HitCollision" type="CollisionShape2D" parent="Hitbox"]
