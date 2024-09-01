@@ -9,6 +9,3 @@ func _init() -> void:
 func _on_area_entered(hurtbox: Hurtbox) -> void:
 	hit.emit(hurtbox)
 	hurtbox.hurt.emit(self)
-	
-	
-	

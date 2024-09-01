@@ -1,5 +1,6 @@
 extends HBoxContainer
 
+@export var battle_unit: BattleUnit
 @export var stats: Stats
 
 @onready var health_bar: TextureProgressBar = $Health_and_Exp/HealthBar
@@ -9,18 +10,19 @@ extends HBoxContainer
 
 
 func _ready() -> void:
-	stats.health_changed.connect(update_health)
-	stats.exp_changed.connect(update_exp)
-	stats.coin_changed.connect(update_coin)
-	stats.level_changed.connect(update_level)
+	battle_unit.health_changed.connect(update_health)
 	update_health()
-	update_exp()
-	update_coin()
-	update_level()
-	
+	# stats.health_changed.connect(update_health)
+	# stats.exp_changed.connect(update_exp)
+	# stats.coin_changed.connect(update_coin)
+	# stats.level_changed.connect(update_level)
+	# update_exp()
+	# update_coin()
+	# update_level()
 
+	
 func update_health() -> void:
-	var health_percentage := stats.health / float(stats.max_health)
+	var health_percentage := battle_unit.health / float(battle_unit.max_health)
 	health_bar.value = health_percentage
 	
 func update_exp() -> void:

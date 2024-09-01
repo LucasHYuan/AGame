@@ -1,12 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://g4ytruh0jt1b"]
+[gd_scene load_steps=17 format=3 uid="uid://g4ytruh0jt1b"]
 
-[ext_resource type="Texture2D" uid="uid://gdjxdkdd54m7" path="res://assets/brackeys_platformer_assets/sprites/knight.png" id="1_2eeth"]
-[ext_resource type="Script" path="res://scenes/player.gd" id="1_cwdlh"]
-[ext_resource type="PackedScene" uid="uid://40nqsobwv8oq" path="res://scenes/bullet_shooter.tscn" id="3_e201i"]
-[ext_resource type="Script" path="res://classes/state_machine.gd" id="3_ovmfn"]
-[ext_resource type="Script" path="res://classes/hurtbox.gd" id="4_5wdb1"]
-[ext_resource type="Script" path="res://classes/stats.gd" id="5_o5khm"]
-[ext_resource type="PackedScene" uid="uid://dj8s0itikxgfu" path="res://ui/status_panel.tscn" id="6_ln37t"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_wadek"]
+[ext_resource type="Texture2D" uid="uid://gdjxdkdd54m7" path="res://assets/brackeys_platformer_assets/sprites/knight.png" id="2_ioptb"]
+[ext_resource type="PackedScene" uid="uid://40nqsobwv8oq" path="res://scenes/bullet_shooter.tscn" id="3_i8tdt"]
+[ext_resource type="PackedScene" uid="uid://ynah0rik0eio" path="res://battle/battle_unit.tscn" id="4_3t8dl"]
+[ext_resource type="Script" path="res://classes/state_machine.gd" id="4_df445"]
+[ext_resource type="Script" path="res://classes/hurtbox.gd" id="5_6x7l5"]
+[ext_resource type="PackedScene" uid="uid://dj8s0itikxgfu" path="res://ui/status_panel.tscn" id="7_nb60r"]
+[ext_resource type="Script" path="res://classes/stats.gd" id="8_7jsyx"]
 
 [sub_resource type="Animation" id="Animation_fv7hq"]
 length = 0.4
@@ -327,13 +328,13 @@ height = 9.0
 [node name="Player" type="CharacterBody2D" groups=["Player_Group"]]
 collision_layer = 2
 motion_mode = 1
-script = ExtResource("1_cwdlh")
+script = ExtResource("1_wadek")
 
 [node name="Graphics" type="Node2D" parent="."]
 
 [node name="PlayerSprite" type="Sprite2D" parent="Graphics"]
 position = Vector2(0, -12)
-texture = ExtResource("1_2eeth")
+texture = ExtResource("2_ioptb")
 hframes = 4
 frame = 3
 region_enabled = true
@@ -351,25 +352,27 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_sxgmk")
 debug_color = Color(4.23551e-06, 0.58264, 0.790378, 0.42)
 
-[node name="BulletShooter" parent="." instance=ExtResource("3_e201i")]
-scale = Vector2(0.5, 0.5)
-
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource("3_ovmfn")
-
 [node name="Hurtbox" type="Area2D" parent="."]
 position = Vector2(0, -3)
 collision_layer = 8
 collision_mask = 0
-script = ExtResource("4_5wdb1")
+script = ExtResource("5_6x7l5")
 
 [node name="HurtCollision" type="CollisionShape2D" parent="Hurtbox"]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_sxgmk")
 debug_color = Color(0.844691, 0.279891, 0.648589, 0.42)
 
-[node name="Stats" type="Node" parent="."]
-script = ExtResource("5_o5khm")
+[node name="BattleUnit" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("4_3t8dl")]
+hurtbox = NodePath("../Hurtbox")
+team = 0
+max_health = 5
+
+[node name="BulletShooter" parent="BattleUnit" instance=ExtResource("3_i8tdt")]
+scale = Vector2(0.5, 0.5)
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("4_df445")
 
 [node name="InvincibleTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -377,11 +380,14 @@ one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="StatusPanel" parent="CanvasLayer" node_paths=PackedStringArray("stats") instance=ExtResource("6_ln37t")]
+[node name="StatusPanel" parent="CanvasLayer" node_paths=PackedStringArray("battle_unit") instance=ExtResource("7_nb60r")]
 offset_left = 6.0
 offset_top = 6.0
 offset_right = 54.0
 offset_bottom = 32.0
-stats = NodePath("../../Stats")
+battle_unit = NodePath("../../BattleUnit")
+
+[node name="Stats" type="Node2D" parent="."]
+script = ExtResource("8_7jsyx")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

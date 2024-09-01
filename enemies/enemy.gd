@@ -15,33 +15,38 @@ enum State {
 	HIT,
 }
 
-signal enemy_death(stats: Stats)
+signal enemy_death(enemy: Enemy)
 
+# 固定属性：生命、攻击、经验、金币
 @export var health: int = 1
 @export var atk: int = 1
-@export var max_exp: int = 1
-@export var init_coin: int = 0
+@export var EXP: int = 1
+@export var coin: int = 0
 
 @export var max_speed: float = 30
 var target: Node2D # 追踪目标
 @export var target_groups := ["Player_Group", "Building_Group"] # 要追踪的组列表
+
+@onready var hitbox: Hitbox = $Hitbox
+
 @onready var graphics: Node2D = $Graphics
 @onready var state_machine: StateMachine = $StateMachine
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var stats: Stats = $Stats
-@onready var hurtbox: Hurtbox = $Graphics/Hurtbox
+@onready var battle_unit: BattleUnit = $BattleUnit
 
 var pending_damage: Array = []
 var current_state: State
 const KNOCKBACK_AMOUNT := 1200.0
 
+func init_stats() -> void:
+	pass
+
+
 func _ready() -> void:
-	hurtbox.hurt.connect(_on_hurtbox_hurt)
+	battle_unit.unit_hurt.connect(_on_unit_hurt)
 	GlobalSignal.add_emitter("enemy_death", self)
 	init_stats()
 
-func init_stats() -> void:
-	pass
 
 #region 移动&目标控制
 func get_target() -> Node2D:
@@ -76,7 +81,7 @@ func move_towards_target(cur_target: Node2D, _delta: float) -> void:
 func get_next_state(state: State) -> State:
 	match state:
 		State.TARGET:
-			if stats.health <= 0:
+			if battle_unit.health <= 0:
 				return State.DEATH
 			if pending_damage.size() > 0:
 				transition_state(state, State.HIT)
@@ -98,10 +103,8 @@ func transition_state(_from: State, to: State) -> void:
 		State.HIT:
 			animation_player.play("hit")
 			if pending_damage.size() > 0:
-				# 扣血
-				var dmg = pending_damage.pop_front()
-				stats.health -= dmg.amount
-				hurt_effect(dmg)
+				var attack_item = pending_damage.pop_front()
+				hurt_effect(attack_item)
 				move_and_slide()
 		State.DEATH:
 			die()
@@ -109,16 +112,15 @@ func transition_state(_from: State, to: State) -> void:
 		State.TARGET, State.IDLE:
 			animation_player.play("RESET")
 
-func hurt_effect(_dmg: Damage) -> void:
+func hurt_effect(_attack_item: AttackItem) -> void:
 	print("存在未实现的怪物受击")
 	pass
 #endregion
 
-func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
-	var attacker: Node2D = hitbox.owner as Node2D
-	var new_dmg = Damage.new(attacker.atk, attacker)
-	pending_damage.append(new_dmg)
+# 受击逻辑
+func _on_unit_hurt(attack: AttackItem) -> void:
+	pending_damage.append(attack)
 
 func die() -> void:
-	enemy_death.emit(stats)
+	enemy_death.emit(self)
 	queue_free()

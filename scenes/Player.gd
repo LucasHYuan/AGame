@@ -18,7 +18,7 @@ var interacting_with: Node2D
 @onready var invincible_timer: Timer = $InvincibleTimer
 @onready var graphics: Node2D = $Graphics
 
-@onready var hurtbox: Hurtbox = $Hurtbox
+@onready var battle_unit: BattleUnit = $BattleUnit
 
 enum Direction {
 	LEFT = -1,
@@ -35,13 +35,14 @@ enum State {
 	DEATH,
 }
 
+var flag_hit = false;
+
 var current_state: State = State.IDLE
 
 func _ready() -> void:
 	GlobalObjects.SetObject("player", self)
 
 	stats.enemy_death.connect(_on_enemy_death)
-	hurtbox.hurt.connect(_on_hurtbox_hurt)
 
 	gm_connect()
 	game_connect()
@@ -49,7 +50,6 @@ func _ready() -> void:
 
 #region 属性管理
 func init_stats() -> void:
-	stats.max_health = max_health
 	stats.atk = atk
 	stats.max_exp = max_exp
 	stats.init_coin = init_coin
@@ -59,13 +59,17 @@ func init_stats() -> void:
 
 #region 游戏逻辑
 func game_connect() -> void:
-	
+	# 自己的战斗单位
+	battle_unit.unit_dead.connect(die)
+	battle_unit.unit_hurt.connect(_on_unit_hurt)
+
+	# 所有的敌人死亡
 	GlobalSignal.add_listener("enemy_death", self, "_on_enemy_death")
 
-func _on_enemy_death(enemy_stats: Stats) -> void:
-	print("敌人死亡！")
-	stats.coin += enemy_stats.coin
-	stats.exp += enemy_stats.max_exp
+func _on_enemy_death(enemy: Enemy) -> void:
+	print("玩家检测到敌人死亡！")
+	stats.coin += enemy.coin
+	stats.exp += enemy.EXP
 #endregion
 
 #region GM指令注册
@@ -112,9 +116,8 @@ func get_next_state(state: State) -> State:
 	var movement_H := Input.get_axis("move_left", "move_right")
 	var movement_V := Input.get_axis("move_up", "move_down")
 	var is_still := is_zero_approx(movement_H) && is_zero_approx(movement_V)
-	if stats.health == 0:
-		return State.DEATH
-	if pending_damage.size() > 0:
+	if flag_hit:
+		flag_hit = false
 		transition_state(state, State.HIT)
 		return State.HIT
 	match state:
@@ -132,7 +135,7 @@ func get_next_state(state: State) -> State:
 				return State.IDLE
 	return state
 
-func transition_state(from: State, to: State) -> void:
+func transition_state(_from: State, to: State) -> void:
 	current_state = to
 	match to:
 		State.IDLE:
@@ -141,12 +144,7 @@ func transition_state(from: State, to: State) -> void:
 			animation_player.play("running")
 		State.HIT:
 			animation_player.play("hit")
-			if pending_damage.size() > 0:
-				var dmg = pending_damage.pop_front()
-				stats.health -= dmg.amount
-				var dir = dmg.source.global_position.direction_to(global_position)
-				velocity = dir * KNOCKBACK_AMOUNT
-				move_and_slide()
+			# move_and_slide()
 			invincible_timer.start()
 		State.ATTACK:
 			animation_player.play("attack")
@@ -155,14 +153,9 @@ func transition_state(from: State, to: State) -> void:
 			invincible_timer.stop()
 #endregion
 
-#region 伤害
-func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
-	if invincible_timer.time_left > 0:
-		return
-	var attacker: Node2D = hitbox.owner as Node2D
-	var new_dmg = Damage.new(attacker.stats.atk, attacker)
-	pending_damage.append(new_dmg)
-	
+#region 受击逻辑
+func _on_unit_hurt(_attack: AttackItem) -> void:
+	flag_hit = true
 
 func die() -> void:
 	get_tree().reload_current_scene()

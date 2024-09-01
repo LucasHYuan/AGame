@@ -1,14 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://b0myny5kap7m6"]
 
-[ext_resource type="Script" path="res://bullets/bullet.gd" id="1_dhc6m"]
-[ext_resource type="Texture2D" uid="uid://c1fly64g4vjxt" path="res://assets/Ninja Adventure - Asset Pack/Items/Food/Calamari.png" id="2_ow6o7"]
-[ext_resource type="Script" path="res://classes/hitbox.gd" id="3_um4lj"]
+[ext_resource type="Script" path="res://bullets/bullet.gd" id="1_8o1op"]
+[ext_resource type="Texture2D" uid="uid://c1fly64g4vjxt" path="res://assets/Ninja Adventure - Asset Pack/Items/Food/Calamari.png" id="2_3ygsl"]
+[ext_resource type="Script" path="res://classes/hitbox.gd" id="3_7ro4c"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_m0nx6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_ow6o7")
+"texture": ExtResource("2_3ygsl")
 }],
 "loop": true,
 "name": &"default",
@@ -19,7 +19,7 @@ animations = [{
 radius = 5.0
 
 [node name="Bullet" type="Node2D"]
-script = ExtResource("1_dhc6m")
+script = ExtResource("1_8o1op")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_m0nx6")
@@ -27,15 +27,12 @@ frame_progress = 0.0652143
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 16
+collision_mask = 3
 monitorable = false
-script = ExtResource("3_um4lj")
+script = ExtResource("3_7ro4c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_pnmqf")
-
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
-scale = Vector2(0.2, 0.2)
 
 [node name="TimerDestroy" type="Timer" parent="."]
 wait_time = 20.0

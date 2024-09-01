@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ynah0rik0eio"]
+
+[ext_resource type="Script" path="res://battle/battle_unit.gd" id="1_q4oxl"]
+
+[node name="BattleUnit" type="Node2D"]
+script = ExtResource("1_q4oxl")
+team = null
+health = null

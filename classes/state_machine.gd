@@ -18,6 +18,3 @@ func _physics_process(delta: float) -> void:
 		current_state = next
 		
 	owner.tick_physics(current_state,delta)
-
-
-
