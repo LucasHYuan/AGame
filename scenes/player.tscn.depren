@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://classes/state_machine.gd" id="4_df445"]
 [ext_resource type="Script" path="res://classes/hurtbox.gd" id="5_6x7l5"]
 [ext_resource type="PackedScene" uid="uid://dj8s0itikxgfu" path="res://ui/status_panel.tscn" id="7_nb60r"]
-[ext_resource type="Script" path="res://classes/player_data.gd" id="9_3p4rv"]
+[ext_resource type="Script" path="res://classes/player_data.gd" id="8_7jsyx"]
 [ext_resource type="PackedScene" uid="uid://cii72sr21bqp3" path="res://battle/skills/invincible_on_hurt.tscn" id="9_rayig"]
 
 [sub_resource type="Animation" id="Animation_fv7hq"]
@@ -332,6 +332,9 @@ motion_mode = 1
 script = ExtResource("1_wadek")
 max_health = null
 atk = null
+max_exp = null
+max_coin = null
+init_coin = null
 
 [node name="Graphics" type="Node2D" parent="."]
 
@@ -381,15 +384,14 @@ script = ExtResource("4_df445")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="StatusPanel" parent="CanvasLayer" node_paths=PackedStringArray("battle_unit", "player_data") instance=ExtResource("7_nb60r")]
+[node name="StatusPanel" parent="CanvasLayer" node_paths=PackedStringArray("battle_unit") instance=ExtResource("7_nb60r")]
 offset_left = 6.0
 offset_top = 6.0
 offset_right = 54.0
 offset_bottom = 32.0
 battle_unit = NodePath("../../BattleUnit")
-player_data = NodePath("../../Data")
 
-[node name="Data" type="Node2D" parent="."]
-script = ExtResource("9_3p4rv")
+[node name="Stats" type="Node2D" parent="."]
+script = ExtResource("8_7jsyx")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

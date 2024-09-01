@@ -8,13 +8,10 @@ var interacting_with: Node2D
 
 @export var max_health: int = 5
 @export var atk: int = 1
-@export var max_exp: int = 3
-@export var max_coin: int = 999
-@export var init_coin: int = 3
 
 @onready var sprite_2d = $Graphics/PlayerSprite
 @onready var animation_player = $AnimationPlayer
-@onready var stats: Stats = $Stats
+@onready var data: PlayerData = $Data
 @onready var graphics: Node2D = $Graphics
 
 @onready var battle_unit: BattleUnit = $BattleUnit
@@ -41,19 +38,13 @@ var current_state: State = State.IDLE
 func _ready() -> void:
 	GlobalObjects.SetObject("player", self)
 
-	stats.enemy_death.connect(_on_enemy_death)
-
 	gm_connect()
 	game_connect()
 	init_stats()
 
 #region 属性管理
 func init_stats() -> void:
-	stats.atk = atk
-	stats.max_exp = max_exp
-	stats.init_coin = init_coin
-	stats.max_coin = max_coin
-	stats.default_init()
+	data.default_init()
 #endregion
 
 #region 游戏逻辑
@@ -66,9 +57,9 @@ func game_connect() -> void:
 	GlobalSignal.add_listener("enemy_death", self, "_on_enemy_death")
 
 func _on_enemy_death(enemy: Enemy) -> void:
-	print("玩家检测到敌人死亡！")
-	stats.coin += enemy.coin
-	stats.exp += enemy.EXP
+	print("玩家检测到敌人死亡,获得金币:", enemy.coin, "  经验:", enemy.EXP)
+	data.coin += enemy.coin
+	data.EXP += enemy.EXP
 #endregion
 
 #region GM指令注册

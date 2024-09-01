@@ -18,10 +18,9 @@ enum State {
 signal enemy_death(enemy: Enemy)
 
 # 固定属性：生命、攻击、经验、金币
-@export var health: int = 1
 @export var atk: int = 1
 @export var EXP: int = 1
-@export var coin: int = 0
+@export var coin: int = 1
 
 @export var max_speed: float = 30
 var target: Node2D # 追踪目标

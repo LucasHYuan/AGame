@@ -459,10 +459,9 @@ radius = 8.0
 position = Vector2(0, -8)
 collision_mask = 4
 script = ExtResource("2_eq5do")
-health = 1
 atk = 1
 EXP = 1
-coin = 0
+coin = 1
 max_speed = 30.0
 target_groups = ["Player_Group", "Building_Group"]
 

@@ -1,31 +1,29 @@
-class_name Stats
+class_name PlayerData
 extends Node
 signal exp_changed
 signal level_changed
 signal coin_changed
-signal enemy_death(enemy_stats: Stats)
 
-var atk: int = 1
-var max_exp: int = 3
-var init_coin: int = 50
-var max_coin: int = 999
+@export var max_exp: int = 3
+@export var init_coin: int = 20
+@export var max_coin: int = 9999
 
 func default_init() -> void:
-	exp = 0
+	EXP = 0
 	coin = init_coin
 	level = 0
 
-@onready var exp: int = 0:
+var EXP: int = 0:
 	set(v):
 		if v <= 0:
 			return
-		exp = v
-		if exp >= max_exp:
-			exp -= max_exp
+		EXP = v
+		if EXP >= max_exp:
+			EXP -= max_exp
 			level += 1
 		exp_changed.emit()
 
-@onready var coin: int = init_coin:
+var coin: int = init_coin:
 	set(v):
 		v = clampi(v, 0, max_coin)
 		if coin == v:
@@ -33,7 +31,7 @@ func default_init() -> void:
 		coin = v
 		coin_changed.emit()
 		
-@onready var level: int = 0:
+var level: int = 0:
 	set(v):
 		if v <= 0:
 			return
