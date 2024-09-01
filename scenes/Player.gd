@@ -15,7 +15,6 @@ var interacting_with: Node2D
 @onready var sprite_2d = $Graphics/PlayerSprite
 @onready var animation_player = $AnimationPlayer
 @onready var stats: Stats = $Stats
-@onready var invincible_timer: Timer = $InvincibleTimer
 @onready var graphics: Node2D = $Graphics
 
 @onready var battle_unit: BattleUnit = $BattleUnit
@@ -85,10 +84,6 @@ func _physics_process(delta: float) -> void:
 	tick_physics(current_state, delta)
 
 func tick_physics(state: State, delta: float) -> void:
-	if invincible_timer.time_left > 0:
-		graphics.modulate.a = sin(Time.get_ticks_msec() / 20) * 0.5 + 0.5
-	else:
-		graphics.modulate.a = 1
 	match state:
 		State.IDLE, State.HIT:
 			move(0)
@@ -144,13 +139,10 @@ func transition_state(_from: State, to: State) -> void:
 			animation_player.play("running")
 		State.HIT:
 			animation_player.play("hit")
-			# move_and_slide()
-			invincible_timer.start()
 		State.ATTACK:
 			animation_player.play("attack")
 		State.DEATH:
 			animation_player.play("death")
-			invincible_timer.stop()
 #endregion
 
 #region 受击逻辑

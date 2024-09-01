@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://g4ytruh0jt1b"]
+[gd_scene load_steps=18 format=3 uid="uid://g4ytruh0jt1b"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_wadek"]
 [ext_resource type="Texture2D" uid="uid://gdjxdkdd54m7" path="res://assets/brackeys_platformer_assets/sprites/knight.png" id="2_ioptb"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://classes/hurtbox.gd" id="5_6x7l5"]
 [ext_resource type="PackedScene" uid="uid://dj8s0itikxgfu" path="res://ui/status_panel.tscn" id="7_nb60r"]
 [ext_resource type="Script" path="res://classes/stats.gd" id="8_7jsyx"]
+[ext_resource type="PackedScene" uid="uid://cii72sr21bqp3" path="res://battle/skills/invincible_on_hurt.tscn" id="9_rayig"]
 
 [sub_resource type="Animation" id="Animation_fv7hq"]
 length = 0.4
@@ -368,15 +369,13 @@ hurtbox = NodePath("../Hurtbox")
 team = 0
 max_health = 5
 
+[node name="InvincibleOnHurt" parent="BattleUnit" instance=ExtResource("9_rayig")]
+
 [node name="BulletShooter" parent="BattleUnit" instance=ExtResource("3_i8tdt")]
 scale = Vector2(0.5, 0.5)
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("4_df445")
-
-[node name="InvincibleTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -13,6 +13,11 @@ var bullet_damage = 1
 
 var target_enemy: Enemy = null
 
+func _ready():
+	shoot_timer.wait_time = shoot_time
+	shoot_timer.start()
+	shoot_timer.timeout.connect(_on_shoot_timer_timeout)
+
 # 跟BattleUnit同级放置
 
 func _init_data_from_parent() -> void:
