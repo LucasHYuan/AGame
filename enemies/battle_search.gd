@@ -18,14 +18,15 @@ func get_neareast_target() -> BattleUnit:
 			else:
 				if get_distance(area) < get_distance(res):
 					res = area
-	return res.battle_unit
+	return null if res == null else res.battle_unit
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_set_team()
-
-	area_entered.connect(_on_area_entered)
+	
+	area_exited.connect(_search_target)
+	area_entered.connect(_search_target)
 
 
 func _set_team() -> void:
@@ -35,5 +36,6 @@ func _set_team() -> void:
 func get_distance(o):
 	return (o.global_position - global_position).length()
 
-func _on_area_entered(_area: Area2D) -> void:
+func _search_target(_area: Area2D) -> void:
 	target = get_neareast_target()
+	print("发现目标:", target)
