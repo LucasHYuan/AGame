@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 const RUN_SPEED := 50.0
-const KNOCKBACK_AMOUNT := 1200.0
+const KNOCKBACK_AMOUNT := 30.0
 var pending_damage: Array = []
 var interacting_with: Node2D
 
@@ -49,12 +49,23 @@ func init_stats() -> void:
 #region 游戏逻辑
 func game_connect() -> void:
 	# 自己的战斗单位
-	battle_unit.unit_dead.connect(die)
+	battle_unit.unit_dead.connect(_player_die)
 	battle_unit.unit_hurt.connect(_on_unit_hurt)
 	battle_unit.unit_kickback.connect(_on_unit_kickback)
 
 	# 所有的敌人死亡
 	GlobalSignal.add_listener("enemy_death", self, "_on_enemy_death")
+
+#region 受击逻辑
+func _on_unit_hurt(_attack: AttackItem) -> void:
+	flag_hit = true
+
+func _on_unit_kickback(kickback: Vector2) -> void:
+	translate(kickback * KNOCKBACK_AMOUNT)
+
+func _player_die() -> void:
+	get_tree().reload_current_scene()
+#endregion
 
 func _on_enemy_death(enemy: Enemy) -> void:
 	print("玩家检测到敌人死亡,获得金币:", enemy.coin, "  经验:", enemy.EXP)
@@ -65,10 +76,11 @@ func _on_enemy_death(enemy: Enemy) -> void:
 #region GM指令注册
 func gm_connect() -> void:
 	GlobalSignal.add_listener("playerLevelUp", self, "_on_player_level_up")
-#endregion
 
 func _on_player_level_up() -> void:
 	print("玩家执行升级！")
+#endregion
+
 
 #region 状态机控制
 func _physics_process(delta: float) -> void:
@@ -86,7 +98,7 @@ func tick_physics(state: State, delta: float) -> void:
 		State.RUNNING:
 			move(delta)
 
-func move(delta: float) -> void:
+func move(_delta: float) -> void:
 	var movement_H := Input.get_axis("move_left", "move_right")
 	var movement_V := Input.get_axis("move_up", "move_down")
 	
@@ -134,17 +146,4 @@ func transition_state(_from: State, to: State) -> void:
 			animation_player.play("attack")
 		State.DEATH:
 			animation_player.play("death")
-#endregion
-
-#region 受击逻辑
-func _on_unit_hurt(_attack: AttackItem) -> void:
-	flag_hit = true
-
-func _on_unit_kickback(kickback: Vector2) -> void:
-	print("玩家受击击退", kickback)
-	# 因为速度被操控系统占用，只能直接位移
-	translate(kickback*30)
-
-func die() -> void:
-	get_tree().reload_current_scene()
 #endregion

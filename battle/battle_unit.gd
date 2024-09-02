@@ -5,8 +5,12 @@ class_name BattleUnit
 @export var hurtbox: Hurtbox
 @export var team: GlobalInfo.Team = GlobalInfo.Team.player
 @export var max_health: int = 1
-var health: int = 1
 
+
+var is_dead: bool = false:
+	get:
+		return health <= 0
+var health: int = 1
 var invincible: bool = false
 
 signal health_changed()
@@ -55,6 +59,8 @@ func _process_atk(attack: AttackItem) -> void:
 # 击退逻辑
 func _process_kickback(attack: AttackItem) -> void:
 	if attack.kickback_volume > 0:
+		print("击退量：", attack.kickback_volume)
+		
 		var dir = attack.attacker.global_position.direction_to(global_position)
 		var kickback = dir * attack.kickback_volume
 		unit_kickback.emit(kickback)

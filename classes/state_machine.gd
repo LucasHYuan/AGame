@@ -1,4 +1,4 @@
-class_name  StateMachine
+class_name StateMachine
 extends Node
 
 var current_state: int = -1:
@@ -12,9 +12,10 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	while true:
+		# 不断切换状态，直到下一个状态和当前状态相同
 		var next := owner.get_next_state(current_state) as int
 		if current_state == next:
 			break
 		current_state = next
 		
-	owner.tick_physics(current_state,delta)
+	owner.tick_physics(current_state, delta)

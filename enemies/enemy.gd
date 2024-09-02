@@ -1,6 +1,8 @@
 class_name Enemy
 extends CharacterBody2D
 
+const KNOCKBACK_AMOUNT := 30.0
+
 enum Direction {
 	LEFT = -1,
 	RIGHT = +1,
@@ -21,34 +23,81 @@ signal enemy_death(enemy: Enemy)
 @export var EXP: int = 1
 @export var coin: int = 1
 
-@export var max_speed: float = 30
-var target: Node2D # 追踪目标
+@export var speed: float = 30
 @export var target_groups := ["Player_Group", "Building_Group"] # 要追踪的组列表
 
 @onready var graphics: Node2D = $Graphics
-@onready var state_machine: StateMachine = $StateMachine
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var battle_unit: BattleUnit = $BattleUnit
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var animation_tree: AnimationTree = $AnimationTree
 
-var pending_damage: Array = []
-var current_state: State
-const KNOCKBACK_AMOUNT := 1200.0
-
-func init_stats() -> void:
-	pass
-
+var target: Node2D # 追踪目标
+var is_dead: bool = false:
+	get:
+		return battle_unit.is_dead
+var flag_hit = false
 
 func _ready() -> void:
+	init_stats()
+	game_connect()
+	
+
+#region 属性管理
+func init_stats() -> void:
+	pass
+#endregion
+
+#region 主入口
+func _physics_process(delta: float) -> void:
+	move_towards_target(delta)
+
+func move_towards_target(_delta: float) -> void:
+	var _target = get_target()
+
+	# 获取方向向量
+	var direction = global_position.direction_to(_target.global_position)
+
+	# 动画机参数
+	animation_move(direction)
+
+	# 移动逻辑
+	velocity = direction * speed
+	move_and_slide()
+#endregion
+
+#region 游戏逻辑
+func game_connect() -> void:
 	battle_unit.unit_hurt.connect(_on_unit_hurt)
 	battle_unit.unit_kickback.connect(_on_unit_kickback)
+	battle_unit.unit_dead.connect(_on_unit_die)
+
+	# 广播死亡事件
 	GlobalSignal.add_emitter("enemy_death", self)
-	init_stats()
+
+func _destroy() -> void:
+	queue_free()
+
+# 受击逻辑
+func _on_unit_kickback(kickback: Vector2) -> void:
+	translate(kickback * KNOCKBACK_AMOUNT)
+
+func _on_unit_hurt(_attack_item: AttackItem) -> void:
+	pass
+
+func _on_unit_die() -> void:
+	animation_die()
+	speed = 0
+	enemy_death.emit(self)
+
+#endregion
 
 
 #region 移动&目标控制
+# 获取目标
 func get_target() -> Node2D:
 	return get_closest_target()
 
+# 获取最近的目标
 func get_closest_target() -> Node2D:
 	var closest_target: Node2D = null
 	var closest_distance = INF
@@ -62,66 +111,10 @@ func get_closest_target() -> Node2D:
 				closest_target = obj
 	return closest_target
 	
-func move_towards_target(cur_target: Node2D, _delta: float) -> void:
-	var direction = (cur_target.global_position - global_position).normalized()
-	if direction.x < 0:
-		animation_player.play("left")
-	else: animation_player.play("right")
-	if direction.y < 0:
-		animation_player.play("up")
-	else: animation_player.play("down")
-	velocity = direction * max_speed
-	move_and_slide()
+#region 动画接口
+func animation_move(dir: Vector2) -> void:
+	animation_tree.set("parameters/Run/blend_position", dir)
+
+func animation_die() -> void:
+	animation_tree.set("parameters/conditions/dead", true)
 #endregion
-
-#region 状态机控制
-func get_next_state(state: State) -> State:
-	match state:
-		State.TARGET:
-			if battle_unit.health <= 0:
-				return State.DEATH
-			if pending_damage.size() > 0:
-				transition_state(state, State.HIT)
-				return State.HIT
-		State.HIT:
-			if not animation_player.is_playing():
-				return State.TARGET
-	return state
-				
-func tick_physics(state: State, delta: float) -> void:
-	target = get_target()
-	match state:
-		State.TARGET:
-			move_towards_target(target, delta)
-	
-func transition_state(_from: State, to: State) -> void:
-	current_state = to
-	match to:
-		State.HIT:
-			animation_player.play("hit")
-			if pending_damage.size() > 0:
-				var attack_item = pending_damage.pop_front()
-				hurt_effect(attack_item)
-				move_and_slide()
-		State.DEATH:
-			die()
-			animation_player.play("death")
-		State.TARGET, State.IDLE:
-			animation_player.play("RESET")
-
-func hurt_effect(_attack_item: AttackItem) -> void:
-	print("存在未实现的怪物受击")
-	pass
-#endregion
-
-# 受击逻辑
-func _on_unit_hurt(attack: AttackItem) -> void:
-	pending_damage.append(attack)
-
-func _on_unit_kickback(kickback: Vector2) -> void:
-	# 由于Hit状态下不会每帧设置速度，可以使用速度位移
-	velocity = kickback * KNOCKBACK_AMOUNT
-
-func die() -> void:
-	enemy_death.emit(self)
-	queue_free()

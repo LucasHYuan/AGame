@@ -19,7 +19,6 @@ func _ready():
 	shoot_timer.timeout.connect(_on_shoot_timer_timeout)
 
 # 跟BattleUnit同级放置
-
 func _init_data_from_parent() -> void:
 	shoot_time = get_parent().shoot_time
 	bullet_speed = get_parent().bullet_speed
@@ -36,7 +35,7 @@ func get_nearest_enemy():
 		if body is Enemy == false:
 			continue
 		# 排除已经没血的敌人
-		if body.current_state == Enemy.State.DEATH:
+		if body.is_dead:
 			continue
 		
 		if res == null: # 第一个遍历到的敌人
