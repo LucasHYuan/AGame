@@ -467,7 +467,7 @@ _data = {
 radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bj0gr"]
-radius = 8.0
+radius = 12.0
 
 [node name="Skull" instance=ExtResource("1_5enrj")]
 position = Vector2(0, -8)

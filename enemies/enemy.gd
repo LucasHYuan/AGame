@@ -24,13 +24,14 @@ signal enemy_death(enemy: Enemy)
 @export var coin: int = 1
 
 @export var speed: float = 30
-@export var target_groups := ["Player_Group", "Building_Group"] # 要追踪的组列表
 
 @onready var graphics: Node2D = $Graphics
 @onready var battle_unit: BattleUnit = $BattleUnit
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_tree: AnimationTree = $AnimationTree
+@onready var battle_search: BattleSearch = $BattleSearch
 
+var DEFAULT_TARGET: Node2D = null
 var target: Node2D # 追踪目标
 
 var team: GlobalInfo.Team
@@ -43,7 +44,7 @@ var flag_hit = false
 func _ready() -> void:
 	init_stats()
 	game_connect()
-	
+	DEFAULT_TARGET = GlobalObjects.GetObject("player")
 
 #region 属性管理
 func init_stats() -> void:
@@ -98,21 +99,9 @@ func _on_unit_die() -> void:
 #region 移动&目标控制
 # 获取目标
 func get_target() -> Node2D:
-	return get_closest_target()
-
-# 获取最近的目标
-func get_closest_target() -> Node2D:
-	var closest_target: Node2D = null
-	var closest_distance = INF
-
-	for group in target_groups:
-		var objects = get_tree().get_nodes_in_group(group)
-		for obj in objects:
-			var distance = global_position.distance_to(obj.global_position)
-			if distance < closest_distance:
-				closest_distance = distance
-				closest_target = obj
-	return closest_target
+	if battle_search.target != null:
+		return battle_search.target
+	return DEFAULT_TARGET
 	
 #region 动画接口
 func animation_move(dir: Vector2) -> void:

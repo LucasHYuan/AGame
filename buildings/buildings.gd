@@ -28,8 +28,21 @@ func _ready() -> void:
 		# 自动建造
 		_on_build()
 
+	game_connect()
+
 	# 监听全局信号
 	GlobalSignal.add_listener("day", self, "_on_day")
+
+#region 游戏逻辑
+func game_connect() -> void:
+	# 自己的战斗单位
+	battle_unit.unit_dead.connect(_on_unit_die)
+
+func _on_unit_die() -> void:
+	# 建筑被摧毁
+	isBuilt = false
+	_set_building_active(false)
+#endregion
 
 #region 建造基本实现
 func _init_build() -> void:
