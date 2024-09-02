@@ -5,7 +5,7 @@ class_name BulletShooter
 @onready var shoot_timer = $ShootTimer
 @onready var shoot_point = $ShootPoint
 
-@onready var bullet = preload("res://bullets/bullet.tscn")
+@onready var bullet_scene = preload("res://bullets/bullet.tscn")
 
 var shoot_time = 2
 var bullet_speed = 200
@@ -57,12 +57,11 @@ func _shoot() -> void:
 	
 	if target_enemy != null:
 		# 发射子弹，并初始化数据
-		var new_bullet = bullet.instantiate()
-		new_bullet.speed = bullet_speed
-		new_bullet.atk = bullet_damage
-		new_bullet.position = shoot_point.global_position
-		new_bullet.team = get_parent().team
+		var bullet = bullet_scene.instantiate()
+		bullet.set_team(get_parent().team)
 
-		
-		new_bullet.dir = (target_enemy.global_position - shoot_point.global_position).normalized()
-		get_tree().root.add_child(new_bullet)
+		bullet.atk = bullet_damage
+		bullet.speed = bullet_speed
+		bullet.position = shoot_point.global_position
+		bullet.dir = (target_enemy.global_position - shoot_point.global_position).normalized()
+		get_tree().root.add_child(bullet)

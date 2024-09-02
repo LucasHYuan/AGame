@@ -32,7 +32,7 @@ enum State {
 }
 
 var flag_hit = false;
-
+var team: GlobalInfo.Team
 var current_state: State = State.IDLE
 
 func _ready() -> void:

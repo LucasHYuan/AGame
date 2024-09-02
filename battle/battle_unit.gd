@@ -20,6 +20,7 @@ signal unit_dead()
 
 
 func _ready() -> void:
+	owner.team = team
 	health = max_health
 	hurtbox.hurt.connect(_on_hurtbox_hurt)
 	_init_collision()

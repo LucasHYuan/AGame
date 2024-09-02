@@ -32,6 +32,9 @@ signal enemy_death(enemy: Enemy)
 @onready var animation_tree: AnimationTree = $AnimationTree
 
 var target: Node2D # 追踪目标
+
+var team: GlobalInfo.Team
+
 var is_dead: bool = false:
 	get:
 		return battle_unit.is_dead
