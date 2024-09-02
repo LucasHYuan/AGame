@@ -73,13 +73,16 @@ func _set_building_active(active: bool) -> void:
 	# 激活/拆除建筑
 	isBuilt = active
 	building.visible = active
-	for child in building.get_children():
-		if child is CollisionShape2D:
-			child.disabled = not active
+	call_deferred("_set_collision_active", active)
 	if active:
 		battle_unit.set_collision()
 	else:
 		battle_unit.hide_collision()
+
+func _set_collision_active(active: bool) -> void:
+	for child in building.get_children():
+		if child is CollisionShape2D:
+			child.disabled = not active
 #endregion
 
 #region 监听信号

@@ -42,7 +42,7 @@ func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
 	var attack = AttackItem.new(attacker.atk, attacker)
 
 	_process_atk(attack)
-	print("当前生命值:", health, "  最大生命值：", max_health)
+	# print("当前生命值:", health, "  最大生命值：", max_health)
 
 # 伤害结算逻辑
 func _process_atk(attack: AttackItem) -> void:
@@ -50,7 +50,7 @@ func _process_atk(attack: AttackItem) -> void:
 		# 无敌状态下不受伤
 		return
 
-	print("有效攻击，攻击者:", attack.attacker, "  攻击力:", attack.atk)
+	# print("有效攻击，攻击者:", attack.attacker, "  攻击力:", attack.atk)
 	_process_kickback(attack)
 
 	health -= attack.atk
