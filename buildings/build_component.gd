@@ -51,8 +51,8 @@ func _on_Button_pressed() -> void:
 	# build_ask.emit(price)
 	var player = GlobalObjects.GetObject("player")
 	if player:
-		if player.stats.coin >= price:
-			player.stats.coin -= price
+		if player.data.coin >= price:
+			player.data.coin -= price
 			_on_build()
 
 
@@ -64,12 +64,12 @@ func _on_build() -> void:
 
 func _on_day() -> void:
 	# 白天显示地基，可建造
-	interactable_area.process_mode=Node.PROCESS_MODE_INHERIT
+	interactable_area.process_mode = Node.PROCESS_MODE_INHERIT
 	icon.visible = true
 	pass
 
 func _on_night() -> void:
 	# 夜晚隐藏地基，不可建造
-	interactable_area.process_mode=Node.PROCESS_MODE_DISABLED
+	interactable_area.process_mode = Node.PROCESS_MODE_DISABLED
 	icon.visible = false
 	pass

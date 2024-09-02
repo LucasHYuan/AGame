@@ -4,11 +4,12 @@ extends Node2D
 @export var buildingName: String = "建筑名称"
 @export var descriptionLabel: String = "建筑描述"
 @export var price: int = 2
-
 @onready var buildShow: Sprite2D = $BuildShow
 @onready var building: Node2D = $Building
+@onready var battle_unit: BattleUnit = $BattleUnit
 var buildC: BuildComponent = null
 var isBuilt: bool = false
+var team: GlobalInfo.Team
 
 enum State {
 	UNBUILT,
@@ -62,6 +63,10 @@ func _set_building_active(active: bool) -> void:
 	for child in building.get_children():
 		if child is CollisionShape2D:
 			child.disabled = not active
+	if active:
+		battle_unit.set_collision()
+	else:
+		battle_unit.hide_collision()
 #endregion
 
 #region 监听信号

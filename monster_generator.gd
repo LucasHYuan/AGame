@@ -4,7 +4,7 @@ extends Node2D
 @export var enemy_path: Path2D
 @export var enemy_spawn_location: PathFollow2D
 @export var scene: PackedScene
-@export var enemy_prototype = preload ("res://enemies/skull.tscn")
+@export var enemy_prototype = preload("res://enemies/skull.tscn")
 @export var spawn_interval: float = 1.0
 @export var cycle_controller: CycleController
 
@@ -25,7 +25,7 @@ func _on_enemy_timer_timeout():
 func clear_all_enemies() -> void:
 	for enemy in enemy_list:
 		if enemy != null:
-			enemy.die()
+			enemy.destroy()
 	enemy_timer.stop()
 
 func start_generate() -> void:

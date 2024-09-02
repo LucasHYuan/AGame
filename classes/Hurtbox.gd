@@ -3,3 +3,5 @@ extends Area2D
 
 
 signal hurt(hitbox)
+
+var battle_unit: BattleUnit

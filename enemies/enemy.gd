@@ -77,7 +77,7 @@ func game_connect() -> void:
 	# 广播死亡事件
 	GlobalSignal.add_emitter("enemy_death", self)
 
-func _destroy() -> void:
+func destroy() -> void:
 	queue_free()
 
 # 受击逻辑

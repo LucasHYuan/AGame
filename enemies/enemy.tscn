@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://bbtrppnn3mx5t"]
+[gd_scene load_steps=18 format=3 uid="uid://bbtrppnn3mx5t"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_6grxu"]
 [ext_resource type="Script" path="res://enemies/battle_search.gd" id="4_g75lv"]
 [ext_resource type="PackedScene" uid="uid://ynah0rik0eio" path="res://battle/battle_unit.tscn" id="4_gtygu"]
+[ext_resource type="Texture2D" uid="uid://demkp4ciyeskq" path="res://assets/normal/round.png" id="5_3xnve"]
 [ext_resource type="Script" path="res://classes/hurtbox.gd" id="5_p1u8q"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tvbjf"]
@@ -57,8 +58,8 @@ radius = 1.0
 radius = 20.0
 
 [node name="Ememy" type="CharacterBody2D"]
-collision_layer = 2
-collision_mask = 0
+collision_layer = 3
+collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_6grxu")
 
@@ -81,7 +82,7 @@ hurtbox = NodePath("../Hurtbox")
 team = 1
 
 [node name="Hurtbox" type="Area2D" parent="."]
-collision_layer = 8
+collision_layer = 0
 collision_mask = 0
 script = ExtResource("5_p1u8q")
 
@@ -91,7 +92,15 @@ shape = SubResource("CircleShape2D_65eks")
 debug_color = Color(0.844691, 0.279891, 0.648589, 0.42)
 
 [node name="BattleSearch" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
 script = ExtResource("4_g75lv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BattleSearch"]
+scale = Vector2(2, 1)
 shape = SubResource("CircleShape2D_swir2")
+
+[node name="Sprite2D" type="Sprite2D" parent="BattleSearch"]
+position = Vector2(0.5, 9.53674e-07)
+scale = Vector2(0.154297, 0.078125)
+texture = ExtResource("5_3xnve")

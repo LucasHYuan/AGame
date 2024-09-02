@@ -327,7 +327,6 @@ radius = 3.0
 height = 9.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player_Group"]]
-collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_wadek")
 
@@ -355,7 +354,7 @@ debug_color = Color(4.23551e-06, 0.58264, 0.790378, 0.42)
 
 [node name="Hurtbox" type="Area2D" parent="."]
 position = Vector2(0, -3)
-collision_layer = 8
+collision_layer = 0
 collision_mask = 0
 script = ExtResource("5_6x7l5")
 
@@ -366,13 +365,13 @@ debug_color = Color(0.844691, 0.279891, 0.648589, 0.42)
 
 [node name="BattleUnit" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("4_3t8dl")]
 hurtbox = NodePath("../Hurtbox")
-team = 0
 max_health = 5
 
 [node name="InvincibleOnHurt" parent="BattleUnit" instance=ExtResource("9_rayig")]
 
-[node name="BulletShooter" parent="BattleUnit" instance=ExtResource("3_i8tdt")]
+[node name="BulletShooter" parent="BattleUnit" node_paths=PackedStringArray("battle_unit") instance=ExtResource("3_i8tdt")]
 scale = Vector2(0.5, 0.5)
+battle_unit = NodePath("..")
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("4_df445")

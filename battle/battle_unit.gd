@@ -22,14 +22,19 @@ signal unit_dead()
 func _ready() -> void:
 	owner.team = team
 	health = max_health
+	hurtbox.battle_unit = self
 	hurtbox.hurt.connect(_on_hurtbox_hurt)
-	_init_collision()
+	set_collision()
 
-func _init_collision() -> void:
+func set_collision() -> void:
 	if team == GlobalInfo.Team.player:
 		hurtbox.collision_layer = 1 << GlobalInfo.Team.player
 	elif team == GlobalInfo.Team.enemy:
 		hurtbox.collision_layer = 1 << GlobalInfo.Team.enemy
+
+func hide_collision() -> void:
+	hurtbox.collision_layer = 0
+	
 
 # 通用受击逻辑
 func _on_hurtbox_hurt(hitbox: Hitbox) -> void:

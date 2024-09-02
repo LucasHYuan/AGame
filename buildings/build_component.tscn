@@ -16,6 +16,8 @@ region = Rect2(20, 3, 8, 10)
 script = ExtResource("1_dxdpw")
 
 [node name="Interactable_area" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_db6re")
 
 [node name="Detector" type="CollisionShape2D" parent="Interactable_area"]

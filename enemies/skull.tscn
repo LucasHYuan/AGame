@@ -172,7 +172,7 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"_destroy"
+"method": &"destroy"
 }]
 }
 
@@ -471,7 +471,8 @@ radius = 8.0
 
 [node name="Skull" instance=ExtResource("1_5enrj")]
 position = Vector2(0, -8)
-collision_mask = 4
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("2_eq5do")
 
 [node name="Graphics_Hurtbox" type="CollisionShape2D" parent="." index="0"]
@@ -497,9 +498,6 @@ autoplay = "down"
 scale = Vector2(0.795, 0.795)
 max_health = 2
 
-[node name="Hurtbox" parent="." index="6"]
-collision_layer = 0
-
 [node name="HurtCollision" parent="Hurtbox" index="0"]
 shape = SubResource("CircleShape2D_6n67b")
 
@@ -510,3 +508,6 @@ script = ExtResource("4_gulxi")
 
 [node name="HitCollision" type="CollisionShape2D" parent="HitAttacker" index="0"]
 shape = SubResource("CircleShape2D_bj0gr")
+
+[node name="BattleSearch" parent="." index="8"]
+scale = Vector2(2, 2)

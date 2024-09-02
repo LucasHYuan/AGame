@@ -2,7 +2,7 @@ extends Hitbox
 class_name HitAttacker
 
 @export var atk: float = 1
-@export var kickback: float = 1
+@export var kickback: float = 0
 
 var team: GlobalInfo.Team
 
