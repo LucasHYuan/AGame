@@ -7,15 +7,20 @@ var drag_offset: Vector2
 
 @onready var rest_pos := global_position
 
+func _ready() -> void:
+	# 刷新时重置鼠标状态
+	_reset()
+
 
 func _input(event: InputEvent) -> void:
 	var st := event as InputEventScreenTouch
+	# 有点击事件
 	if st:
+		# 单指按压
 		if st.pressed and finger_index == -1:
 			var global_pos := st.position * get_canvas_transform()
 			var local_pos := to_local(global_pos)
 
-			
 			var rect := Rect2(Vector2.ZERO, texture_normal.get_size())
 			if rect.has_point(local_pos):
 				# 按下
@@ -23,12 +28,7 @@ func _input(event: InputEvent) -> void:
 				drag_offset = global_pos - global_position
 		elif not st.pressed and st.index == finger_index:
 			# 松开
-			Input.action_release("move_left")
-			Input.action_release("move_right")
-			Input.action_release("move_up")
-			Input.action_release("move_down")
-			finger_index = -1
-			global_position = rest_pos
+			_reset()
 	
 	var sd := event as InputEventScreenDrag
 	if sd and sd.index == finger_index:
@@ -50,3 +50,12 @@ func _input(event: InputEvent) -> void:
 		elif movement.y < 0:
 			Input.action_release("move_down")
 			Input.action_press("move_up", -movement.y)
+
+func _reset() -> void:
+	# 重置鼠标状态
+	Input.action_release("move_left")
+	Input.action_release("move_right")
+	Input.action_release("move_up")
+	Input.action_release("move_down")
+	finger_index = -1
+	global_position = rest_pos

@@ -28,6 +28,6 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="knob" type="TouchScreenButton" parent="Control"]
-position = Vector2(-8, -8)
+position = Vector2(-44, -12)
 texture_normal = SubResource("AtlasTexture_d6wmn")
 script = ExtResource("2_gubj0")
