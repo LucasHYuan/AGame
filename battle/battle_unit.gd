@@ -6,6 +6,7 @@ class_name BattleUnit
 @export var team: GlobalInfo.Team = GlobalInfo.Team.player
 @export var max_health: int = 1
 
+@onready var healthBar: TextureProgressBar = $HealthBar
 
 var is_dead: bool = false:
 	get:
@@ -24,6 +25,7 @@ func _ready() -> void:
 	health = max_health
 	hurtbox.battle_unit = self
 	hurtbox.hurt.connect(_on_hurtbox_hurt)
+	update_health()
 	set_collision()
 
 func set_collision() -> void:
@@ -55,6 +57,7 @@ func _process_atk(attack: AttackItem) -> void:
 
 	health -= attack.atk
 	
+	update_health()
 	health_changed.emit()
 	unit_hurt.emit(attack)
 
@@ -70,3 +73,14 @@ func _process_kickback(attack: AttackItem) -> void:
 		var dir = attack.attacker.global_position.direction_to(global_position)
 		var kickback = dir * attack.kickback_volume
 		unit_kickback.emit(kickback)
+
+#region UI更新
+func update_health() -> void:
+	# 满血时不显示血条
+	if health >= max_health:
+		healthBar.visible = false
+	else:
+		healthBar.visible = true
+		var health_percentage := health / float(max_health)
+		healthBar.value = health_percentage
+#endregion

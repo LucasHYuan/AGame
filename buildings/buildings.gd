@@ -21,7 +21,7 @@ var current_state: State = State.UNBUILT
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	buildC = $BuildComponent
+	buildC = find_child("BuildComponent")
 	if buildC:
 		_init_build()
 	else:
@@ -35,7 +35,6 @@ func _ready() -> void:
 
 #region 游戏逻辑
 func game_connect() -> void:
-	# 自己的战斗单位
 	battle_unit.unit_dead.connect(_on_unit_die)
 
 func _on_unit_die() -> void:
@@ -68,6 +67,7 @@ func _on_build_hide_ui() -> void:
 func _on_build() -> void:
 	# 建造建筑
 	_set_building_active(true)
+	_on_build_hide_ui()
 
 func _set_building_active(active: bool) -> void:
 	# 激活/拆除建筑

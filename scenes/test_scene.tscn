@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d3yllstdmow4o"]
+[gd_scene load_steps=12 format=3 uid="uid://d3yllstdmow4o"]
 
 [ext_resource type="PackedScene" uid="uid://dqplwuanj0qb7" path="res://scenes/tile_map.tscn" id="1_04r47"]
 [ext_resource type="PackedScene" uid="uid://g4ytruh0jt1b" path="res://scenes/player.tscn" id="1_tvfoe"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://doe3ou8ymiafx" path="res://buildings/farm_basic.tscn" id="9_app1a"]
 [ext_resource type="PackedScene" uid="uid://cb1noa13yna06" path="res://buildings/build_component.tscn" id="9_g848o"]
 [ext_resource type="PackedScene" uid="uid://031u5b0jmcbl" path="res://buildings/tower_basic.tscn" id="9_hyy0c"]
+[ext_resource type="PackedScene" uid="uid://bqk4w32ygdjra" path="res://buildings/base_camp.tscn" id="10_p4fai"]
 
 [sub_resource type="Curve2D" id="Curve2D_oe8ji"]
 _data = {
@@ -119,3 +120,6 @@ position = Vector2(114, 173)
 
 [node name="BuildComponent" parent="Buildings/Farm4" instance=ExtResource("9_g848o")]
 position = Vector2(0, 24)
+
+[node name="BaseCamp" parent="Buildings" instance=ExtResource("10_p4fai")]
+position = Vector2(128, 139)

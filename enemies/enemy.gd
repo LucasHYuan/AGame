@@ -44,7 +44,8 @@ var flag_hit = false
 func _ready() -> void:
 	init_stats()
 	game_connect()
-	DEFAULT_TARGET = GlobalObjects.GetObject("player")
+	DEFAULT_TARGET = GlobalObjects.GetObject("base_camp")
+	# DEFAULT_TARGET = GlobalObjects.GetObject("player")
 
 #region 属性管理
 func init_stats() -> void:

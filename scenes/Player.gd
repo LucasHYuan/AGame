@@ -64,7 +64,8 @@ func _on_unit_kickback(kickback: Vector2) -> void:
 	translate(kickback * KNOCKBACK_AMOUNT)
 
 func _player_die() -> void:
-	get_tree().reload_current_scene()
+	print("玩家死亡")
+	# get_tree().reload_current_scene()
 #endregion
 
 func _on_enemy_death(enemy: Enemy) -> void:

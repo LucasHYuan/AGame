@@ -38,4 +38,4 @@ func get_distance(o):
 
 func _search_target(_area: Area2D) -> void:
 	target = get_neareast_target()
-	print("发现目标:", target)
+	# print("范围搜索发现目标:", target)

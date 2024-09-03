@@ -10,11 +10,8 @@ extends Node2D
 
 var enemy_list: Array = []
 func _ready() -> void:
-	# enemy_timer.timeout.connect(_on_enemy_timer_timeout)
+	enemy_timer.timeout.connect(_on_enemy_timer_timeout)
 	enemy_timer.start(spawn_interval)
-
-	_add_enemy()
-
 	cycle_controller.day.connect(clear_all_enemies)
 	cycle_controller.night.connect(start_generate)
 
