@@ -21,6 +21,9 @@ position = Vector2(0, -16)
 scale = Vector2(0.6, 0.6)
 region_rect = Rect2(256, 96, 48, 80)
 
+[node name="BattleUnit" parent="." index="2"]
+position = Vector2(0, -40)
+
 [node name="HurtCollision" parent="Hurtbox" index="0"]
 shape = SubResource("RectangleShape2D_f0xum")
 

@@ -76,6 +76,9 @@ func _process_kickback(attack: AttackItem) -> void:
 
 #region UI更新
 func update_health() -> void:
+	if owner is Player:
+		healthBar.visible = false
+		return
 	# 满血时不显示血条
 	if health >= max_health:
 		healthBar.visible = false

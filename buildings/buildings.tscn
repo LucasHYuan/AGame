@@ -28,6 +28,7 @@ region_enabled = true
 region_rect = Rect2(46.9823, 126.767, 48.6636, 35.3391)
 
 [node name="BattleUnit" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("4_xwgry")]
+position = Vector2(0, -15)
 hurtbox = NodePath("../Hurtbox")
 
 [node name="Hurtbox" type="Area2D" parent="."]
