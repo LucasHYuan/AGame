@@ -7,7 +7,7 @@ extends Node2D
 @onready var buildShow: Sprite2D = $BuildShow
 @onready var building: Node2D = $Building
 @onready var battle_unit: BattleUnit = $BattleUnit
-var buildC: BuildComponent = null
+@onready var buildC: BuildComponent = $BuildComponent
 var isBuilt: bool = false
 var team: GlobalInfo.Team
 
@@ -21,12 +21,10 @@ var current_state: State = State.UNBUILT
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	buildC = find_child("BuildComponent")
-	if buildC:
-		_init_build()
-	else:
+	_init_build()
+	if buildC.price == 0:
 		# 自动建造
-		_on_build()
+		buildC.build_process()
 
 	game_connect()
 
@@ -73,6 +71,7 @@ func _set_building_active(active: bool) -> void:
 	# 激活/拆除建筑
 	isBuilt = active
 	building.visible = active
+
 	call_deferred("_set_collision_active", active)
 	if active:
 		battle_unit.set_collision()

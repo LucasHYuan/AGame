@@ -53,10 +53,10 @@ func _on_Button_pressed() -> void:
 	if player:
 		if player.data.coin >= price:
 			player.data.coin -= price
-			_on_build()
+			build_process()
 
 
-func _on_build() -> void:
+func build_process() -> void:
 	# 钱够,建造
 	build.emit()
 	self.queue_free()

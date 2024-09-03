@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://m3mx4wyq1waq"]
+[gd_scene load_steps=9 format=3 uid="uid://m3mx4wyq1waq"]
 
 [ext_resource type="Script" path="res://buildings/buildings.gd" id="1_jafur"]
 [ext_resource type="Script" path="res://classes/player_data.gd" id="2_3lp6e"]
+[ext_resource type="PackedScene" uid="uid://cb1noa13yna06" path="res://buildings/build_component.tscn" id="2_keyg0"]
 [ext_resource type="Texture2D" uid="uid://ccutmsu8l4nqm" path="res://assets/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetHouse.png" id="4_0wocw"]
 [ext_resource type="Script" path="res://classes/hurtbox.gd" id="4_pinsj"]
 [ext_resource type="PackedScene" uid="uid://ynah0rik0eio" path="res://battle/battle_unit.tscn" id="4_xwgry"]
@@ -17,6 +18,9 @@ radius = 23.0868
 z_as_relative = false
 y_sort_enabled = true
 script = ExtResource("1_jafur")
+
+[node name="BuildComponent" parent="." instance=ExtResource("2_keyg0")]
+position = Vector2(0, 15)
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("2_3lp6e")

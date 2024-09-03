@@ -10,12 +10,13 @@ size = Vector2(14.205, 7.975)
 script = ExtResource("2_c5ajv")
 coin_earn_day = 1
 buildingName = "鱼牧场"
-descriptionLabel = "鱼生鱼，每到白天获得1块钱"
+descriptionLabel = "鱼生鱼，每5秒获得1块钱"
+price = 10
 
-[node name="BuildShow" parent="." index="1"]
+[node name="BuildShow" parent="." index="2"]
 region_rect = Rect2(256, 208, 16, 16)
 
-[node name="BattleUnit" parent="." index="2"]
+[node name="BattleUnit" parent="." index="3"]
 position = Vector2(0, -6)
 
 [node name="HurtCollision" parent="Hurtbox" index="0"]

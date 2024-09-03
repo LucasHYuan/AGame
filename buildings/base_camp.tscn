@@ -4,12 +4,15 @@
 [ext_resource type="Script" path="res://buildings/base_camp.gd" id="2_pulib"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qpqhv"]
-size = Vector2(39.785, 47.47)
+size = Vector2(50, 60)
 
 [node name="BaseCamp" instance=ExtResource("1_msrci")]
 script = ExtResource("2_pulib")
+buildingName = "营地"
+descriptionLabel = "敌人将不断发起攻击，务必保护！"
+price = 5
 
-[node name="BuildShow" parent="." index="1"]
+[node name="BuildShow" parent="." index="2"]
 region_rect = Rect2(48, 128, 48, 32)
 
 [node name="HurtCollision" parent="Hurtbox" index="0"]
