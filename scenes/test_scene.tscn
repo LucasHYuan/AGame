@@ -13,7 +13,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_oe8ji"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -369, -498, 0, 0, 0, 0, 576, -493, 0, 0, 0, 0, 568, 807, 0, 0, 0, 0, -361, 807, 0, 0, 0, 0, -369, -496)
+"points": PackedVector2Array(0, 0, 0, 0, -68, -73, 0, 0, 0, 0, 262, -76, 0, 0, 0, 0, 262, 446, 0, 0, 0, 0, -65, 443, 0, 0, 0, 0, -71, -73)
 }
 point_count = 5
 
@@ -37,6 +37,7 @@ position_smoothing_enabled = true
 metadata/_edit_use_anchors_ = true
 
 [node name="CycleController" parent="." instance=ExtResource("6_ufvnw")]
+start_state = 1
 
 [node name="EnemyGenerator" parent="." node_paths=PackedStringArray("enemy_path", "enemy_spawn_location", "cycle_controller") instance=ExtResource("7_afqbx")]
 enemy_path = NodePath("Path2D")
@@ -47,8 +48,8 @@ cycle_controller = NodePath("../CycleController")
 curve = SubResource("Curve2D_oe8ji")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="EnemyGenerator/Path2D"]
-position = Vector2(-369, -498)
-rotation = 0.00529096
+position = Vector2(-68, -73)
+rotation = -0.00909066
 
 [node name="GmCommand" parent="." instance=ExtResource("8_ccghd")]
 

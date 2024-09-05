@@ -2,7 +2,7 @@ class_name CycleController
 
 extends Node2D
 signal day
-signal night
+signal night(duration: float)
 
 
 ## 世界在白天黑夜中不断循环
@@ -13,8 +13,6 @@ signal night
 ## 2 在白天、黑夜开始时，出现暂时的文字，告诉玩家敌人要进攻了or可以喘息
 ## 3 阶段内，显示时间的倒计时
 ## 4 由cycle_controller控制刷怪器进行
-
-
 @onready var day_night_modulate: CanvasModulate = $DayNightModulate
 @onready var state_timer: Timer = $StateTimer
 @onready var one_second_timer: Timer = $OneSecondTimer
@@ -47,7 +45,7 @@ var color_index: int = 0
 ## 从白天开始，每晚时间不同
 var day_index = 0
 var day_time = [20, 30, 30, 30, 30]
-var night_time = [30, 30, 30, 30, 30]
+var night_time = [20, 20, 30, 30, 30]
 var times = []
 var is_day: bool:
 	get:
@@ -61,13 +59,17 @@ func _ready() -> void:
 	GlobalSignal.add_emitter("day", self)
 	GlobalSignal.add_emitter("night", self)
 
+	# 监听基地建造
+	GlobalSignal.add_listener("camp_built", self, "_camp_built")
+
 	state_timer.timeout.connect(_change_state)
 	one_second_timer.timeout.connect(_count_down)
 	transition_timer.timeout.connect(_transition_next_color)
 
 	countdown.text = ""
-	# _start_by_state() # 根据当前状态启动
 
+func _camp_built() -> void:
+	_start_by_state()
 
 func _count_down() -> void:
 	var remaining_time: int = round(state_timer.time_left) # 截断小数强制转换
@@ -96,8 +98,8 @@ func _start_by_state() -> void:
 		day.emit()
 	else:
 		times = night_time
-		night.emit()
-	var _time = times[0]
+		night.emit(times[day_index])
+	var _time = times[day_index]
 	state_timer.start(_time)
 	_start_transition()
 	_set_count_down_text(_time)

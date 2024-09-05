@@ -68,7 +68,7 @@ func _on_day() -> void:
 	icon.visible = true
 	pass
 
-func _on_night() -> void:
+func _on_night(_duration: float) -> void:
 	# 夜晚隐藏地基，不可建造
 	interactable_area.process_mode = Node.PROCESS_MODE_DISABLED
 	icon.visible = false

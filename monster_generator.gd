@@ -1,4 +1,5 @@
 extends Node2D
+class_name MonsterGenerator
 
 @onready var interval_timer: Timer = $IntervalTimer
 @onready var wave_interval_timer: Timer = $WaveIntervalTimer
@@ -30,18 +31,21 @@ var wave_inner_index: int = 0 # 夜晚的波次数
 func _ready() -> void:
 	interval_timer.timeout.connect(_on_interval_timeout)
 	wave_interval_timer.timeout.connect(_on_wave_interval_timeout)
+
 	# cycle_controller.day.connect(_generate_by_interval)
 	cycle_controller.night.connect(_generate_next_wave)
 
-func _generate_next_wave() -> void:
-	_generate_by_wave(wave_index, 30) # 在N秒内刷出对应波次的怪物
+
+func _generate_next_wave(duration: float) -> void:
+	print("夜晚持续时间:", duration)
+	_generate_by_wave(wave_index, duration) # 在N秒内刷出对应波次的怪物
 
 # 在duration中刷出对应波次的怪物
 func _generate_by_wave(index: int, duration: float):
 	var data = wave_data[index]
 	var size = data.size()
 
-	var interval = duration / size
+	var interval = duration / size / 2
 	wave_interval_timer.wait_time = interval # 每波怪物的间隔
 
 	_add_wave_enemy(wave_index, 0)
