@@ -12,13 +12,15 @@ class_name BulletShooter
 var shoot_time = 2
 var bullet_speed = 200
 var bullet_damage = 1
-
+var is_shooting = false
 var target_enemy: BattleUnit = null
 
 func _ready():
 	shoot_timer.wait_time = shoot_time
-	shoot_timer.start()
 	shoot_timer.timeout.connect(_on_shoot_timer_timeout)
+
+	area_entered.connect(_start_shooting)
+
 	_set_team()
 
 
@@ -31,6 +33,13 @@ func _init_data_from_parent() -> void:
 	shoot_time = battle_unit.get_parent().shoot_time
 	bullet_speed = battle_unit.get_parent().bullet_speed
 	bullet_damage = battle_unit.get_parent().bullet_damage
+
+func _start_shooting(_area: Area2D) -> void:
+	if is_shooting:
+		return
+	else:
+		_shoot()
+		shoot_timer.start()
 
 
 func get_distance(o):
@@ -56,13 +65,12 @@ func get_nearest_enemy() -> BattleUnit:
 	return res
 
 func _on_shoot_timer_timeout():
-	# 隐藏则不射击
-	if get_parent().visible == false:
-		return
-	else:
-		_shoot()
+	_shoot()
 
 func _shoot() -> void:
+	if get_parent().visible == false:
+		return
+
 	target_enemy = get_nearest_enemy()
 	
 	if target_enemy != null:
@@ -74,4 +82,9 @@ func _shoot() -> void:
 		bullet.speed = bullet_speed
 		bullet.position = shoot_point.global_position
 		bullet.dir = (target_enemy.global_position - shoot_point.global_position).normalized()
-		get_tree().root.add_child(bullet)
+
+		get_tree().root.call_deferred("add_child", bullet)
+	else:
+		# 没有敌人，停止射击
+		shoot_timer.stop()
+		is_shooting = false
