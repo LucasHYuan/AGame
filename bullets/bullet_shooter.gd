@@ -38,6 +38,7 @@ func _start_shooting(_area: Area2D) -> void:
 	if is_shooting:
 		return
 	else:
+		is_shooting = true
 		_shoot()
 		shoot_timer.start()
 
