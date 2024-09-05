@@ -5,7 +5,7 @@ signal level_changed
 signal coin_changed
 
 @export var max_exp: int = 3
-@export var init_coin: int = 20
+@export var init_coin: int = 0
 @export var max_coin: int = 9999
 
 func default_init() -> void:

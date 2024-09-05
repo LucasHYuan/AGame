@@ -10,7 +10,7 @@ size = Vector2(50, 60)
 script = ExtResource("2_pulib")
 buildingName = "营地"
 descriptionLabel = "敌人将不断发起攻击，务必保护！"
-price = 5
+can_build = true
 
 [node name="BuildShow" parent="." index="2"]
 region_rect = Rect2(48, 128, 48, 32)

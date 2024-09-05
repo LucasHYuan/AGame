@@ -46,6 +46,17 @@ func interacting_end() -> void:
 	hide_ui.emit()
 	ui.visible = false
 
+func set_can_built(can_built: bool) -> void:
+	if can_built:
+		# 显示并激活碰撞
+		icon.visible = true
+		interactable_area.process_mode = Node.PROCESS_MODE_INHERIT
+	else:
+		# 隐藏并禁用碰撞
+		icon.visible = false
+		interactable_area.process_mode = Node.PROCESS_MODE_DISABLED
+
+
 func _on_Button_pressed() -> void:
 	# 检查钱够不够
 	# build_ask.emit(price)
