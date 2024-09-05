@@ -123,7 +123,6 @@ func _transition_next_color() -> void:
 
 # 在一段时间内切换到目标颜色
 func _transition_to_color(target_color: Color, duration: float) -> void:
-	print(target_color, "  ", duration)
 	var anim = animation_player.get_animation("transition")
 	if anim:
 		anim.length = duration

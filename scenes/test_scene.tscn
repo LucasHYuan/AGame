@@ -36,6 +36,9 @@ position_smoothing_enabled = true
 metadata/_edit_use_anchors_ = true
 
 [node name="CycleController" parent="." instance=ExtResource("6_ufvnw")]
+day_colors = [Color(1, 1, 1, 1), Color(0.843, 0.798, 0.688, 1), Color(0.554, 0.589, 0.709, 1)]
+night_colors = [Color(0, 0.431, 1, 1), Color(0.161, 0.573, 0.769, 1), Color(0.224, 0.243, 0.333, 1), Color(0.867, 0.741, 0.525, 1)]
+start_state = 0
 
 [node name="EnemyGenerator" parent="." node_paths=PackedStringArray("enemy_path", "enemy_spawn_location", "cycle_controller") instance=ExtResource("7_afqbx")]
 enemy_path = NodePath("Path2D")
