@@ -30,6 +30,7 @@ signal enemy_death(enemy: Enemy)
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var battle_search: BattleSearch = $BattleSearch
+@export var is_stay: bool = false
 
 var DEFAULT_TARGET: Node2D = null
 var target: Node2D # 追踪目标
@@ -44,7 +45,8 @@ var flag_hit = false
 func _ready() -> void:
 	init_stats()
 	game_connect()
-	DEFAULT_TARGET = GlobalObjects.GetObject("base_camp")
+	if not is_stay:
+		DEFAULT_TARGET = GlobalObjects.GetObject("base_camp")
 	# DEFAULT_TARGET = GlobalObjects.GetObject("player")
 
 #region 属性管理
@@ -60,14 +62,15 @@ func move_towards_target(_delta: float) -> void:
 	var _target = get_target()
 
 	# 获取方向向量
-	var direction = global_position.direction_to(_target.global_position)
+	if _target:
+		var direction = global_position.direction_to(_target.global_position)
 
-	# 动画机参数
-	animation_move(direction)
+		# 动画机参数
+		animation_move(direction)
 
-	# 移动逻辑
-	velocity = direction * speed
-	move_and_slide()
+		# 移动逻辑
+		velocity = direction * speed
+		move_and_slide()
 #endregion
 
 #region 游戏逻辑

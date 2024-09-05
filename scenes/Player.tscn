@@ -370,7 +370,7 @@ max_health = 5
 [node name="InvincibleOnHurt" parent="BattleUnit" instance=ExtResource("9_rayig")]
 
 [node name="BulletShooter" parent="BattleUnit" node_paths=PackedStringArray("battle_unit") instance=ExtResource("3_i8tdt")]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.6, 0.6)
 battle_unit = NodePath("..")
 
 [node name="StateMachine" type="Node" parent="."]

@@ -32,9 +32,6 @@ shadow_color = Color(0, 0, 0, 1)
 
 [node name="CycleController" type="Node2D"]
 script = ExtResource("1_uyxye")
-day_colors = null
-night_colors = null
-start_state = null
 
 [node name="DayNightModulate" type="CanvasModulate" parent="."]
 

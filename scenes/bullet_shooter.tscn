@@ -20,9 +20,9 @@ rotation = -1.5708
 scale = Vector2(1, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(1, 2)
+scale = Vector2(1.4, 2)
 shape = SubResource("CircleShape2D_vu8cn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.313, 0.626)
+scale = Vector2(0.44, 0.629)
 texture = ExtResource("2_dqjrj")

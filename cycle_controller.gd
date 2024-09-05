@@ -65,7 +65,8 @@ func _ready() -> void:
 	one_second_timer.timeout.connect(_count_down)
 	transition_timer.timeout.connect(_transition_next_color)
 
-	_start_by_state() # 根据当前状态启动
+	countdown.text = ""
+	# _start_by_state() # 根据当前状态启动
 
 
 func _count_down() -> void:
