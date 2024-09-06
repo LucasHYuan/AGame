@@ -44,8 +44,8 @@ var color_index: int = 0
 
 ## 从白天开始，每晚时间不同
 var day_index = 0
-var day_time = [20, 30, 30, 30, 30]
-var night_time = [20, 20, 30, 30, 30]
+var day_time = [10, 30, 30, 30, 30]
+var night_time = [25, 25, 30, 30, 30]
 var times = []
 var is_day: bool:
 	get:

@@ -23,7 +23,7 @@ const SPAWN_RADIUS = 10
 var enemy_list: Array = []
 var interval_enemy_list: Array = [enemy_prototype]
 var wave_enemy_list: Array = [enemy_prototype]
-var wave_data: Array = [[1, 3, 3], [10, 10]] # 每夜怪物的数量
+var wave_data: Array = [[1, 2, 3], [10, 10]] # 每夜怪物的数量
 var wave_index: int = 0 # 夜晚数
 var wave_inner_index: int = 0 # 夜晚的波次数
 
@@ -37,7 +37,7 @@ func _ready() -> void:
 
 
 func _generate_next_wave(duration: float) -> void:
-	print("夜晚持续时间:", duration)
+	print("夜晚开始，持续时间:", duration)
 	_generate_by_wave(wave_index, duration) # 在N秒内刷出对应波次的怪物
 
 # 在duration中刷出对应波次的怪物
