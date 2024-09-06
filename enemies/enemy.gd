@@ -94,9 +94,13 @@ func _on_unit_hurt(_attack_item: AttackItem) -> void:
 
 func _on_unit_die() -> void:
 	animation_die()
+	# 死亡时不对玩家造成伤害
+	set_active(false)
 	speed = 0
 	enemy_death.emit(self)
 
+func set_active(_active: bool) -> void:
+	pass
 #endregion
 
 

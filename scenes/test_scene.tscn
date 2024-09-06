@@ -71,14 +71,19 @@ pre_building = NodePath("../BaseCamp")
 
 [node name="BaseCamp" parent="Buildings" instance=ExtResource("10_p4fai")]
 position = Vector2(113, 184)
+price = 3
 
 [node name="DefaultEnemy" type="Node2D" parent="."]
 position = Vector2(-192, 563)
 
 [node name="Skull" parent="DefaultEnemy" instance=ExtResource("10_sxf50")]
-position = Vector2(228, -209)
+position = Vector2(121, 85)
 is_stay = true
 
 [node name="Skull2" parent="DefaultEnemy" instance=ExtResource("10_sxf50")]
-position = Vector2(139, -138)
+position = Vector2(135, -83)
+is_stay = true
+
+[node name="Skull3" parent="DefaultEnemy" instance=ExtResource("10_sxf50")]
+position = Vector2(209, -243)
 is_stay = true
