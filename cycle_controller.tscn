@@ -39,6 +39,8 @@ script = ExtResource("1_uyxye")
 
 [node name="OneSecondTimer" type="Timer" parent="."]
 
+[node name="CountDownTimer" type="Timer" parent="."]
+
 [node name="TransitionTimer" type="Timer" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

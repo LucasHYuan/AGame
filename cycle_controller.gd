@@ -3,6 +3,7 @@ class_name CycleController
 extends Node2D
 signal day
 signal night(duration: float)
+signal one_second
 
 
 ## 世界在白天黑夜中不断循环
@@ -15,8 +16,9 @@ signal night(duration: float)
 ## 4 由cycle_controller控制刷怪器进行
 @onready var day_night_modulate: CanvasModulate = $DayNightModulate
 @onready var state_timer: Timer = $StateTimer
-@onready var one_second_timer: Timer = $OneSecondTimer
+@onready var count_down_timer: Timer = $CountDownTimer
 @onready var transition_timer: Timer = $TransitionTimer
+@onready var one_second_timer: Timer = $OneSecondTimer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var countdown: Label = $CanvasLayer/Countdown
 
@@ -45,7 +47,7 @@ var color_index: int = 0
 ## 从白天开始，每晚时间不同
 var day_index = 0
 var day_time = [10, 30, 30, 30, 30]
-var night_time = [25, 25, 30, 30, 30]
+var night_time = [15, 25, 30, 30, 30]
 var times = []
 var is_day: bool:
 	get:
@@ -58,15 +60,22 @@ func _ready() -> void:
 	# 注册全局指令
 	GlobalSignal.add_emitter("day", self)
 	GlobalSignal.add_emitter("night", self)
+	GlobalSignal.add_emitter("one_second", self)
 
 	# 监听基地建造
 	GlobalSignal.add_listener("camp_built", self, "_camp_built")
 
 	state_timer.timeout.connect(_change_state)
-	one_second_timer.timeout.connect(_count_down)
+	count_down_timer.timeout.connect(_count_down)
 	transition_timer.timeout.connect(_transition_next_color)
+	one_second_timer.timeout.connect(_one_second)
+	one_second_timer.wait_time = 1.0
+	one_second_timer.start()
 
 	countdown.text = ""
+
+func _one_second() -> void:
+	one_second.emit()
 
 func _camp_built() -> void:
 	_start_by_state()
@@ -105,7 +114,7 @@ func _start_by_state() -> void:
 	_set_count_down_text(_time)
 
 	# 开始数字倒计时
-	one_second_timer.start(1.0)
+	count_down_timer.start(1.0)
 
 
 func _start_transition() -> void:

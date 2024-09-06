@@ -9,7 +9,7 @@ class_name BulletShooter
 
 @export var battle_unit: BattleUnit
 
-var shoot_time = 2
+var shoot_time = 1
 var bullet_speed = 200
 var bullet_damage = 1
 var is_shooting = false

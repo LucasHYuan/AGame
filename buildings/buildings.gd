@@ -36,6 +36,7 @@ func _ready() -> void:
 
 	# 监听全局信号
 	GlobalSignal.add_listener("day", self, "_on_day")
+	GlobalSignal.add_listener("one_second", self, "_on_one_second")
 
 #region 游戏逻辑
 func _game_connect() -> void:
@@ -107,6 +108,14 @@ func _on_day() -> void:
 		print("我是{ %s }，到了新的白天" % buildingName)
 		_on_day_function()
 
+func _on_one_second() -> void:
+	if is_built:
+		_on_one_second_function()
+
 func _on_day_function() -> void:
+	# 在继承类中实现
+	pass
+
+func _on_one_second_function() -> void:
 	# 在继承类中实现
 	pass
