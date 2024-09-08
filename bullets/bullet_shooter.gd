@@ -5,7 +5,7 @@ class_name BulletShooter
 @onready var shoot_timer = $ShootTimer
 @onready var shoot_point = $ShootPoint
 @onready var team: GlobalInfo.Team = owner.team
-@onready var bullet_scene = preload("res://bullets/bullet.tscn")
+@export var bullet_scene = preload("res://bullets/bullet.tscn")
 
 @export var battle_unit: BattleUnit
 
