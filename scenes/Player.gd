@@ -6,9 +6,10 @@ const KNOCKBACK_AMOUNT := 30.0
 var pending_damage: Array = []
 var interacting_with: Node2D
 
-@export var max_health: int = 5
-@export var atk: int = 1
-
+@export var max_health: float = 5
+@export var atk: float = 1
+@export var shoot_time: float = 1
+@export var attacker_speed: float = 200
 @onready var sprite_2d = $Graphics/PlayerSprite
 @onready var animation_player = $AnimationPlayer
 @onready var data: PlayerData = $Data
@@ -80,6 +81,7 @@ func gm_connect() -> void:
 
 func _on_player_level_up() -> void:
 	print("玩家执行升级！")
+	self.atk *= 2
 #endregion
 
 

@@ -12,7 +12,7 @@ size = Vector2(36.59, 21.512)
 script = ExtResource("2_ngooe")
 shoot_time = 1.0
 attacker_speed = 200.0
-attacker_damage = 1.0
+atk = 1.0
 buildingName = "箭塔"
 descriptionLabel = "不断攻击范围内的敌人"
 price = 30
@@ -24,6 +24,7 @@ region_rect = Rect2(256, 96, 48, 80)
 
 [node name="BattleUnit" parent="." index="3"]
 position = Vector2(0, -40)
+max_health = 3.0
 
 [node name="HurtCollision" parent="Hurtbox" index="0"]
 shape = SubResource("RectangleShape2D_f0xum")

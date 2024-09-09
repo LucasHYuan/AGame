@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://g4ytruh0jt1b"]
+[gd_scene load_steps=19 format=3 uid="uid://g4ytruh0jt1b"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_wadek"]
 [ext_resource type="Texture2D" uid="uid://gdjxdkdd54m7" path="res://assets/brackeys_platformer_assets/sprites/knight.png" id="2_ioptb"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ynah0rik0eio" path="res://battle/battle_unit.tscn" id="4_3t8dl"]
 [ext_resource type="Script" path="res://classes/state_machine.gd" id="4_df445"]
 [ext_resource type="Script" path="res://classes/hurtbox.gd" id="5_6x7l5"]
+[ext_resource type="PackedScene" uid="uid://b0myny5kap7m6" path="res://bullets/Bullet.tscn" id="7_13f65"]
 [ext_resource type="PackedScene" uid="uid://dj8s0itikxgfu" path="res://ui/status_panel.tscn" id="7_nb60r"]
 [ext_resource type="Script" path="res://classes/player_data.gd" id="9_3p4rv"]
 [ext_resource type="PackedScene" uid="uid://cii72sr21bqp3" path="res://battle/skills/invincible_on_hurt.tscn" id="9_rayig"]
@@ -329,6 +330,7 @@ height = 9.0
 [node name="Player" type="CharacterBody2D" groups=["Player_Group"]]
 motion_mode = 1
 script = ExtResource("1_wadek")
+atk = 0.5
 
 [node name="Graphics" type="Node2D" parent="."]
 
@@ -370,7 +372,9 @@ hurtbox = NodePath("../Hurtbox")
 
 [node name="BulletShooter" parent="BattleUnit" node_paths=PackedStringArray("battle_unit") instance=ExtResource("3_i8tdt")]
 scale = Vector2(0.6, 0.6)
+attacker_scene = ExtResource("7_13f65")
 battle_unit = NodePath("..")
+attacker_damage = 0.5
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("4_df445")

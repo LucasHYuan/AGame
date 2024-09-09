@@ -19,7 +19,6 @@ var target_enemy: BattleUnit = null
 func _ready():
 	timer.wait_time = shoot_time
 	timer.timeout.connect(_on_shoot_timer_timeout)
-	
 	area_entered.connect(_start_shooting)
 
 	_set_team()
@@ -30,12 +29,13 @@ func _set_team() -> void:
 	collision_mask &= ~(1 << team)
 
 # 跟BattleUnit同级放置
-func _init_data_from_parent() -> void:
+func _sync_data_from_parent() -> void:
 	shoot_time = battle_unit.get_parent().shoot_time
 	attacker_speed = battle_unit.get_parent().attacker_speed
-	attacker_damage = battle_unit.get_parent().attacker_damage
+	attacker_damage = battle_unit.get_parent().atk
 
 func _start_shooting(_area: Area2D) -> void:
+	_sync_data_from_parent()
 	if is_shooting:
 		return
 	else:

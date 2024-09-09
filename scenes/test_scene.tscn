@@ -27,6 +27,7 @@ metadata/_edit_vertical_guides_ = [561.0]
 
 [node name="Player" parent="." instance=ExtResource("1_tvfoe")]
 position = Vector2(-248, 653)
+atk = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_smoothed = true
@@ -60,6 +61,7 @@ y_sort_enabled = true
 
 [node name="WaveTower" parent="Buildings" instance=ExtResource("7_8jgbk")]
 position = Vector2(-1, 187)
+price = 30
 
 [node name="Farm" parent="Buildings" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_app1a")]
 position = Vector2(89, 223)
@@ -71,7 +73,7 @@ price = 3
 
 [node name="Tower" parent="Buildings" instance=ExtResource("9_hyy0c")]
 position = Vector2(223, 180)
-price = 10
+price = 20
 
 [node name="DefaultEnemy" type="Node2D" parent="."]
 position = Vector2(-192, 563)
