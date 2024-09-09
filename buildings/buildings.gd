@@ -13,7 +13,7 @@ extends Node2D
 @export var can_build: bool = false
 
 var is_built: bool = false
-var team: GlobalInfo.Team
+var team: GlobalInfo.Team=GlobalInfo.Team.player
 
 signal build
 

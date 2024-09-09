@@ -1,6 +1,6 @@
 extends Node2D
 
-signal gmPayerLevelUp
+signal gmPlayerLevelUp
 signal gmChangeTime
 
 @onready var button_lv_up: Button = $CanvasLayer/ButtonLvUp
@@ -17,7 +17,7 @@ func _ready() -> void:
 	
 func _on_button_lv_up_pressed():
 	GMPrint("升级！")
-	gmPayerLevelUp.emit()
+	gmPlayerLevelUp.emit()
 
 func _on_button_change_time_pressed():
 	GMPrint("昼夜交替！")

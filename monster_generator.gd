@@ -8,7 +8,7 @@ class_name MonsterGenerator
 @export var enemy_spawn_location: PathFollow2D
 
 @export var scene: PackedScene
-@export var enemy_prototype: PackedScene = preload("res://enemies/skull.tscn")
+@export var enemy_prototypes: Array[PackedScene] = [preload("res://enemies/skull.tscn"), preload("res://enemies/octupus.tscn")]
 
 @export var cycle_controller: CycleController
 
@@ -21,9 +21,21 @@ const SPAWN_RADIUS = 10
 # 拿着所有怪物的引用，执行全体操作
 
 var enemy_list: Array = []
-var interval_enemy_list: Array = [enemy_prototype]
-var wave_enemy_list: Array = [enemy_prototype]
-var wave_data: Array = [[1, 2, 3], [10, 10]] # 每夜怪物的数量
+var interval_enemy_list: Array = enemy_prototypes
+var wave_enemy_list: Array = enemy_prototypes
+
+var wave_data: Array = [
+	[  # 第一波
+		[[0, 1]],  # 第一小波，怪物种类0生成1个
+		[[0, 2]],  # 第二小波
+		[[0, 3]]   # 第三小波
+	],
+	[  # 第二波
+		[[0, 8], [1, 2]],  # 第一小波，怪物种类0生成6个，怪物种类2生成3个
+		[[1, 5], [0, 5]]   # 第二小波，怪物种类1生成7个，怪物种类0生成2个
+	]
+]
+
 var wave_index: int = 0 # 夜晚数
 var wave_inner_index: int = 0 # 夜晚的波次数
 
@@ -42,33 +54,46 @@ func _generate_next_wave(duration: float) -> void:
 
 # 在duration中刷出对应波次的怪物
 func _generate_by_wave(index: int, duration: float):
-	var data = wave_data[index]
-	var size = data.size()
+	var data = wave_data[index]  # 获取这一波的怪物数据
+	var size = data.size()  # 这一波中有多少小波次
 
-	var interval = duration / size / 2
-	wave_interval_timer.wait_time = interval # 每波怪物的间隔
-
-	_add_wave_enemy(wave_index, 0)
+	var interval = duration / size / 2  # 每小波之间的间隔时间
+	wave_interval_timer.wait_time = interval
+	wave_inner_index = 0  # 初始化小波次索引
+	_add_wave_enemy(wave_index, wave_inner_index)  # 生成第一小波怪物
 	wave_interval_timer.start()
 
 
 func _on_wave_interval_timeout() -> void:
-	if wave_inner_index >= wave_data[wave_index].size() - 1:
-		# 刷完了 下一波
-		print("刷完一夜的怪物，准备下一波")
+	var wave_size = wave_data[wave_index].size()
+	if wave_inner_index >= wave_size - 1:
+		# 当前波次的所有小波都刷完了，准备下一波
+		print("刷完一夜的所有小波怪物，准备下一波")
 		wave_index += 1
+		wave_inner_index = 0
 		wave_interval_timer.stop()
 		return
 	else:
+		# 继续刷下一小波
 		wave_inner_index += 1
-
-	_add_wave_enemy(wave_index, wave_inner_index)
+		_add_wave_enemy(wave_index, wave_inner_index)
 	
 
-func _add_wave_enemy(wave: int, index: int) -> void:
-	print("刷怪,夜晚：", wave, " 波次", index)
-	var enemy_index = randi()%wave_enemy_list.size()
-	_add_enemy_random_pos(enemy_index, wave_data[wave][index])
+#func _add_wave_enemy(wave: int, index: int) -> void:
+	#print("刷怪,夜晚：", wave, " 波次", index)
+	#var enemy_index = randi()%wave_enemy_list.size()
+	#_add_enemy_random_pos(enemy_index, wave_data[wave][index])
+	
+func _add_wave_enemy(wave: int, inner_wave_index: int) -> void:
+	print("刷怪, 夜晚：", wave, " 波次：", inner_wave_index)
+	var inner_wave_data = wave_data[wave][inner_wave_index]  # 获取这一小波的怪物数据
+
+	# 遍历这一小波中的每种怪物并生成相应数量
+	for enemy_data in inner_wave_data:
+		var enemy_type = enemy_data[0]  # 怪物种类
+		var enemy_count = enemy_data[1]  # 怪物数量
+		_add_enemy_random_pos(enemy_type, enemy_count)  # 生成指定数量的怪物
+
 
 		
 # 以一定频率刷怪

@@ -3,9 +3,8 @@ class_name BattleUnit
 
 
 @export var hurtbox: Hurtbox
-@export var team: GlobalInfo.Team = GlobalInfo.Team.player
 @export var max_health: float = 1
-
+@onready var team: GlobalInfo.Team = owner.team
 @onready var healthBar: TextureProgressBar = $HealthBar
 
 var is_dead: bool = false:

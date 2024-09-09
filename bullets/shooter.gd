@@ -54,6 +54,8 @@ func get_nearest_enemy() -> BattleUnit:
 	for area in areas:
 		if area is Hurtbox == false:
 			continue
+		if area.owner.team == team:
+			continue
 		var hurtbox = area as Hurtbox
 		var target_unit = hurtbox.battle_unit
 		if target_unit.is_dead:

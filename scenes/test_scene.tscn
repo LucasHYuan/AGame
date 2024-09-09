@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d3yllstdmow4o"]
+[gd_scene load_steps=14 format=3 uid="uid://d3yllstdmow4o"]
 
 [ext_resource type="PackedScene" uid="uid://dqplwuanj0qb7" path="res://scenes/tile_map.tscn" id="1_04r47"]
 [ext_resource type="PackedScene" uid="uid://g4ytruh0jt1b" path="res://scenes/Player.tscn" id="1_tvfoe"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://031u5b0jmcbl" path="res://buildings/tower_basic.tscn" id="9_hyy0c"]
 [ext_resource type="PackedScene" uid="uid://bqk4w32ygdjra" path="res://buildings/base_camp.tscn" id="10_p4fai"]
 [ext_resource type="PackedScene" uid="uid://cwjy7r783tqx5" path="res://enemies/skull.tscn" id="10_sxf50"]
+[ext_resource type="PackedScene" uid="uid://dla7wqkavxvfq" path="res://enemies/octupus.tscn" id="12_u5rkk"]
 
 [sub_resource type="Curve2D" id="Curve2D_oe8ji"]
 _data = {
@@ -27,7 +28,6 @@ metadata/_edit_vertical_guides_ = [561.0]
 
 [node name="Player" parent="." instance=ExtResource("1_tvfoe")]
 position = Vector2(-248, 653)
-atk = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_smoothed = true
@@ -88,4 +88,8 @@ is_stay = true
 
 [node name="Skull3" parent="DefaultEnemy" instance=ExtResource("10_sxf50")]
 position = Vector2(209, -243)
+is_stay = true
+
+[node name="Octupus" parent="DefaultEnemy" instance=ExtResource("12_u5rkk")]
+position = Vector2(-35, 256)
 is_stay = true

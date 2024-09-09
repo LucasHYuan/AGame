@@ -24,6 +24,7 @@ signal enemy_death(enemy: Enemy)
 @export var coin: int = 1
 
 @export var speed: float = 30
+var max_health: float
 
 @onready var graphics: Node2D = $Graphics
 @onready var battle_unit: BattleUnit = $BattleUnit
@@ -35,7 +36,7 @@ signal enemy_death(enemy: Enemy)
 var DEFAULT_TARGET: Node2D = null
 var target: Node2D # 追踪目标
 
-var team: GlobalInfo.Team
+var team: GlobalInfo.Team=GlobalInfo.Team.enemy
 
 var is_dead: bool = false:
 	get:

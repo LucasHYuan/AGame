@@ -45,11 +45,11 @@ switch_mode = 2
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_eratb"]
 states/Run/node = SubResource("AnimationNodeBlendSpace2D_tdabr")
 states/Run/position = Vector2(442.5, 99.5)
-states/Start/position = Vector2(216, 99)
+states/Start/position = Vector2(228, 92.5)
 states/death/node = SubResource("AnimationNodeAnimation_jadyv")
 states/death/position = Vector2(672, 99.7227)
 transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_hd4ro"), "Run", "death", SubResource("AnimationNodeStateMachineTransition_37fg1"), "death", "End", SubResource("AnimationNodeStateMachineTransition_3eqny")]
-graph_offset = Vector2(116.523, -104)
+graph_offset = Vector2(-60.7766, -104)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_65eks"]
 radius = 1.0
@@ -79,7 +79,6 @@ parameters/Run/blend_position = Vector2(0.00985217, -0.986541)
 
 [node name="BattleUnit" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("4_gtygu")]
 hurtbox = NodePath("../Hurtbox")
-team = 1
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0

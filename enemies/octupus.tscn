@@ -1,12 +1,14 @@
-[gd_scene load_steps=31 format=3 uid="uid://cwjy7r783tqx5"]
+[gd_scene load_steps=33 format=3 uid="uid://dla7wqkavxvfq"]
 
-[ext_resource type="Texture2D" uid="uid://blgq4h8r3685w" path="res://assets/Ninja Adventure - Asset Pack/Actor/Monsters/Skull/SpriteSheet.png" id="2_1s24a"]
-[ext_resource type="Script" path="res://enemies/skull.gd" id="2_eq5do"]
-[ext_resource type="PackedScene" uid="uid://ynah0rik0eio" path="res://battle/battle_unit.tscn" id="3_86ldx"]
-[ext_resource type="Script" path="res://battle/hit_attacker.gd" id="4_gulxi"]
-[ext_resource type="Script" path="res://classes/hurtbox.gd" id="4_leuw4"]
-[ext_resource type="Script" path="res://enemies/battle_search.gd" id="6_530uv"]
-[ext_resource type="Texture2D" uid="uid://demkp4ciyeskq" path="res://assets/normal/round.png" id="7_5oshl"]
+[ext_resource type="Script" path="res://octupus.gd" id="1_rw18t"]
+[ext_resource type="Texture2D" uid="uid://ckl3x4akk7s74" path="res://assets/Ninja Adventure - Asset Pack/Actor/Monsters/Octopus/SpriteSheet.png" id="2_5i7cy"]
+[ext_resource type="PackedScene" uid="uid://ynah0rik0eio" path="res://battle/battle_unit.tscn" id="3_sdfkm"]
+[ext_resource type="Script" path="res://classes/hurtbox.gd" id="4_28qr3"]
+[ext_resource type="PackedScene" uid="uid://40nqsobwv8oq" path="res://scenes/shooter.tscn" id="4_dyx6x"]
+[ext_resource type="Script" path="res://battle/hit_attacker.gd" id="5_0yefr"]
+[ext_resource type="PackedScene" uid="uid://b0myny5kap7m6" path="res://bullets/Bullet.tscn" id="5_ys0je"]
+[ext_resource type="Script" path="res://enemies/battle_search.gd" id="6_uwjnq"]
+[ext_resource type="Texture2D" uid="uid://demkp4ciyeskq" path="res://assets/normal/round.png" id="7_qvl25"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4gbpa"]
 radius = 8.0
@@ -53,7 +55,7 @@ switch_mode = 2
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_eratb"]
 states/Run/node = SubResource("AnimationNodeBlendSpace2D_tdabr")
 states/Run/position = Vector2(442.5, 99.5)
-states/Start/position = Vector2(227, 75.5)
+states/Start/position = Vector2(228, 92.5)
 states/death/node = SubResource("AnimationNodeAnimation_jadyv")
 states/death/position = Vector2(672, 99.7227)
 transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_hd4ro"), "Run", "death", SubResource("AnimationNodeStateMachineTransition_37fg1"), "death", "End", SubResource("AnimationNodeStateMachineTransition_3eqny")]
@@ -251,18 +253,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Graphics/Sprite2D:vframes")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
 }
 
 [sub_resource type="Animation" id="Animation_d62ec"]
@@ -508,12 +498,14 @@ radius = 12.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_swir2"]
 radius = 20.0
 
-[node name="Skull" type="CharacterBody2D"]
+[node name="Octupus" type="CharacterBody2D"]
 position = Vector2(0, -8)
 collision_layer = 20
-collision_mask = 2
+collision_mask = 12
 motion_mode = 1
-script = ExtResource("2_eq5do")
+script = ExtResource("1_rw18t")
+attacker_speed = 100.0
+atk = 0.5
 
 [node name="Graphics_Hurtbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_4gbpa")
@@ -522,7 +514,7 @@ debug_color = Color(0.950089, 2.31028e-06, 0.570311, 0.42)
 [node name="Graphics" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Graphics"]
-texture = ExtResource("2_1s24a")
+texture = ExtResource("2_5i7cy")
 vframes = 4
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 64)
@@ -534,7 +526,7 @@ shape = SubResource("CircleShape2D_peadw")
 tree_root = SubResource("AnimationNodeStateMachine_eratb")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/dead = false
-parameters/Run/blend_position = Vector2(-0.00146842, 0.00628924)
+parameters/Run/blend_position = Vector2(-0.00146842, 0.00313473)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -542,15 +534,21 @@ libraries = {
 }
 autoplay = "down"
 
-[node name="BattleUnit" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("3_86ldx")]
+[node name="BattleUnit" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("3_sdfkm")]
 position = Vector2(0, -6)
 scale = Vector2(0.795, 0.795)
 hurtbox = NodePath("../Hurtbox")
 
+[node name="Shooter" parent="BattleUnit" node_paths=PackedStringArray("battle_unit") instance=ExtResource("4_dyx6x")]
+visible = false
+position = Vector2(0, 7.54717)
+attacker_scene = ExtResource("5_ys0je")
+battle_unit = NodePath("..")
+
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 20
-script = ExtResource("4_leuw4")
+script = ExtResource("4_28qr3")
 
 [node name="HurtCollision" type="CollisionShape2D" parent="Hurtbox"]
 rotation = 1.5708
@@ -558,9 +556,10 @@ shape = SubResource("CircleShape2D_6n67b")
 debug_color = Color(0.844691, 0.279891, 0.648589, 0.42)
 
 [node name="HitAttacker" type="Area2D" parent="."]
+scale = Vector2(0.996285, 1)
 collision_layer = 0
 collision_mask = 3
-script = ExtResource("4_gulxi")
+script = ExtResource("5_0yefr")
 
 [node name="HitCollision" type="CollisionShape2D" parent="HitAttacker"]
 shape = SubResource("CircleShape2D_bj0gr")
@@ -569,7 +568,7 @@ shape = SubResource("CircleShape2D_bj0gr")
 scale = Vector2(3.39664, 3.39664)
 collision_layer = 0
 collision_mask = 3
-script = ExtResource("6_530uv")
+script = ExtResource("6_uwjnq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BattleSearch"]
 scale = Vector2(2, 1.4)
@@ -577,4 +576,4 @@ shape = SubResource("CircleShape2D_swir2")
 
 [node name="Sprite2D" type="Sprite2D" parent="BattleSearch"]
 scale = Vector2(0.157, 0.11)
-texture = ExtResource("7_5oshl")
+texture = ExtResource("7_qvl25")

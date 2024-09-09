@@ -5,8 +5,9 @@ const RUN_SPEED := 50.0
 const KNOCKBACK_AMOUNT := 30.0
 var pending_damage: Array = []
 var interacting_with: Node2D
+var atk_growth_rate = 1.1
+var health_growth_rate = 1.2
 
-@export var max_health: float = 5
 @export var atk: float = 1
 @export var shoot_time: float = 1
 @export var attacker_speed: float = 200
@@ -14,7 +15,6 @@ var interacting_with: Node2D
 @onready var animation_player = $AnimationPlayer
 @onready var data: PlayerData = $Data
 @onready var graphics: Node2D = $Graphics
-
 @onready var battle_unit: BattleUnit = $BattleUnit
 
 enum Direction {
@@ -33,7 +33,7 @@ enum State {
 }
 
 var flag_hit = false;
-var team: GlobalInfo.Team
+var team: GlobalInfo.Team=GlobalInfo.Team.player
 var current_state: State = State.IDLE
 
 func _ready() -> void:
@@ -45,6 +45,14 @@ func _ready() -> void:
 #region 属性管理
 func init_stats() -> void:
 	data.default_init()
+	#等级升级时处理逻辑
+	data.level_changed.connect(player_level_up)
+	
+func player_level_up() -> void:
+	print("升级了！")
+	self.atk *= atk_growth_rate
+	battle_unit.max_health *= health_growth_rate
+	battle_unit.health = battle_unit.max_health
 #endregion
 
 #region 游戏逻辑
@@ -53,7 +61,7 @@ func game_connect() -> void:
 	battle_unit.unit_dead.connect(_player_die)
 	battle_unit.unit_hurt.connect(_on_unit_hurt)
 	battle_unit.unit_kickback.connect(_on_unit_kickback)
-
+	
 	# 所有的敌人死亡
 	GlobalSignal.add_listener("enemy_death", self, "_on_enemy_death")
 
@@ -77,11 +85,13 @@ func _on_enemy_death(enemy: Enemy) -> void:
 
 #region GM指令注册
 func gm_connect() -> void:
-	GlobalSignal.add_listener("playerLevelUp", self, "_on_player_level_up")
+	#GlobalSignal.add_listener("playerLevelUp", self, "_on_player_level_up")
+	GlobalSignal.add_listener("gmPlayerLevelUp", self, "_on_player_level_up")
 
+#
 func _on_player_level_up() -> void:
 	print("玩家执行升级！")
-	self.atk *= 2
+	data.level+=1
 #endregion
 
 
