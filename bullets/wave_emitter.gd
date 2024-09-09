@@ -5,7 +5,7 @@ class_name WaveEmitter
 @onready var emit_timer: Timer = $EmitTimer
 @onready var emit_point = $EmitPoint
 @onready var team: GlobalInfo.Team = owner.team
-@export var wave_scene=preload("res://bullets/taunt_wave.tscn");
+@export var wave_scene=preload("res://bullets/wave.tscn");
 
 @export var battle_unit: BattleUnit
 

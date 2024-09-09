@@ -365,7 +365,6 @@ debug_color = Color(0.844691, 0.279891, 0.648589, 0.42)
 
 [node name="BattleUnit" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("4_3t8dl")]
 hurtbox = NodePath("../Hurtbox")
-max_health = 5
 
 [node name="InvincibleOnHurt" parent="BattleUnit" instance=ExtResource("9_rayig")]
 

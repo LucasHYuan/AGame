@@ -4,14 +4,14 @@ class_name BattleUnit
 
 @export var hurtbox: Hurtbox
 @export var team: GlobalInfo.Team = GlobalInfo.Team.player
-@export var max_health: int = 1
+@export var max_health: float = 1
 
 @onready var healthBar: TextureProgressBar = $HealthBar
 
 var is_dead: bool = false:
 	get:
 		return health <= 0
-var health: int = 1
+var health: float = 1
 var invincible: bool = false
 
 signal health_changed()

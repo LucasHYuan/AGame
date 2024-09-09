@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://8tl7c6epylu4"]
 
-[ext_resource type="Script" path="res://buildings/defense_tower_basic.gd" id="1_mkrcl"]
+[ext_resource type="Script" path="res://buildings/wave_tower_basic.gd" id="1_mkrcl"]
 [ext_resource type="PackedScene" uid="uid://cb1noa13yna06" path="res://buildings/build_component.tscn" id="2_xqh38"]
 [ext_resource type="Script" path="res://classes/player_data.gd" id="3_uc3qc"]
 [ext_resource type="Texture2D" uid="uid://ccutmsu8l4nqm" path="res://assets/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetHouse.png" id="4_ugrp7"]
@@ -14,7 +14,7 @@ size = Vector2(36.59, 21.512)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7nwja"]
 size = Vector2(32, 16)
 
-[node name="DefenseTower" type="Node2D"]
+[node name="WaveTower" type="Node2D"]
 script = ExtResource("1_mkrcl")
 buildingName = "嘲讽塔"
 descriptionLabel = "不断吸引敌人仇恨并击退"
@@ -36,7 +36,6 @@ region_rect = Rect2(16, 240, 30.7506, 46.866)
 visible = false
 position = Vector2(0, -40)
 hurtbox = NodePath("../Hurtbox")
-max_health = 20
 
 [node name="Hurtbox" type="Area2D" parent="."]
 visible = false

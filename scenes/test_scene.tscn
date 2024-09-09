@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://g4ytruh0jt1b" path="res://scenes/Player.tscn" id="1_tvfoe"]
 [ext_resource type="PackedScene" uid="uid://bpn04pgdpl1ai" path="res://ui/joy_stick.tscn" id="3_fsps6"]
 [ext_resource type="PackedScene" uid="uid://diit1i7sexrw6" path="res://cycle_controller.tscn" id="6_ufvnw"]
-[ext_resource type="PackedScene" uid="uid://8tl7c6epylu4" path="res://buildings/defense_tower_basic.tscn" id="7_8jgbk"]
+[ext_resource type="PackedScene" uid="uid://8tl7c6epylu4" path="res://buildings/wave_tower_basic.tscn" id="7_8jgbk"]
 [ext_resource type="PackedScene" uid="uid://dqpc7u7apn2h" path="res://enemies/enemy_generator.tscn" id="7_afqbx"]
 [ext_resource type="PackedScene" uid="uid://mr2hi4fimewl" path="res://scenes/gm_command.tscn" id="8_ccghd"]
 [ext_resource type="PackedScene" uid="uid://doe3ou8ymiafx" path="res://buildings/farm_basic.tscn" id="9_app1a"]
@@ -58,8 +58,10 @@ rotation = -0.00909066
 z_as_relative = false
 y_sort_enabled = true
 
-[node name="DefenseTower" parent="Buildings" instance=ExtResource("7_8jgbk")]
-position = Vector2(0, 191)
+[node name="WaveTower" parent="Buildings" instance=ExtResource("7_8jgbk")]
+position = Vector2(0, 197)
+buildingName = "光波塔"
+descriptionLabel = "发射范围伤害的光波"
 
 [node name="Tower" parent="Buildings" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_hyy0c")]
 z_as_relative = true
