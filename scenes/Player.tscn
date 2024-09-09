@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_wadek"]
 [ext_resource type="Texture2D" uid="uid://gdjxdkdd54m7" path="res://assets/brackeys_platformer_assets/sprites/knight.png" id="2_ioptb"]
-[ext_resource type="PackedScene" uid="uid://40nqsobwv8oq" path="res://scenes/bullet_shooter.tscn" id="3_i8tdt"]
+[ext_resource type="PackedScene" uid="uid://40nqsobwv8oq" path="res://scenes/shooter.tscn" id="3_i8tdt"]
 [ext_resource type="PackedScene" uid="uid://ynah0rik0eio" path="res://battle/battle_unit.tscn" id="4_3t8dl"]
 [ext_resource type="Script" path="res://classes/state_machine.gd" id="4_df445"]
 [ext_resource type="Script" path="res://classes/hurtbox.gd" id="5_6x7l5"]

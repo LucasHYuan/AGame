@@ -1,8 +1,8 @@
 extends Buildings
 
-@export var taunt_freq:float=2 ## 嘲讽间隔
-@export var wave_speed:float=200 ## 子弹速度
-
+@export var shoot_time:float=1
+@export var attacker_speed:float=0.25
+@export var attacker_damage:float=0.25
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready();

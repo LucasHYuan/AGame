@@ -44,9 +44,6 @@ func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
 	var attack = AttackItem.new(attacker.atk, attacker)
 
 	_process_atk(attack)
-	print("当前生命值:", health, "  最大生命值：", max_health)
-	print(get_parent().get_class(), " 打到我了")
-
 
 # 伤害结算逻辑
 func _process_atk(attack: AttackItem) -> void:

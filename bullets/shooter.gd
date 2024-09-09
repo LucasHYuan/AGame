@@ -1,24 +1,25 @@
 extends Area2D
-class_name BulletShooter
+class_name attackerShooter
 
 @onready var attack_range = $"."
-@onready var shoot_timer = $ShootTimer
+@onready var timer = $Timer
 @onready var shoot_point = $ShootPoint
 @onready var team: GlobalInfo.Team = owner.team
-@export var bullet_scene = preload("res://bullets/bullet.tscn")
+@export var attacker_scene: PackedScene
 
 @export var battle_unit: BattleUnit
 
-var shoot_time = 1
-var bullet_speed = 200
-var bullet_damage = 1
+@export var shoot_time: float = 1
+@export var attacker_speed: float = 200
+@export var attacker_damage: float = 1
+@export var fix = false;
 var is_shooting = false
 var target_enemy: BattleUnit = null
 
 func _ready():
-	shoot_timer.wait_time = shoot_time
-	shoot_timer.timeout.connect(_on_shoot_timer_timeout)
-
+	timer.wait_time = shoot_time
+	timer.timeout.connect(_on_shoot_timer_timeout)
+	
 	area_entered.connect(_start_shooting)
 
 	_set_team()
@@ -31,8 +32,8 @@ func _set_team() -> void:
 # 跟BattleUnit同级放置
 func _init_data_from_parent() -> void:
 	shoot_time = battle_unit.get_parent().shoot_time
-	bullet_speed = battle_unit.get_parent().bullet_speed
-	bullet_damage = battle_unit.get_parent().bullet_damage
+	attacker_speed = battle_unit.get_parent().attacker_speed
+	attacker_damage = battle_unit.get_parent().attacker_damage
 
 func _start_shooting(_area: Area2D) -> void:
 	if is_shooting:
@@ -40,7 +41,7 @@ func _start_shooting(_area: Area2D) -> void:
 	else:
 		is_shooting = true
 		_shoot()
-		shoot_timer.start()
+		timer.start()
 
 
 func get_distance(o):
@@ -76,16 +77,20 @@ func _shoot() -> void:
 	
 	if target_enemy != null:
 		# 发射子弹，并初始化数据
-		var bullet = bullet_scene.instantiate()
-		bullet.set_team(battle_unit.team)
+		var attacker = attacker_scene.instantiate()
+		attacker.set_team(battle_unit.team)
 
-		bullet.atk = bullet_damage
-		bullet.speed = bullet_speed
-		bullet.position = shoot_point.global_position
-		bullet.dir = (target_enemy.global_position - shoot_point.global_position).normalized()
+		attacker.atk = attacker_damage
+		attacker.speed = attacker_speed
+		attacker.position = shoot_point.global_position
+		if !fix:
+			attacker.dir = (target_enemy.global_position - shoot_point.global_position).normalized()
+			
+		
+		
 
-		get_tree().root.call_deferred("add_child", bullet)
+		get_tree().root.call_deferred("add_child", attacker)
 	else:
 		# 没有敌人，停止射击
-		shoot_timer.stop()
+		timer.stop()
 		is_shooting = false

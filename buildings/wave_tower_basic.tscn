@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://8tl7c6epylu4"]
+[gd_scene load_steps=11 format=3 uid="uid://8tl7c6epylu4"]
 
 [ext_resource type="Script" path="res://buildings/wave_tower_basic.gd" id="1_mkrcl"]
 [ext_resource type="PackedScene" uid="uid://cb1noa13yna06" path="res://buildings/build_component.tscn" id="2_xqh38"]
@@ -6,7 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://ccutmsu8l4nqm" path="res://assets/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetHouse.png" id="4_ugrp7"]
 [ext_resource type="PackedScene" uid="uid://ynah0rik0eio" path="res://battle/battle_unit.tscn" id="5_du00k"]
 [ext_resource type="Script" path="res://classes/hurtbox.gd" id="6_cjiq4"]
-[ext_resource type="PackedScene" uid="uid://cnbcq8na6gypr" path="res://scenes/wave_emitter.tscn" id="7_xkal8"]
+[ext_resource type="PackedScene" uid="uid://40nqsobwv8oq" path="res://scenes/shooter.tscn" id="7_syslv"]
+[ext_resource type="PackedScene" uid="uid://c8lj3sjmixder" path="res://bullets/wave.tscn" id="8_ptq4l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c4r3q"]
 size = Vector2(36.59, 21.512)
@@ -16,8 +17,10 @@ size = Vector2(32, 16)
 
 [node name="WaveTower" type="Node2D"]
 script = ExtResource("1_mkrcl")
-buildingName = "嘲讽塔"
-descriptionLabel = "不断吸引敌人仇恨并击退"
+shoot_time = 2.0
+attacker_speed = 1.0
+buildingName = "光波塔"
+descriptionLabel = "发射范围性的光波"
 
 [node name="BuildComponent" parent="." instance=ExtResource("2_xqh38")]
 
@@ -64,5 +67,9 @@ region_rect = Rect2(16, 240, 32, 48)
 position = Vector2(-4.76837e-07, -3)
 shape = SubResource("RectangleShape2D_7nwja")
 
-[node name="WaveEmitter" parent="Building" node_paths=PackedStringArray("battle_unit") instance=ExtResource("7_xkal8")]
+[node name="Shooter" parent="Building" node_paths=PackedStringArray("battle_unit") instance=ExtResource("7_syslv")]
+attacker_scene = ExtResource("8_ptq4l")
 battle_unit = NodePath("../../BattleUnit")
+attacker_speed = 0.25
+attacker_damage = 0.25
+fix = true
