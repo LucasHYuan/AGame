@@ -9,9 +9,9 @@ radius = 5.0
 [node name="Taunt_wave" type="Area2D"]
 rotation = 1.5708
 collision_layer = 0
-collision_mask = 20
+collision_mask = 3
 script = ExtResource("1_po7cb")
-kickback = 10.0
+atk = 0.25
 
 [node name="HitCollision" type="CollisionShape2D" parent="."]
 scale = Vector2(22.64, 32.08)

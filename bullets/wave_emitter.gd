@@ -9,7 +9,7 @@ class_name WaveEmitter
 
 @export var battle_unit: BattleUnit
 
-var emit_time = 1
+var emit_time = 2
 var wave_speed = 0.25
 var wave_damage = 1
 var is_shooting = false
