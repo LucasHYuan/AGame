@@ -1,4 +1,5 @@
 extends HitAttacker
+class_name TauntWave
 
 var speed = 1  # This will be set from the WaveEmitter script and control the wave's growth speed
 var max_wave_size = 1  # Maximum size the wave can grow to
@@ -8,14 +9,15 @@ var current_wave_size = 0.01  # Initial wave size
 @onready var timer_destroy = $TimerDestroy
 @onready var sprite = $Sprite2D
 
+var initial_scale
 func _ready():
 	super._ready()
 	set_as_top_level(true)
 	hit.connect(_on_hitbox_hit)
 	
-	# Initialize the size of the sprite and collision shape
-	sprite.scale *= Vector2.ONE * current_wave_size
-	hit_collision.scale = Vector2.ONE * current_wave_size
+	initial_scale = sprite.scale
+	sprite.scale *= current_wave_size
+	hit_collision.scale *= current_wave_size
 
 	# Start the destroy timer
 	timer_destroy.start()
@@ -26,13 +28,14 @@ func _process(delta):
 	current_wave_size = min(current_wave_size, max_wave_size)  # Ensure wave doesn't exceed max size
 	
 	# Scale the sprite and collision shape according to the wave size
-	sprite.scale = Vector2.ONE * current_wave_size
-	hit_collision.scale = Vector2.ONE * current_wave_size
+	sprite.scale = initial_scale * current_wave_size
+	hit_collision.scale = initial_scale * current_wave_size
 
 func _on_hitbox_hit(_hurtbox: Hurtbox) -> void:
 	# Handle collision logic, e.g., applying damage, then destroy the wave
 	# queue_free()
-	pass
+	print("hit")
+	
 
 func _on_timer_destroy_timeout():
 	# Destroy the wave after the timer ends

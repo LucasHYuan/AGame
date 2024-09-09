@@ -58,9 +58,8 @@ rotation = -0.00909066
 z_as_relative = false
 y_sort_enabled = true
 
-[node name="DefenseTower" parent="Buildings" node_paths=PackedStringArray("pre_building") instance=ExtResource("7_8jgbk")]
+[node name="DefenseTower" parent="Buildings" instance=ExtResource("7_8jgbk")]
 position = Vector2(0, 191)
-pre_building = NodePath("../BaseCamp")
 
 [node name="Tower" parent="Buildings" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_hyy0c")]
 z_as_relative = true
