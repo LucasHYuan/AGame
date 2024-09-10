@@ -13,7 +13,7 @@ extends Node2D
 @export var can_build: bool = false
 
 var is_built: bool = false
-var team: GlobalInfo.Team=GlobalInfo.Team.player
+var team: GlobalInfo.Team = GlobalInfo.Team.player
 
 signal build
 
@@ -104,9 +104,7 @@ func _set_collision_active(active: bool) -> void:
 
 #region 监听信号
 func _on_day() -> void:
-	if is_built:
-		print("我是{ %s }，到了新的白天" % buildingName)
-		_on_day_function()
+	pass
 
 func _on_one_second() -> void:
 	if is_built:

@@ -35,8 +35,8 @@ func _ready() -> void:
 	ui.visible = false
 
 	# 监听全局信号
-	GlobalSignal.add_listener("day", self, "_on_day")
-	GlobalSignal.add_listener("night", self, "_on_night")
+	# GlobalSignal.add_listener("day", self, "_on_day")
+	# GlobalSignal.add_listener("night", self, "_on_night")
 
 func interacting() -> void:
 	show_ui.emit()
@@ -73,14 +73,14 @@ func build_process() -> void:
 	self.queue_free()
 	pass
 
-func _on_day() -> void:
-	# 白天显示地基，可建造
-	interactable_area.process_mode = Node.PROCESS_MODE_INHERIT
-	icon.visible = true
-	pass
+# func _on_day() -> void:
+# 	# 白天显示地基，可建造
+# 	interactable_area.process_mode = Node.PROCESS_MODE_INHERIT
+# 	icon.visible = true
+# 	pass
 
-func _on_night(_duration: float) -> void:
-	# 夜晚隐藏地基，不可建造
-	interactable_area.process_mode = Node.PROCESS_MODE_DISABLED
-	icon.visible = false
-	pass
+# func _on_night(_duration: float) -> void:
+# 	# 夜晚隐藏地基，不可建造
+# 	interactable_area.process_mode = Node.PROCESS_MODE_DISABLED
+# 	icon.visible = false
+# 	pass
