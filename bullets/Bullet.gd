@@ -22,7 +22,8 @@ func _process(delta):
 	position += (dir * speed) * delta
 
 func _on_hitbox_hit(_hurtbox: Hurtbox) -> void:
-	queue_free()
+	if hit_time == 0:
+		queue_free()
 
 
 func _on_timer_destroy_timeout():

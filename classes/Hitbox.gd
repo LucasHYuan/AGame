@@ -12,6 +12,7 @@ func _on_area_entered(hurtbox: Hurtbox) -> void:
 	if hit_time == 0:
 		disable_mode = DISABLE_MODE_REMOVE
 		return
+	hit_time -= 1
+	
 	hit.emit(hurtbox)
 	hurtbox.hurt.emit(self)
-	hit_time -= 1
