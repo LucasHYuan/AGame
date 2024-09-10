@@ -22,6 +22,7 @@ scale = Vector2(1, 2)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1.4, 2)
 shape = SubResource("CircleShape2D_vu8cn")
+debug_color = Color(0.992157, 0, 0, 0.0392157)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.44, 0.629)
