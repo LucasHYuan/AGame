@@ -15,8 +15,6 @@ height = 28.0
 radius = 23.0868
 
 [node name="Building" type="Node2D"]
-z_as_relative = false
-y_sort_enabled = true
 script = ExtResource("1_jafur")
 
 [node name="BuildComponent" parent="." instance=ExtResource("2_keyg0")]
@@ -46,8 +44,6 @@ debug_color = Color(0.844691, 0.279891, 0.648589, 0.42)
 
 [node name="Building" type="StaticBody2D" parent="."]
 visible = false
-z_as_relative = false
-y_sort_enabled = true
 collision_layer = 3
 collision_mask = 0
 

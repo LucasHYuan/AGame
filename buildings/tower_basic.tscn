@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://031u5b0jmcbl"]
+[gd_scene load_steps=7 format=3 uid="uid://031u5b0jmcbl"]
 
 [ext_resource type="PackedScene" uid="uid://m3mx4wyq1waq" path="res://buildings/buildings.tscn" id="1_3pqih"]
 [ext_resource type="Script" path="res://buildings/tower_basic.gd" id="2_ngooe"]
@@ -6,7 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://b0myny5kap7m6" path="res://bullets/bullet.tscn" id="4_p3bir"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f0xum"]
-size = Vector2(36.59, 21.512)
+size = Vector2(36.59, 24.377)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y5sw2"]
+size = Vector2(27.51, 14.755)
 
 [node name="Tower" instance=ExtResource("1_3pqih")]
 script = ExtResource("2_ngooe")
@@ -27,10 +30,12 @@ position = Vector2(0, -40)
 max_health = 20.0
 
 [node name="HurtCollision" parent="Hurtbox" index="0"]
+position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_f0xum")
 
 [node name="Building" parent="." index="5"]
 visible = true
+y_sort_enabled = false
 
 [node name="Img" parent="Building" index="0"]
 z_as_relative = false
@@ -42,7 +47,7 @@ region_rect = Rect2(256, 96, 48, 80)
 [node name="CollisionShape2D" parent="Building" index="1"]
 position = Vector2(0, 0)
 scale = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_f0xum")
+shape = SubResource("RectangleShape2D_y5sw2")
 
 [node name="Shooter" parent="Building" index="2" node_paths=PackedStringArray("battle_unit") instance=ExtResource("3_xwn3r")]
 scale = Vector2(1.5, 1.5)

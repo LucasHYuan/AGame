@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqk4w32ygdjra"]
+[gd_scene load_steps=5 format=3 uid="uid://bqk4w32ygdjra"]
 
 [ext_resource type="PackedScene" uid="uid://m3mx4wyq1waq" path="res://buildings/buildings.tscn" id="1_msrci"]
 [ext_resource type="Script" path="res://buildings/base_camp.gd" id="2_pulib"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vmco6"]
+size = Vector2(50.79, 61.7)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qpqhv"]
-size = Vector2(50, 60)
+size = Vector2(39.755, 49.395)
 
 [node name="BaseCamp" instance=ExtResource("1_msrci")]
 script = ExtResource("2_pulib")
@@ -21,7 +24,7 @@ max_health = 30.0
 [node name="HurtCollision" parent="Hurtbox" index="0"]
 position = Vector2(0, 6)
 scale = Vector2(1, 0.36)
-shape = SubResource("RectangleShape2D_qpqhv")
+shape = SubResource("RectangleShape2D_vmco6")
 
 [node name="Img" parent="Building" index="0"]
 region_rect = Rect2(48, 128, 48, 32)

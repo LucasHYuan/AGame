@@ -60,63 +60,92 @@ z_as_relative = false
 y_sort_enabled = true
 
 [node name="BaseCamp" parent="Buildings" instance=ExtResource("10_p4fai")]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(113, 184)
 price = 3
 
 [node name="WaveTower" parent="Buildings" node_paths=PackedStringArray("pre_building") instance=ExtResource("7_8jgbk")]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(149, 99)
 price = 30
 pre_building = NodePath("../Farms/Farm4")
 
 [node name="Farms" type="Node2D" parent="Buildings"]
+y_sort_enabled = true
 
 [node name="Farm" parent="Buildings/Farms" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_app1a")]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(97, 213)
 pre_building = NodePath("../../BaseCamp")
 
 [node name="Farm2" parent="Buildings/Farms" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_app1a")]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(129, 214)
 pre_building = NodePath("../Farm")
 
 [node name="Farm3" parent="Buildings/Farms" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_app1a")]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(97, 235)
 pre_building = NodePath("../Farm2")
 
 [node name="Farm4" parent="Buildings/Farms" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_app1a")]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(129, 235)
 pre_building = NodePath("../Farm3")
 
 [node name="Farm5" parent="Buildings/Farms" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_app1a")]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(97, 154)
 pre_building = NodePath("../Farm4")
 
 [node name="Farm6" parent="Buildings/Farms" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_app1a")]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(129, 154)
 pre_building = NodePath("../Farm5")
 
 [node name="Farm7" parent="Buildings/Farms" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_app1a")]
+z_as_relative = false
 position = Vector2(129, 130)
 pre_building = NodePath("../Farm6")
 
 [node name="Farm8" parent="Buildings/Farms" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_app1a")]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(97, 130)
 pre_building = NodePath("../Farm7")
 
 [node name="Towers" type="Node2D" parent="Buildings"]
+y_sort_enabled = true
 
 [node name="Tower" parent="Buildings/Towers" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_hyy0c")]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(176, 155)
 pre_building = NodePath("../../Farms/Farm2")
 
 [node name="Tower2" parent="Buildings/Towers" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_hyy0c")]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(176, 213)
 pre_building = NodePath("../Tower")
 
 [node name="Tower3" parent="Buildings/Towers" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_hyy0c")]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(50, 213)
 pre_building = NodePath("../Tower2")
 
 [node name="Tower4" parent="Buildings/Towers" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_hyy0c")]
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(50, 155)
 pre_building = NodePath("../Tower3")
 
