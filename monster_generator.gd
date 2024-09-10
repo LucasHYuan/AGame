@@ -25,14 +25,25 @@ var interval_enemy_list: Array = enemy_prototypes
 var wave_enemy_list: Array = enemy_prototypes
 
 var wave_data: Array = [
-	[  # 第一波
-		[[0, 1]],  # 第一小波，怪物种类0生成1个
-		[[0, 2]],  # 第二小波
-		[[0, 3]]   # 第三小波
+	[ # 第一波 赚启动资金
+		[[0, 1]], # 第一小波，怪物种类0生成1个
+		[[0, 2]], # 第二小波
+		[[0, 3]] # 第三小波
 	],
-	[  # 第二波
-		[[0, 8], [1, 2]],  # 第一小波，怪物种类0生成6个，怪物种类2生成3个
-		[[1, 5], [0, 5]]   # 第二小波，怪物种类1生成7个，怪物种类0生成2个
+	[ # 第二波 给牧场一些攒钱时间
+		[[0, 3]],
+		[[0, 1], [0, 1], [0, 1]],
+		[[0, 1], [1, 1]],
+	],
+	[ # 第三波 上压力，需要造出1个防御塔
+		[[0, 4], ],
+		[[0, 4], [1, 2], ],
+		[[1, 3], [0, 3], [0, 3]]
+	],
+	[ # 第四波 准备推平
+		[[0, 8], [0, 8], [1, 4], [1, 4]],
+		[[0, 10], [1, 8], ],
+		[[0, 10], [0, 10], [1, 8]]
 	]
 ]
 
@@ -54,13 +65,13 @@ func _generate_next_wave(duration: float) -> void:
 
 # 在duration中刷出对应波次的怪物
 func _generate_by_wave(index: int, duration: float):
-	var data = wave_data[index]  # 获取这一波的怪物数据
-	var size = data.size()  # 这一波中有多少小波次
+	var data = wave_data[index] # 获取这一波的怪物数据
+	var size = data.size() # 这一波中有多少小波次
 
-	var interval = duration / size / 2  # 每小波之间的间隔时间
+	var interval = duration / (size - 1) / 1.6 # 每小波之间的间隔时间
 	wave_interval_timer.wait_time = interval
-	wave_inner_index = 0  # 初始化小波次索引
-	_add_wave_enemy(wave_index, wave_inner_index)  # 生成第一小波怪物
+	wave_inner_index = 0 # 初始化小波次索引
+	_add_wave_enemy(wave_index, wave_inner_index) # 生成第一小波怪物
 	wave_interval_timer.start()
 
 
@@ -86,16 +97,15 @@ func _on_wave_interval_timeout() -> void:
 	
 func _add_wave_enemy(wave: int, inner_wave_index: int) -> void:
 	print("刷怪, 夜晚：", wave, " 波次：", inner_wave_index)
-	var inner_wave_data = wave_data[wave][inner_wave_index]  # 获取这一小波的怪物数据
+	var inner_wave_data = wave_data[wave][inner_wave_index] # 获取这一小波的怪物数据
 
 	# 遍历这一小波中的每种怪物并生成相应数量
 	for enemy_data in inner_wave_data:
-		var enemy_type = enemy_data[0]  # 怪物种类
-		var enemy_count = enemy_data[1]  # 怪物数量
-		_add_enemy_random_pos(enemy_type, enemy_count)  # 生成指定数量的怪物
+		var enemy_type = enemy_data[0] # 怪物种类
+		var enemy_count = enemy_data[1] # 怪物数量
+		_add_enemy_random_pos(enemy_type, enemy_count) # 生成指定数量的怪物
 
 
-		
 # 以一定频率刷怪
 func _generate_by_interval(interval: float) -> void:
 	interval_timer.wait_time = interval
