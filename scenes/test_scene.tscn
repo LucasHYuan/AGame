@@ -59,21 +59,27 @@ rotation = -0.00909066
 z_as_relative = false
 y_sort_enabled = true
 
-[node name="WaveTower" parent="Buildings" instance=ExtResource("7_8jgbk")]
+[node name="WaveTower" parent="Buildings" node_paths=PackedStringArray("pre_building") instance=ExtResource("7_8jgbk")]
 position = Vector2(-1, 187)
 price = 30
+pre_building = NodePath("../Farm")
 
 [node name="Farm" parent="Buildings" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_app1a")]
 position = Vector2(89, 223)
 pre_building = NodePath("../BaseCamp")
 
+[node name="Farm2" parent="Buildings" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_app1a")]
+position = Vector2(130, 223)
+pre_building = NodePath("../Farm")
+
 [node name="BaseCamp" parent="Buildings" instance=ExtResource("10_p4fai")]
 position = Vector2(113, 184)
 price = 3
 
-[node name="Tower" parent="Buildings" instance=ExtResource("9_hyy0c")]
+[node name="Tower" parent="Buildings" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_hyy0c")]
 position = Vector2(223, 180)
 price = 20
+pre_building = NodePath("../Farm")
 
 [node name="DefaultEnemy" type="Node2D" parent="."]
 position = Vector2(-192, 563)

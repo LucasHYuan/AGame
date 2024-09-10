@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://classes/hurtbox.gd" id="4_28qr3"]
 [ext_resource type="PackedScene" uid="uid://40nqsobwv8oq" path="res://scenes/shooter.tscn" id="4_dyx6x"]
 [ext_resource type="Script" path="res://battle/hit_attacker.gd" id="5_0yefr"]
-[ext_resource type="PackedScene" uid="uid://b0myny5kap7m6" path="res://bullets/Bullet.tscn" id="5_ys0je"]
+[ext_resource type="PackedScene" uid="uid://b0myny5kap7m6" path="res://bullets/bullet.tscn" id="5_ys0je"]
 [ext_resource type="Script" path="res://enemies/battle_search.gd" id="6_uwjnq"]
 [ext_resource type="Texture2D" uid="uid://demkp4ciyeskq" path="res://assets/normal/round.png" id="7_qvl25"]
 

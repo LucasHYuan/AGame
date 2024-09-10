@@ -12,6 +12,11 @@ func _ready():
 	set_as_top_level(true)
 	hit.connect(_on_hitbox_hit)
 
+	timer_destroy.timeout.connect(_on_timer_destroy_timeout)
+	timer_destroy.start()
+
+	hit_time = 1
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	position += (dir * speed) * delta

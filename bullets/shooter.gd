@@ -1,5 +1,5 @@
 extends Area2D
-class_name attackerShooter
+class_name Shooter
 
 @onready var attack_range = $"."
 @onready var timer = $Timer
@@ -28,7 +28,6 @@ func _set_team() -> void:
 	# 搜索敌人
 	collision_mask &= ~(1 << team)
 
-# 跟BattleUnit同级放置
 func _sync_data_from_parent() -> void:
 	shoot_time = battle_unit.get_parent().shoot_time
 	attacker_speed = battle_unit.get_parent().attacker_speed

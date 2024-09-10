@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ynah0rik0eio" path="res://battle/battle_unit.tscn" id="4_3t8dl"]
 [ext_resource type="Script" path="res://classes/state_machine.gd" id="4_df445"]
 [ext_resource type="Script" path="res://classes/hurtbox.gd" id="5_6x7l5"]
-[ext_resource type="PackedScene" uid="uid://b0myny5kap7m6" path="res://bullets/Bullet.tscn" id="7_13f65"]
+[ext_resource type="PackedScene" uid="uid://b0myny5kap7m6" path="res://bullets/bullet.tscn" id="7_13f65"]
 [ext_resource type="PackedScene" uid="uid://dj8s0itikxgfu" path="res://ui/status_panel.tscn" id="7_nb60r"]
 [ext_resource type="Script" path="res://classes/player_data.gd" id="9_3p4rv"]
 [ext_resource type="PackedScene" uid="uid://cii72sr21bqp3" path="res://battle/skills/invincible_on_hurt.tscn" id="9_rayig"]
