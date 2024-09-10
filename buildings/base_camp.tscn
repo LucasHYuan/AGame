@@ -16,7 +16,7 @@ can_build = true
 region_rect = Rect2(48, 128, 48, 32)
 
 [node name="BattleUnit" parent="." index="3"]
-max_health = 5
+max_health = 30.0
 
 [node name="HurtCollision" parent="Hurtbox" index="0"]
 position = Vector2(0, 6)

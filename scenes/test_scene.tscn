@@ -106,22 +106,18 @@ pre_building = NodePath("../Farm7")
 
 [node name="Tower" parent="Buildings/Towers" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_hyy0c")]
 position = Vector2(176, 155)
-price = 20
 pre_building = NodePath("../../Farms/Farm2")
 
 [node name="Tower2" parent="Buildings/Towers" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_hyy0c")]
 position = Vector2(176, 213)
-price = 20
 pre_building = NodePath("../Tower")
 
 [node name="Tower3" parent="Buildings/Towers" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_hyy0c")]
 position = Vector2(50, 213)
-price = 20
 pre_building = NodePath("../Tower2")
 
 [node name="Tower4" parent="Buildings/Towers" node_paths=PackedStringArray("pre_building") instance=ExtResource("9_hyy0c")]
 position = Vector2(50, 155)
-price = 20
 pre_building = NodePath("../Tower3")
 
 [node name="DefaultEnemy" type="Node2D" parent="."]
