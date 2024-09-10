@@ -10,6 +10,7 @@ var team: GlobalInfo.Team
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	super._ready()
 	if owner && owner.get("team"):
 		team = owner.team
 		_set_team()

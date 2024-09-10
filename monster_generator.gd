@@ -8,7 +8,7 @@ class_name MonsterGenerator
 @export var enemy_spawn_location: PathFollow2D
 
 @export var scene: PackedScene
-@export var enemy_prototypes: Array[PackedScene] = [preload("res://enemies/skull.tscn"), preload("res://enemies/octupus.tscn")]
+@export var enemy_prototypes: Array[PackedScene] = [preload("res://enemies/skull.tscn"), preload("res://enemies/octopus.tscn")]
 
 @export var cycle_controller: CycleController
 

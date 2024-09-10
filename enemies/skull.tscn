@@ -561,6 +561,7 @@ debug_color = Color(0.844691, 0.279891, 0.648589, 0.42)
 collision_layer = 0
 collision_mask = 3
 script = ExtResource("4_gulxi")
+atk = 0.5
 
 [node name="HitCollision" type="CollisionShape2D" parent="HitAttacker"]
 shape = SubResource("CircleShape2D_bj0gr")

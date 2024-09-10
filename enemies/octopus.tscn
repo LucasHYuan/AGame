@@ -1,14 +1,14 @@
 [gd_scene load_steps=33 format=3 uid="uid://dla7wqkavxvfq"]
 
-[ext_resource type="Script" path="res://octupus.gd" id="1_rw18t"]
-[ext_resource type="Texture2D" uid="uid://ckl3x4akk7s74" path="res://assets/Ninja Adventure - Asset Pack/Actor/Monsters/Octopus/SpriteSheet.png" id="2_5i7cy"]
-[ext_resource type="PackedScene" uid="uid://ynah0rik0eio" path="res://battle/battle_unit.tscn" id="3_sdfkm"]
-[ext_resource type="Script" path="res://classes/hurtbox.gd" id="4_28qr3"]
-[ext_resource type="PackedScene" uid="uid://40nqsobwv8oq" path="res://scenes/shooter.tscn" id="4_dyx6x"]
-[ext_resource type="Script" path="res://battle/hit_attacker.gd" id="5_0yefr"]
-[ext_resource type="PackedScene" uid="uid://b0myny5kap7m6" path="res://bullets/bullet.tscn" id="5_ys0je"]
-[ext_resource type="Script" path="res://enemies/battle_search.gd" id="6_uwjnq"]
-[ext_resource type="Texture2D" uid="uid://demkp4ciyeskq" path="res://assets/normal/round.png" id="7_qvl25"]
+[ext_resource type="Script" path="res://octupus.gd" id="1_b8d0s"]
+[ext_resource type="Texture2D" uid="uid://ckl3x4akk7s74" path="res://assets/Ninja Adventure - Asset Pack/Actor/Monsters/Octopus/SpriteSheet.png" id="2_l6pt7"]
+[ext_resource type="PackedScene" uid="uid://ynah0rik0eio" path="res://battle/battle_unit.tscn" id="3_n5kya"]
+[ext_resource type="PackedScene" uid="uid://40nqsobwv8oq" path="res://scenes/shooter.tscn" id="4_g8ebt"]
+[ext_resource type="PackedScene" uid="uid://b0myny5kap7m6" path="res://bullets/bullet.tscn" id="5_ghow6"]
+[ext_resource type="Script" path="res://classes/hurtbox.gd" id="6_c16if"]
+[ext_resource type="Script" path="res://battle/hit_attacker.gd" id="7_cwuwv"]
+[ext_resource type="Script" path="res://enemies/battle_search.gd" id="8_fm37u"]
+[ext_resource type="Texture2D" uid="uid://demkp4ciyeskq" path="res://assets/normal/round.png" id="9_wlktx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4gbpa"]
 radius = 8.0
@@ -498,12 +498,12 @@ radius = 12.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_swir2"]
 radius = 20.0
 
-[node name="Octupus" type="CharacterBody2D"]
+[node name="Octopus" type="CharacterBody2D"]
 position = Vector2(0, -8)
 collision_layer = 20
 collision_mask = 12
 motion_mode = 1
-script = ExtResource("1_rw18t")
+script = ExtResource("1_b8d0s")
 attacker_speed = 100.0
 atk = 0.5
 
@@ -514,7 +514,7 @@ debug_color = Color(0.950089, 2.31028e-06, 0.570311, 0.42)
 [node name="Graphics" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Graphics"]
-texture = ExtResource("2_5i7cy")
+texture = ExtResource("2_l6pt7")
 vframes = 4
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 64)
@@ -534,21 +534,22 @@ libraries = {
 }
 autoplay = "down"
 
-[node name="BattleUnit" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("3_sdfkm")]
+[node name="BattleUnit" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("3_n5kya")]
 position = Vector2(0, -6)
 scale = Vector2(0.795, 0.795)
 hurtbox = NodePath("../Hurtbox")
 
-[node name="Shooter" parent="BattleUnit" node_paths=PackedStringArray("battle_unit") instance=ExtResource("4_dyx6x")]
+[node name="Shooter" parent="BattleUnit" node_paths=PackedStringArray("battle_unit") instance=ExtResource("4_g8ebt")]
 visible = false
 position = Vector2(0, 7.54717)
-attacker_scene = ExtResource("5_ys0je")
+attacker_scene = ExtResource("5_ghow6")
 battle_unit = NodePath("..")
+attacker_damage = 3.0
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 20
-script = ExtResource("4_28qr3")
+script = ExtResource("6_c16if")
 
 [node name="HurtCollision" type="CollisionShape2D" parent="Hurtbox"]
 rotation = 1.5708
@@ -559,7 +560,7 @@ debug_color = Color(0.844691, 0.279891, 0.648589, 0.42)
 scale = Vector2(0.996285, 1)
 collision_layer = 0
 collision_mask = 3
-script = ExtResource("5_0yefr")
+script = ExtResource("7_cwuwv")
 
 [node name="HitCollision" type="CollisionShape2D" parent="HitAttacker"]
 shape = SubResource("CircleShape2D_bj0gr")
@@ -568,7 +569,7 @@ shape = SubResource("CircleShape2D_bj0gr")
 scale = Vector2(3.39664, 3.39664)
 collision_layer = 0
 collision_mask = 3
-script = ExtResource("6_uwjnq")
+script = ExtResource("8_fm37u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BattleSearch"]
 scale = Vector2(2, 1.4)
@@ -576,4 +577,4 @@ shape = SubResource("CircleShape2D_swir2")
 
 [node name="Sprite2D" type="Sprite2D" parent="BattleSearch"]
 scale = Vector2(0.157, 0.11)
-texture = ExtResource("7_qvl25")
+texture = ExtResource("9_wlktx")

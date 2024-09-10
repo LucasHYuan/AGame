@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://031u5b0jmcbl" path="res://buildings/tower_basic.tscn" id="9_hyy0c"]
 [ext_resource type="PackedScene" uid="uid://bqk4w32ygdjra" path="res://buildings/base_camp.tscn" id="10_p4fai"]
 [ext_resource type="PackedScene" uid="uid://cwjy7r783tqx5" path="res://enemies/skull.tscn" id="10_sxf50"]
-[ext_resource type="PackedScene" uid="uid://dla7wqkavxvfq" path="res://enemies/octupus.tscn" id="12_u5rkk"]
+[ext_resource type="PackedScene" uid="uid://dla7wqkavxvfq" path="res://enemies/octopus.tscn" id="12_u5rkk"]
 
 [sub_resource type="Curve2D" id="Curve2D_oe8ji"]
 _data = {
